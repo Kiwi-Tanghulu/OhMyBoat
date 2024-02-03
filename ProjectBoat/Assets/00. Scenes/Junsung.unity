@@ -422,6 +422,7 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: 807403439970f0d448782817beb0e920, type: 2}
   gravityScale: -9.81
   moveSpeed: 3
+  jumpPower: 5
 --- !u!114 &575815620
 MonoBehaviour:
   m_ObjectHideFlags: 0

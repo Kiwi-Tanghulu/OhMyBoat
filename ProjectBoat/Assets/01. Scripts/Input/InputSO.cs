@@ -12,6 +12,7 @@ public class InputSO : ScriptableObject, IPlayActions
 
     public Action<Vector2> OnMoveEvent;
     public Action<Vector2> OnMouseDeltaEvent;
+    public Action OnJumpEvent;
 
     private void OnEnable()
     {
@@ -36,5 +37,13 @@ public class InputSO : ScriptableObject, IPlayActions
         Vector2 mouseDelta = context.ReadValue<Vector2>();
 
         OnMouseDeltaEvent?.Invoke(mouseDelta);
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            OnJumpEvent?.Invoke();
+        }
     }
 }
