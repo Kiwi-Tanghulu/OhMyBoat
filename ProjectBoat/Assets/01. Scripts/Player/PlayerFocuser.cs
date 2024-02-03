@@ -9,6 +9,8 @@ public class PlayerFocuser : MonoBehaviour
     private IFocusable focusedObject = null;
     public IFocusable FocusedObject => focusedObject;
 
+    public bool IsEmpty => focusedObject == null;
+
     private void Awake()
     {
         eyeTranform = Camera.main.transform;

@@ -17,24 +17,30 @@ public class THolder : MonoBehaviour, IHolder
 
     private Collider[] detecteds = new Collider[1];
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Vector3 dir = new Vector3(h, 0, v).normalized;
+        // float h = Input.GetAxisRaw("Horizontal");
+        // float v = Input.GetAxisRaw("Vertical");
+        // Vector3 dir = new Vector3(h, 0, v).normalized;
 
-        if(dir.sqrMagnitude > 0.01f)
-        {
-            Move(dir);
-            Rotate(dir);
-        }
+        // if(dir.sqrMagnitude > 0.01f)
+        // {
+        //     Move(dir);
+        //     Rotate(dir);
+        // }
 
         if(Input.GetKeyDown(KeyCode.E))
         {
             if(IsEmpty)
             {
                 if(DetectItem(out IGrabbable item))
-                    GrabItem(item, holdPosition.position);
+                    Grab(item, holdPosition.position);
             }
             else
                 Release();
@@ -69,10 +75,12 @@ public class THolder : MonoBehaviour, IHolder
         return result;
     }
 
-    public void GrabItem(IGrabbable target, Vector3 point)
+    public bool Grab(IGrabbable target, Vector3 point)
     {
         target.Grab(this, point);
         holdingObject = target;
+
+        return true;
     }
 
     public void Release()

@@ -13,7 +13,7 @@ public class Stuff : MonoBehaviour, IGrabbable
             return false;
 
         if(currentHolder != null)
-            currentHolder.Release();
+            return false;
 
         currentHolder = holder;
         transform.SetParent(currentHolder.HoldingParent);
