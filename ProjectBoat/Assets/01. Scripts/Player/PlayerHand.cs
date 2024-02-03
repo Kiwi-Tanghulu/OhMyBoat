@@ -17,7 +17,7 @@ public class PlayerHand : MonoBehaviour, IHolder
 
     private void Awake()
     {
-        // input.OnCollectEvent += HandleCollect;
+        input.OnCollectEvent += HandleCollect;
         focuser = GetComponent<PlayerFocuser>();
     }
 
@@ -29,7 +29,7 @@ public class PlayerHand : MonoBehaviour, IHolder
 
     private void OnDestroy()
     {
-        // input.OnCollectEvent -= HandleCollect;
+        input.OnCollectEvent -= HandleCollect;
     }
 
     private void HandleCollect()

@@ -6103,6 +6103,7 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: 807403439970f0d448782817beb0e920, type: 2}
   gravityScale: -9.81
   moveSpeed: 3
+  jumpPower: 7
 --- !u!143 &1647655320
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6159,7 +6160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 807403439970f0d448782817beb0e920, type: 2}
-  holdPosition: {fileID: 0}
+  holdPosition: {fileID: 481728326}
 --- !u!114 &1647655324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6175,7 +6176,7 @@ MonoBehaviour:
   eyeTranform: {fileID: 922926485}
   focusingLayer:
     serializedVersion: 2
-    m_Bits: 2147483648
+    m_Bits: 64
   distance: 1
   gizmo: 1
 --- !u!1001 &1653606637

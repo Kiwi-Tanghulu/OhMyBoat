@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Controls;
@@ -13,6 +11,8 @@ public class InputSO : ScriptableObject, IPlayActions
     public Action<Vector2> OnMoveEvent;
     public Action<Vector2> OnMouseDeltaEvent;
     public Action OnJumpEvent;
+    public Action OnCollectEvent;
+    public Action<bool> OnInteractEvent;
 
     private void OnEnable()
     {
@@ -45,5 +45,19 @@ public class InputSO : ScriptableObject, IPlayActions
         {
             OnJumpEvent?.Invoke();
         }
+    }
+
+    public void OnCollect(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnCollectEvent?.Invoke();
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnInteractEvent?.Invoke(true);
+        else if(context.canceled)
+            OnInteractEvent?.Invoke(false);
     }
 }

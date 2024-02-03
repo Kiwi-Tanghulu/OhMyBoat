@@ -18,6 +18,7 @@ public class Stuff : MonoBehaviour, IGrabbable
         currentHolder = holder;
         transform.SetParent(currentHolder.HoldingParent);
         transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
 
         return true;
     }
@@ -26,5 +27,6 @@ public class Stuff : MonoBehaviour, IGrabbable
     {
         currentHolder = null;
         transform.SetParent(null);
+        transform.localRotation = Quaternion.Euler(0f, transform.localEulerAngles.y, 0f);
     }
 }
