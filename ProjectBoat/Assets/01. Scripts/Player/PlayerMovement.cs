@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     private Vector3 moveDir;
 
+    [SerializeField] private float jumpPower = 7f;
+
     private CharacterController cc;
 
     private void Awake()
@@ -23,17 +25,19 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         input.OnMoveEvent += SetMoveDirection;
+        input.OnJumpEvent += Jump;
     }
 
     private void OnDestroy()
     {
         input.OnMoveEvent -= SetMoveDirection;
+        input.OnJumpEvent -= Jump;
     }
 
     private void Update()
     {
-        Gravity();
         Move();
+        Gravity();
     }
 
     private void Gravity()
@@ -58,5 +62,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveVector = transform.rotation * ((moveDir * moveSpeed + verticalVelocity * Vector3.up) * Time.deltaTime);
 
         cc.Move(moveVector);
+    }
+
+    private void Jump()
+    {
+        if(cc.isGrounded)
+        {
+            verticalVelocity = jumpPower;
+        }
     }
 }
