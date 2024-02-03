@@ -7786,7 +7786,7 @@ PrefabInstance:
     - target: {fileID: 1105309027318566914, guid: 948d29867d26db3499546e87f941a615,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1105309027318566914, guid: 948d29867d26db3499546e87f941a615,
         type: 3}
@@ -7796,7 +7796,7 @@ PrefabInstance:
     - target: {fileID: 1105309027318566914, guid: 948d29867d26db3499546e87f941a615,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1105309027318566914, guid: 948d29867d26db3499546e87f941a615,
         type: 3}
@@ -7811,7 +7811,7 @@ PrefabInstance:
     - target: {fileID: 1105309027318566914, guid: 948d29867d26db3499546e87f941a615,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 1105309027318566914, guid: 948d29867d26db3499546e87f941a615,
         type: 3}
@@ -7890,6 +7890,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8035084077882549022, guid: 9320781ccae17c04bad159449e26b963,
+        type: 3}
+      propertyPath: rotateSpeed
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737451273948963546, guid: 9320781ccae17c04bad159449e26b963,
+        type: 3}
+      propertyPath: jumpPower
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737451273948963546, guid: 9320781ccae17c04bad159449e26b963,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
