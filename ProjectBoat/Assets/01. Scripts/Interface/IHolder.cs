@@ -7,6 +7,8 @@ public interface IHolder
 
     public bool IsEmpty { get; }
 
+    public bool Grab(IGrabbable target, Vector3 point = default);
+
     /// <summary>
     /// release the holding object
     /// </summary>
