@@ -10,6 +10,7 @@ public class InputSO : ScriptableObject, IPlayActions
 
     public Action<Vector2> OnMoveEvent;
     public Action<Vector2> OnMouseDeltaEvent;
+    public Action<float> OnMouseWheelEvent;
     public Action OnJumpEvent;
     public Action OnCollectEvent;
     public Action<bool> OnInteractEvent;
@@ -59,5 +60,10 @@ public class InputSO : ScriptableObject, IPlayActions
             OnInteractEvent?.Invoke(true);
         else if(context.canceled)
             OnInteractEvent?.Invoke(false);
+    }
+
+    public void OnMouseWheel(InputAction.CallbackContext context)
+    {
+        OnMouseWheelEvent?.Invoke(context.ReadValue<float>());
     }
 }

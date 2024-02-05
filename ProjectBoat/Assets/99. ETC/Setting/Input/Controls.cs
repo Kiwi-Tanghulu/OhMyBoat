@@ -46,6 +46,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""MouseWheel"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""cf4605df-c4f6-43ed-877b-a2894af07fc0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""3efd9a77-54ae-4a29-9a20-4febc72c6c75"",
@@ -172,6 +181,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d1a3fb2-1bc2-4605-bbaa-e1abc732d0ce"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseWheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -199,6 +219,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Play = asset.FindActionMap("Play", throwIfNotFound: true);
         m_Play_Move = m_Play.FindAction("Move", throwIfNotFound: true);
         m_Play_MouseDelta = m_Play.FindAction("MouseDelta", throwIfNotFound: true);
+        m_Play_MouseWheel = m_Play.FindAction("MouseWheel", throwIfNotFound: true);
         m_Play_Jump = m_Play.FindAction("Jump", throwIfNotFound: true);
         m_Play_Collect = m_Play.FindAction("Collect", throwIfNotFound: true);
         m_Play_Interact = m_Play.FindAction("Interact", throwIfNotFound: true);
@@ -265,6 +286,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IPlayActions> m_PlayActionsCallbackInterfaces = new List<IPlayActions>();
     private readonly InputAction m_Play_Move;
     private readonly InputAction m_Play_MouseDelta;
+    private readonly InputAction m_Play_MouseWheel;
     private readonly InputAction m_Play_Jump;
     private readonly InputAction m_Play_Collect;
     private readonly InputAction m_Play_Interact;
@@ -274,6 +296,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public PlayActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Play_Move;
         public InputAction @MouseDelta => m_Wrapper.m_Play_MouseDelta;
+        public InputAction @MouseWheel => m_Wrapper.m_Play_MouseWheel;
         public InputAction @Jump => m_Wrapper.m_Play_Jump;
         public InputAction @Collect => m_Wrapper.m_Play_Collect;
         public InputAction @Interact => m_Wrapper.m_Play_Interact;
@@ -292,6 +315,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MouseDelta.started += instance.OnMouseDelta;
             @MouseDelta.performed += instance.OnMouseDelta;
             @MouseDelta.canceled += instance.OnMouseDelta;
+            @MouseWheel.started += instance.OnMouseWheel;
+            @MouseWheel.performed += instance.OnMouseWheel;
+            @MouseWheel.canceled += instance.OnMouseWheel;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -311,6 +337,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MouseDelta.started -= instance.OnMouseDelta;
             @MouseDelta.performed -= instance.OnMouseDelta;
             @MouseDelta.canceled -= instance.OnMouseDelta;
+            @MouseWheel.started -= instance.OnMouseWheel;
+            @MouseWheel.performed -= instance.OnMouseWheel;
+            @MouseWheel.canceled -= instance.OnMouseWheel;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -350,6 +379,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
+        void OnMouseWheel(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCollect(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);

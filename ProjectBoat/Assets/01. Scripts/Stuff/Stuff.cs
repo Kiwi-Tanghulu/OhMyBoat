@@ -9,6 +9,11 @@ public class Stuff : MonoBehaviour, IGrabbable
     private IHolder currentHolder = null;
     public IHolder CurrentHolder => currentHolder;
 
+    [SerializeField] private GrabObjectType grabObjectType;
+    public GrabObjectType ObjectType => grabObjectType;
+
+    public GameObject GrabObject => gameObject;
+
     public event Action<bool> OnGrabbedEvent = null;
 
     public bool Grab(IHolder holder, Vector3 point = default)
