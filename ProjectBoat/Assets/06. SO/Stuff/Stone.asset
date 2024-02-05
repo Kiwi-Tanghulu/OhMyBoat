@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   StuffName: Stone
-  prefab: {fileID: 0}
+  prefab: {fileID: 523129021472735595, guid: 948d29867d26db3499546e87f941a615, type: 3}
   StuffIcon: {fileID: 0}

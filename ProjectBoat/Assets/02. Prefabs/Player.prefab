@@ -196,6 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4043193883970172283}
+  - component: {fileID: 4300709954266155091}
   - component: {fileID: 3966348471773742526}
   - component: {fileID: 8737451273948963546}
   - component: {fileID: 8035084077882549022}
@@ -225,6 +226,19 @@ Transform:
   - {fileID: 3509588878560066890}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4300709954266155091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5868566777365118024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0abfae99fa9ba40993bee1e747313a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: 807403439970f0d448782817beb0e920, type: 2}
 --- !u!114 &3966348471773742526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +254,7 @@ MonoBehaviour:
   eyeTranform: {fileID: 0}
   focusingLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   distance: 1
   gizmo: 1
 --- !u!114 &8737451273948963546
@@ -257,8 +271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 807403439970f0d448782817beb0e920, type: 2}
   gravityScale: -9.81
-  moveSpeed: 3
-  jumpPower: 7
+  moveSpeed: 1.5
+  jumpPower: 4
 --- !u!114 &8035084077882549022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,7 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 807403439970f0d448782817beb0e920, type: 2}
   playerCam: {fileID: 1072381324326672811}
-  rotateSpeed: 0.1
+  rotateSpeed: 0.025
   maxY: 50
   minY: -90
   inverseX: 0

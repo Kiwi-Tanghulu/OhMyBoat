@@ -19,6 +19,8 @@ public class PlayerHand : MonoBehaviour, IHolder
     {
         input.OnCollectEvent += HandleCollect;
         focuser = GetComponent<PlayerFocuser>();
+
+        DEFINE.PlayerHand = this;
     }
 
     private void Start()
