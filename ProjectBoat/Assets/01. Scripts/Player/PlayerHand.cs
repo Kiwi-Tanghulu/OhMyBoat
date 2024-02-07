@@ -48,8 +48,6 @@ public class PlayerHand : MonoBehaviour, IHolder
             holdingObject = inventory.GetCurrentItem();
             holdingObject?.GrabObject.SetActive(true);
         }
-        Debug.Log(value);
-        Debug.Log(inventory.GetCurrentItem());
     }
 
     private void HandleCollect()

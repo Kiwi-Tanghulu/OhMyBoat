@@ -6990,6 +6990,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: sail_pulley
       objectReference: {fileID: 0}
+    - target: {fileID: 7489721652187167333, guid: 14fb87b40701ee04cae674dbe81662a9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7834863147383693535, guid: 14fb87b40701ee04cae674dbe81662a9,
         type: 3}
       propertyPath: m_RootOrder
