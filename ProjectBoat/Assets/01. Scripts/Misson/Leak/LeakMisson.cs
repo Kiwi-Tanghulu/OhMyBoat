@@ -24,16 +24,10 @@ public class LeakMisson : Misson
                 Quaternion.Euler(leakTransformsSO.LeakTransforms[i].rotation),
                 transform);
 
+            leak.InitMissonObject(this);
+
             leaks.Add(leak);
         }
-        Leak.InitLeak();
-
-        Leak.OnEndWork += Leak_OnEndWork;
-    }
-
-    private void Leak_OnEndWork(Leak leak)
-    {
-        workingLeakCount--;
     }
 
     public override bool CanMakeMisson()
@@ -41,12 +35,7 @@ public class LeakMisson : Misson
         return workingLeakCount < leaks.Count;
     }
 
-    public override bool IsWorking()
-    {
-        return workingLeakCount > 0;
-    }
-
-    public override void MakeMisson()
+    public override void StartMisson()
     {
         int leakIndex;
 
@@ -56,8 +45,22 @@ public class LeakMisson : Misson
         }
         while (leaks[leakIndex].IsWorking);
 
-        leaks[leakIndex].StartWork();
+        leaks[leakIndex].StartMisson();
 
         workingLeakCount++;
+
+        isWorking = true;
+
+        OnStartMisson?.Invoke();
+    }
+
+    public override void EndMisson()
+    {
+        workingLeakCount--;
+
+        if(workingLeakCount == 0)
+            isWorking = false;
+
+        OnEndMisson?.Invoke();
     }
 }

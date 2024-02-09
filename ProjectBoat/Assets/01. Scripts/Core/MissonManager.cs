@@ -25,7 +25,7 @@ public class MissonManager : MonoBehaviour
     {
         if (lastMissonMakeTime + makeMissonInterval < Time.time)
         {
-            MakeMisson();
+            //MakeMisson();
 
             lastMissonMakeTime = Time.time;
         }
@@ -45,6 +45,6 @@ public class MissonManager : MonoBehaviour
         }
         while (!missons[missonIndex].CanMakeMisson());
 
-        missons[missonIndex].MakeMisson();
+        missons[missonIndex].StartMisson();
     }
 }
