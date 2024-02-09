@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +16,7 @@ public class LeakMisson : Misson
         base.Start();
 
         leaks = new List<Leak>();
-
-        for(int i = 0; i < leakTransformsSO.LeakTransforms.Count; i++)
+        for (int i = 0; i < leakTransformsSO.LeakTransforms.Count; i++)
         {
             Leak leak = Instantiate(
                 leakPrefab,
@@ -26,6 +26,14 @@ public class LeakMisson : Misson
 
             leaks.Add(leak);
         }
+        Leak.InitLeak();
+
+        Leak.OnEndWork += Leak_OnEndWork;
+    }
+
+    private void Leak_OnEndWork(Leak leak)
+    {
+        workingLeakCount--;
     }
 
     public override bool CanMakeMisson()
