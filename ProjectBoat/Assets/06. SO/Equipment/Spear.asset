@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327cd973460bdd9448c5f84bfab42365, type: 3}
   m_Name: Spear
   m_EditorClassIdentifier: 
+  StuffName: Spear
+  prefab: {fileID: 5411596715210187999, guid: 2c1d74599a5232f46b4676cb2a720ba9, type: 3}
+  StuffIcon: {fileID: 0}
   MaxDurability: 10
