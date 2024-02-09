@@ -17,11 +17,18 @@ public class MissonManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        missons = new();
     }
 
     private void Update()
     {
-        MakeMisson();
+        if (lastMissonMakeTime + makeMissonInterval < Time.time)
+        {
+            MakeMisson();
+
+            lastMissonMakeTime = Time.time;
+        }
     }
 
     public void RegistMisson(Misson misson)
@@ -31,18 +38,13 @@ public class MissonManager : MonoBehaviour
 
     public void MakeMisson()
     {
-        if(lastMissonMakeTime + makeMissonInterval < Time.time)
+        int missonIndex;
+        do
         {
-            int missonIndex;
-            do
-            {
-                missonIndex = UnityEngine.Random.Range(0, missons.Count);
-            }
-            while (!missons[missonIndex].CanMakeMisson());
-
-            missons[missonIndex].MakeMisson();
-
-            lastMissonMakeTime = Time.time;
+            missonIndex = UnityEngine.Random.Range(0, missons.Count);
         }
+        while (!missons[missonIndex].CanMakeMisson());
+
+        missons[missonIndex].MakeMisson();
     }
 }

@@ -1010,6 +1010,52 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 251594807}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &252995262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 252995264}
+  - component: {fileID: 252995263}
+  m_Layer: 0
+  m_Name: MissonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &252995263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252995262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42804494621977b45aa2b4780a1e9f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  makeMissonInterval: 3
+--- !u!4 &252995264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252995262}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1392344252}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &307573338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5762,6 +5808,53 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1378005215}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1392344251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1392344252}
+  - component: {fileID: 1392344253}
+  m_Layer: 0
+  m_Name: LeakMisson
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1392344252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392344251}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 252995264}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1392344253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392344251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a312eaf2757a6e7468dd66b001469884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leakTransformsSO: {fileID: 11400000, guid: 69105ab0bdb0bae458cec4f2b1ae5e94, type: 2}
+  leakPrefab: {fileID: 610860156784453453, guid: fa3393cd95381f54e8a6a935f92dbf83,
+    type: 3}
 --- !u!1001 &1396149330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8601,3 +8694,4 @@ SceneRoots:
   - {fileID: 8131879005077987173}
   - {fileID: 1488635629}
   - {fileID: 6945104423189391938}
+  - {fileID: 252995264}
