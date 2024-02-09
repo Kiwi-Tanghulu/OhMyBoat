@@ -41,7 +41,7 @@ public class PlayerHand : MonoBehaviour, IHolder
 
     private void Inventory_OnChangeCurrentItemIndex(int value)
     {
-        if(holdingObject == null || holdingObject.ObjectType == GrabObjectType.Equipment)
+        if (holdingObject == null || holdingObject is Equipment)
         {
             //Grab(inventory.GetCurrentItem()); right code
             holdingObject?.GrabObject.SetActive(false);
@@ -52,14 +52,14 @@ public class PlayerHand : MonoBehaviour, IHolder
 
     private void HandleCollect()
     {
-        if(IsEmpty) // 손이 비어있음
+        if (IsEmpty) // 손이 비어있음
         {
-            if(focuser.IsEmpty)
+            if (focuser.IsEmpty)
                 return;
 
-            if(focuser.FocusedObject.CurrentObject.TryGetComponent<IGrabbable>(out IGrabbable target))
+            if (focuser.FocusedObject.CurrentObject.TryGetComponent<IGrabbable>(out IGrabbable target))
             {
-                if (target.ObjectType == GrabObjectType.Equipment)
+                if (target is Equipment)
                     inventory.AddItem(target);
 
                 Grab(target);
@@ -67,27 +67,27 @@ public class PlayerHand : MonoBehaviour, IHolder
         }
         else // 무언가 들고 있음
         {
-            switch (holdingObject.ObjectType)
+            if (holdingObject is Stuff)
             {
-                case GrabObjectType.Stuff:
-                    Release();
+                Release();
 
-                    //Grab(inventory.GetCurrentItem()); right code
-                    holdingObject = inventory.GetCurrentItem();
-                    holdingObject?.GrabObject.SetActive(true);
-                    break;
-                case GrabObjectType.Equipment:
-                    if (focuser.IsEmpty)
-                        break;
+                //Grab(inventory.GetCurrentItem()); right code
+                holdingObject = inventory.GetCurrentItem();
+                holdingObject?.GrabObject.SetActive(true);
+            }
+            else if (holdingObject is Equipment)
+            {
+                if (focuser.IsEmpty)
+                    return;
 
-                    if (focuser.FocusedObject.CurrentObject.TryGetComponent<IGrabbable>(out IGrabbable target))
-                    {
-                        holdingObject.GrabObject.SetActive(false);
-                        holdingObject = null;
-                        inventory.AddItem(target);
-                        Grab(target);
-                    }
-                    break;
+                if (focuser.FocusedObject.CurrentObject.TryGetComponent<IGrabbable>(out IGrabbable target))
+                {
+                    holdingObject.GrabObject.SetActive(false);
+                    holdingObject = null;
+                    inventory.AddItem(target);
+                    Grab(target);
+                }
+
             }
         }
     }
@@ -96,7 +96,7 @@ public class PlayerHand : MonoBehaviour, IHolder
     {
         bool result = target.Grab(this, point);
 
-        if(result)
+        if (result)
             holdingObject = target;
 
         return result;

@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 
-public class Stuff : MonoBehaviour, IGrabbable
+public abstract class Equipment : MonoBehaviour, IGrabbable
 {
-	[SerializeField] StuffSO stuffData;
-    public StuffSO StuffData => stuffData;
+    [SerializeField] EquipmentSO equipmentData;
+    public EquipmentSO EquipmentData => equipmentData;
+
+    protected int durability = 0;
 
     private IHolder currentHolder = null;
     public IHolder CurrentHolder => currentHolder;
@@ -12,13 +14,33 @@ public class Stuff : MonoBehaviour, IGrabbable
     public GameObject GrabObject => gameObject;
 
     public event Action<bool> OnGrabbedEvent = null;
+    public event Action OnBrokenEvent = null;
+
+    public abstract void OnEquipmentActived();
+
+    public void Active()
+    {
+        OnEquipmentActived();
+
+        durability--;
+        if(durability <= 0)
+        {
+            OnBrokenEvent?.Invoke();
+            Destroy(gameObject);   
+        }
+    }
+    
+    public void Init()
+    {
+        durability = equipmentData.MaxDurability;
+    }
 
     public bool Grab(IHolder holder, Vector3 point = default)
     {
-        if(holder.IsEmpty == false)
+        if (holder.IsEmpty == false)
             return false;
 
-        if(currentHolder != null)
+        if (currentHolder != null)
             return false;
 
         currentHolder = holder;
