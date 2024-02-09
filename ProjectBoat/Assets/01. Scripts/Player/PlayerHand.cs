@@ -20,6 +20,7 @@ public class PlayerHand : MonoBehaviour, IHolder
     private void Awake()
     {
         input.OnCollectEvent += HandleCollect;
+        input.OnFireEvent += HandleFire;
         focuser = GetComponent<PlayerFocuser>();
         inventory = GetComponent<PlayerInventory>();
 
@@ -47,6 +48,21 @@ public class PlayerHand : MonoBehaviour, IHolder
             holdingObject?.GrabObject.SetActive(false);
             holdingObject = inventory.GetCurrentItem();
             holdingObject?.GrabObject.SetActive(true);
+        }
+    }
+    
+    private void HandleFire()
+    {
+        Equipment equipment = holdingObject as Equipment;
+        if(equipment == null)
+            return;
+
+        int remaining = equipment.Active();
+        if(remaining <= 0)
+        {
+            Release();
+            inventory.RemoveItem(equipment);
+            Destroy(equipment.gameObject);
         }
     }
 

@@ -16,18 +16,18 @@ public abstract class Equipment : MonoBehaviour, IGrabbable
     public event Action<bool> OnGrabbedEvent = null;
     public event Action OnBrokenEvent = null;
 
-    public abstract void OnEquipmentActived();
+    protected abstract void OnEquipmentActived();
 
-    public void Active()
+    /// <returns>Remaining durability</returns>
+    public int Active()
     {
+        durability--;
         OnEquipmentActived();
 
-        durability--;
         if(durability <= 0)
-        {
             OnBrokenEvent?.Invoke();
-            Destroy(gameObject);   
-        }
+
+        return durability;
     }
     
     public void Init()

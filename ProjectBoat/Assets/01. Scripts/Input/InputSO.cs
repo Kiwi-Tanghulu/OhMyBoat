@@ -14,6 +14,7 @@ public class InputSO : ScriptableObject, IPlayActions
     public Action OnJumpEvent;
     public Action OnCollectEvent;
     public Action<bool> OnInteractEvent;
+    public Action OnFireEvent;
 
     private void OnEnable()
     {
@@ -65,5 +66,11 @@ public class InputSO : ScriptableObject, IPlayActions
     public void OnMouseWheel(InputAction.CallbackContext context)
     {
         OnMouseWheelEvent?.Invoke(context.ReadValue<float>());
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnFireEvent?.Invoke();
     }
 }
