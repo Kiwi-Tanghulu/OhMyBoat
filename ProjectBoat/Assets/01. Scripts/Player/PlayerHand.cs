@@ -42,15 +42,14 @@ public class PlayerHand : MonoBehaviour, IHolder
 
     private void Inventory_OnChangeCurrentItemIndex(int value)
     {
-        if (holdingObject == null || holdingObject is Equipment)
-        {
-            //Grab(inventory.GetCurrentItem()); right code
-            holdingObject?.GrabObject.SetActive(false);
-            holdingObject = inventory.GetCurrentItem();
-            holdingObject?.GrabObject.SetActive(true);
-        }
+        if (holdingObject is Stuff)
+            return;
+
+        holdingObject?.GrabObject.SetActive(false);
+        holdingObject = inventory.GetCurrentItem();
+        holdingObject?.GrabObject.SetActive(true);
     }
-    
+
     private void HandleFire()
     {
         Equipment equipment = holdingObject as Equipment;
@@ -60,9 +59,10 @@ public class PlayerHand : MonoBehaviour, IHolder
         int remaining = equipment.Active();
         if(remaining <= 0)
         {
-            Release();
+            // Release();
             inventory.RemoveItem(equipment);
             Destroy(equipment.gameObject);
+            holdingObject = null;
         }
     }
 
