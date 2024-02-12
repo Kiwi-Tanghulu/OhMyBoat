@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +16,7 @@ public class LeakMisson : Misson
         base.Start();
 
         leaks = new List<Leak>();
-
-        for(int i = 0; i < leakTransformsSO.LeakTransforms.Count; i++)
+        for (int i = 0; i < leakTransformsSO.LeakTransforms.Count; i++)
         {
             Leak leak = Instantiate(
                 leakPrefab,
@@ -24,21 +24,18 @@ public class LeakMisson : Misson
                 Quaternion.Euler(leakTransformsSO.LeakTransforms[i].rotation),
                 transform);
 
+            leak.InitMissonObject(this);
+
             leaks.Add(leak);
         }
     }
 
-    public override bool CanMakeMisson()
+    public override bool CanStartMisson()
     {
         return workingLeakCount < leaks.Count;
     }
 
-    public override bool IsWorking()
-    {
-        return workingLeakCount > 0;
-    }
-
-    public override void MakeMisson()
+    public override void StartMisson()
     {
         int leakIndex;
 
@@ -48,8 +45,22 @@ public class LeakMisson : Misson
         }
         while (leaks[leakIndex].IsWorking);
 
-        leaks[leakIndex].StartWork();
+        leaks[leakIndex].StartMisson();
 
         workingLeakCount++;
+
+        isWorking = true;
+
+        OnStartMisson?.Invoke();
+    }
+
+    public override void EndMisson()
+    {
+        workingLeakCount--;
+
+        if(workingLeakCount == 0)
+            isWorking = false;
+
+        OnEndMisson?.Invoke();
     }
 }

@@ -25,7 +25,7 @@ public class MissonManager : MonoBehaviour
     {
         if (lastMissonMakeTime + makeMissonInterval < Time.time)
         {
-            MakeMisson();
+            //MakeMisson();
 
             lastMissonMakeTime = Time.time;
         }
@@ -43,8 +43,8 @@ public class MissonManager : MonoBehaviour
         {
             missonIndex = UnityEngine.Random.Range(0, missons.Count);
         }
-        while (!missons[missonIndex].CanMakeMisson());
+        while (!missons[missonIndex].CanStartMisson());
 
-        missons[missonIndex].MakeMisson();
+        missons[missonIndex].StartMisson();
     }
 }
