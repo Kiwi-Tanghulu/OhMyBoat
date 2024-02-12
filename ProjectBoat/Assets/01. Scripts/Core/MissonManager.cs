@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MissonManager : MonoBehaviour
@@ -25,7 +26,7 @@ public class MissonManager : MonoBehaviour
     {
         if (lastMissonMakeTime + makeMissonInterval < Time.time)
         {
-            //MakeMisson();
+            MakeMisson();
 
             lastMissonMakeTime = Time.time;
         }
@@ -38,6 +39,19 @@ public class MissonManager : MonoBehaviour
 
     public void MakeMisson()
     {
+        bool canStartAnyMisson = false;
+        for(int i = 0; i < missons.Count; i++)
+        {
+            if(missons[i].CanStartMisson())
+            {
+                canStartAnyMisson = true;
+                break;
+            }
+        }
+
+        if (!canStartAnyMisson)
+            return;
+
         int missonIndex;
         do
         {
