@@ -43,7 +43,7 @@ public class MissonManager : MonoBehaviour
         {
             missonIndex = UnityEngine.Random.Range(0, missons.Count);
         }
-        while (!missons[missonIndex].CanMakeMisson());
+        while (!missons[missonIndex].CanStartMisson());
 
         missons[missonIndex].StartMisson();
     }

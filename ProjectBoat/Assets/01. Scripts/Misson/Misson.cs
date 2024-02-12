@@ -16,7 +16,7 @@ public abstract class Misson : MonoBehaviour
         MissonManager.Instance.RegistMisson(this);
     }
     
-    public abstract bool CanMakeMisson();
+    public abstract bool CanStartMisson();
     public virtual void StartMisson()
     {
         OnStartMisson?.Invoke();

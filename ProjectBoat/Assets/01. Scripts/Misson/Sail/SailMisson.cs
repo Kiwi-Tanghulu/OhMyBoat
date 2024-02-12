@@ -16,7 +16,7 @@ public class SailMisson : Misson
         sail.InitMissonObject(this);
     }
 
-    public override bool CanMakeMisson()
+    public override bool CanStartMisson()
     {
         return !isWorking;
     }

@@ -30,7 +30,7 @@ public class LeakMisson : Misson
         }
     }
 
-    public override bool CanMakeMisson()
+    public override bool CanStartMisson()
     {
         return workingLeakCount < leaks.Count;
     }
