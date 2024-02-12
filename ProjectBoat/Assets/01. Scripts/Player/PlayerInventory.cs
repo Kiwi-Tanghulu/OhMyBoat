@@ -40,7 +40,7 @@ public class PlayerInventory : MonoBehaviour
             else
                 currentItemIndex = (currentItemIndex - 1) % maxItemCount;
         }
-
+        
         OnChangeCurrentItemIndex?.Invoke(currentItemIndex);
     }
 

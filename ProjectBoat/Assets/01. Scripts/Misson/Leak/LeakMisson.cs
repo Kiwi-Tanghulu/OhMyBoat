@@ -37,18 +37,12 @@ public class LeakMisson : Misson
 
     public override void StartMisson()
     {
-        int leakIndex;
+        List<Leak> canStartLeaks = leaks.FindAll(x => x.IsWorking == false);
+        int leakIndex = UnityEngine.Random.Range(0, canStartLeaks.Count);
 
-        do
-        {
-            leakIndex = UnityEngine.Random.Range(0, leaks.Count);
-        }
-        while (leaks[leakIndex].IsWorking);
-
-        leaks[leakIndex].StartMisson();
+        canStartLeaks[leakIndex].StartMisson();
 
         workingLeakCount++;
-
         isWorking = true;
 
         OnStartMisson?.Invoke();

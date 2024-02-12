@@ -100,10 +100,11 @@ public class PlayerHand : MonoBehaviour, IHolder
                 {
                     holdingObject.GrabObject.SetActive(false);
                     holdingObject = null;
-                    inventory.AddItem(target);
                     Grab(target);
-                }
 
+                    if(target is Equipment)
+                        inventory.AddItem(target);
+                }
             }
         }
     }
