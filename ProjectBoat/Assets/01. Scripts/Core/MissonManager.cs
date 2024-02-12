@@ -39,26 +39,13 @@ public class MissonManager : MonoBehaviour
 
     public void MakeMisson()
     {
-        bool canStartAnyMisson = false;
-        for(int i = 0; i < missons.Count; i++)
-        {
-            if(missons[i].CanStartMisson())
-            {
-                canStartAnyMisson = true;
-                break;
-            }
-        }
+        List<Misson> canStartMissons = missons.FindAll(x => x.CanStartMisson());
 
-        if (!canStartAnyMisson)
+        if (canStartMissons.Count == 0)
             return;
 
-        int missonIndex;
-        do
-        {
-            missonIndex = UnityEngine.Random.Range(0, missons.Count);
-        }
-        while (!missons[missonIndex].CanStartMisson());
+        int missonIndex = UnityEngine.Random.Range(0, canStartMissons.Count);
 
-        missons[missonIndex].StartMisson();
+        canStartMissons[missonIndex].StartMisson();
     }
 }
