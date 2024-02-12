@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sail : MissonObject
+public class Sail : RepairMissonObject
 {
     private Animator anim;
 
@@ -18,18 +18,31 @@ public class Sail : MissonObject
 
     public override void StartMisson()
     {
+        base.StartMisson();
+
         anim.SetTrigger(breakHash);
     }
 
     public override void EndMisson()
     {
         base.EndMisson();
-
+        
         anim.SetTrigger(fixHash);
     }
 
-    public override bool Interact(GameObject performer, bool actived, Vector3 point = default)
+    public override void OnFocusBegin(Vector3 point)
     {
-        return true;
+        if (!OwnedMisson.IsWorking)
+            return;
+
+        base.OnFocusBegin(point);
+    }
+
+    public override void OnFocusEnd()
+    {
+        if (!OwnedMisson.IsWorking)
+            return;
+
+        base.OnFocusEnd();
     }
 }

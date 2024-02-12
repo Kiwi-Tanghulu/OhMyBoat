@@ -24,7 +24,7 @@ public class SailMisson : Misson
     public override void StartMisson()
     {
         base.StartMisson();
-
+        
         sail.StartMisson();
     }
 }

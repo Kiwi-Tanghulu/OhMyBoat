@@ -5,28 +5,30 @@ using UnityEngine;
 
 public abstract class MissonObject : MonoBehaviour, IInteractable, IFocusable
 {
-    protected Misson misson;
+    private Misson ownedMisson;
+    public Misson OwnedMisson => ownedMisson;
+
     [SerializeField] private Transform focusedVisual;
 
     public GameObject CurrentObject => gameObject;
 
     public virtual void InitMissonObject(Misson misson)
     {
-        this.misson = misson;
+        ownedMisson = misson;
     }
     public abstract bool Interact(GameObject performer, bool actived, Vector3 point = default);
     public abstract void StartMisson();
     public virtual void EndMisson()
     {
-        misson.EndMisson();
+        ownedMisson.EndMisson();
     }
 
-    public void OnFocusBegin(Vector3 point)
+    public virtual void OnFocusBegin(Vector3 point)
     {
         focusedVisual.gameObject.SetActive(true);
     }
 
-    public void OnFocusEnd()
+    public virtual void OnFocusEnd()
     {
         focusedVisual.gameObject.SetActive(false);
     }
