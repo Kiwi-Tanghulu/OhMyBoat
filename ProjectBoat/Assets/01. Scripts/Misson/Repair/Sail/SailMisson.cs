@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SailMisson : Misson
+public class SailMisson : RepairMisson
 {
     public override bool CanStartMisson()
     {
