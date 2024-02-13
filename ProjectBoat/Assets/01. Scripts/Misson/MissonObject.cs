@@ -8,6 +8,8 @@ public abstract class MissonObject : MonoBehaviour, IInteractable, IFocusable
     private Misson ownedMisson;
     public Misson OwnedMisson => ownedMisson;
 
+    public bool IsWorking { get; private set; } = false;
+
     [SerializeField] private Transform focusedVisual;
 
     public GameObject CurrentObject => gameObject;
@@ -17,9 +19,14 @@ public abstract class MissonObject : MonoBehaviour, IInteractable, IFocusable
         ownedMisson = misson;
     }
     public abstract bool Interact(GameObject performer, bool actived, Vector3 point = default);
-    public abstract void StartMisson();
+    public virtual void StartMisson()
+    {
+        IsWorking = true;
+    }
+
     public virtual void EndMisson()
     {
+        IsWorking = false;
         ownedMisson.EndMisson();
     }
 

@@ -56,6 +56,8 @@ public class RepairMissonObject : MissonObject
 
     public override void StartMisson() 
     {
+        base.StartMisson();
+
         for (int i = 0; i < repairStuffs.Count; i++)
             currentNeededStuffs.Add(repairStuffs[i]);
     }
