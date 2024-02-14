@@ -37,7 +37,7 @@ public class PlayInputSO : InputSO, IPlayActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.started)
         {
             OnJumpEvent?.Invoke();
         }
@@ -45,13 +45,13 @@ public class PlayInputSO : InputSO, IPlayActions
 
     public void OnCollect(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.started)
             OnCollectEvent?.Invoke();
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.started)
             OnInteractEvent?.Invoke(true);
         else if(context.canceled)
             OnInteractEvent?.Invoke(false);
@@ -64,7 +64,7 @@ public class PlayInputSO : InputSO, IPlayActions
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.started)
             OnFireEvent?.Invoke();
     }
 }

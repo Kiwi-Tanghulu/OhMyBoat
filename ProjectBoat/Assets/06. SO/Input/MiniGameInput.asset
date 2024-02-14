@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9be2a594e16d414fa4caaa3d4b99076, type: 3}
   m_Name: MiniGameInput
   m_EditorClassIdentifier: 
+  inputMapType: 1

@@ -12,6 +12,9 @@ public class RepairMissonObject : MissonObject
 
     public override bool Interact(GameObject performer, bool actived, Vector3 point = default)
     {
+        if (!actived)
+            return false;
+
         if (performer.TryGetComponent<PlayerHand>(out PlayerHand playerHand))
         {
             if (currentNeededStuffs.Count == 0)//filled all repair stuff
@@ -25,6 +28,7 @@ public class RepairMissonObject : MissonObject
                 if (equipSO == repairEquip)
                 {
                     //EndMisson();
+                    
                     RepairMisson misson = OwnedMisson as RepairMisson;
                     misson.StartMiniGame(this);
 

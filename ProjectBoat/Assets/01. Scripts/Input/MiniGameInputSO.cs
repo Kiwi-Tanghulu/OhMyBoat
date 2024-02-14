@@ -8,7 +8,7 @@ using static Controls;
 [CreateAssetMenu(menuName = "SO/InputSO/MiniGameInputSO")]
 public class MiniGameInputSO : InputSO, IMiniGameActions
 {
-    public Action OnSpaceEvent;
+    public event Action OnSpaceEvent;
 
     private void OnEnable()
     {
@@ -19,7 +19,9 @@ public class MiniGameInputSO : InputSO, IMiniGameActions
 
     public void OnSpace(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.started)
+        {
             OnSpaceEvent?.Invoke();
+        }
     }
 }

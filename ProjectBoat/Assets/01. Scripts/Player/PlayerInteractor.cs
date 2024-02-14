@@ -27,7 +27,7 @@ public class PlayerInteractor : MonoBehaviour
 
         if(lastFocusedTarget != focuser.FocusedObject)
             currentTarget = focuser.FocusedObject.CurrentObject.GetComponent<IInteractable>();
-            
+
         currentTarget?.Interact(gameObject, actived);
     }
 }
