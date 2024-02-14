@@ -11,6 +11,8 @@ public abstract class RepairMiniGame : MonoBehaviour
     public virtual void StartGame(RepairMissonObject missonObject)
     {
         this.missonObject = missonObject;
+        InputManager.ChangeInputMap(InputMapType.MiniGame);
+        Debug.Log("start minigame");
     }
 
     public virtual void EndGame()
@@ -26,5 +28,6 @@ public abstract class RepairMiniGame : MonoBehaviour
         
         missonObject = null;
         isSuccesses = false;
+        InputManager.ChangeInputMap(InputMapType.Play);
     }
 }

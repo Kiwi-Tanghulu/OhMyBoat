@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerInteractor : MonoBehaviour
 {
-	[SerializeField] InputSO input;
+	[SerializeField] PlayInputSO input;
 
     private PlayerFocuser focuser = null;
 
