@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StageMovement : MonoBehaviour
+public class StageShipMovement : MonoBehaviour
 {
 	[SerializeField] InputSO input = null;
     
