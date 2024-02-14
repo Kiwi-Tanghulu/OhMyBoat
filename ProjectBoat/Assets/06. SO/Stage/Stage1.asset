@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59fc3f3871cf2364082a6a5d69090db0, type: 3}
-  m_Name: StageList
+  m_Script: {fileID: 11500000, guid: c303f53591b321844813c9b01fe57a40, type: 3}
+  m_Name: Stage1
   m_EditorClassIdentifier: 
-  stageList:
-  - {fileID: 8365181710396687489, guid: 4bb6786cfbddcb047803aad38f072082, type: 3}
+  StagePrefab: {fileID: 8365181710396687489, guid: 4bb6786cfbddcb047803aad38f072082,
+    type: 3}
+  PlayTime: 30
