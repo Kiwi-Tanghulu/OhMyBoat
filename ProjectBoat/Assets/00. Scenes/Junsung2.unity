@@ -123,7 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
-      propertyPath: m_LocalPosition.y
 --- !u!1 &73318448
 GameObject:
   m_ObjectHideFlags: 0
