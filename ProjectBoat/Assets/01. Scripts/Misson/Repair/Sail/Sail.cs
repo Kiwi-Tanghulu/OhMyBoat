@@ -14,6 +14,7 @@ public class Sail : RepairMissonObject
         base.InitMissonObject(misson);
 
         anim = GetComponent<Animator>();
+        Debug.Log(1);
     }
 
     public override void StartMisson()
