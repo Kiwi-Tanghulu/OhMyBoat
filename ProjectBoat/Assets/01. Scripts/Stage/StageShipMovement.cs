@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StageShipMovement : MonoBehaviour
 {
-	[SerializeField] InputSO input = null;
+	[SerializeField] PlayInputSO input = null;
     
     [Space(15f)]
     [SerializeField] float moveSpeed = 15f;

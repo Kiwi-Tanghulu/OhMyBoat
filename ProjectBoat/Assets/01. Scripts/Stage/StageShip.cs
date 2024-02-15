@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StageShip : MonoBehaviour
 {
-    [SerializeField] InputSO input = null;
+    [SerializeField] PlayInputSO input = null;
     [SerializeField] int containerSize = 5;
 
     [Space(15f)]
