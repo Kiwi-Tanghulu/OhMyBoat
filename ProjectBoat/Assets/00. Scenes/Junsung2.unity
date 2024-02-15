@@ -7735,7 +7735,7 @@ MonoBehaviour:
   gameTime: 5
   topSail: {fileID: 822722871}
   initRotation: -115
-  increaseAmount: 100
+  increaseAmount: 1000
   decreaseAmount: 5
   maxChangeValue: 50
   minChangeValue: -50
