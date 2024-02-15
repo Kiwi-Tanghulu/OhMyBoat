@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private InputSO input;
+    [SerializeField] private PlayInputSO input;
 
     [SerializeField] private float gravityScale;
     private float verticalVelocity;

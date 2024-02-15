@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class Leak : RepairMissonObject
 {
-    protected bool isWorking;
-    public bool IsWorking => isWorking;
-
     private ParticleSystem particle;
 
     public override void InitMissonObject(Misson misson)
@@ -27,8 +24,6 @@ public class Leak : RepairMissonObject
         
         gameObject.SetActive(true);
         particle.Play();
-
-        isWorking = true;
     }
 
     public override void EndMisson()
@@ -37,7 +32,5 @@ public class Leak : RepairMissonObject
 
         gameObject.SetActive(false);
         particle.Stop();
-
-        isWorking = false;
     }
 }

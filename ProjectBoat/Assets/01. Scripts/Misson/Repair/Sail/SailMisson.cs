@@ -5,17 +5,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SailMisson : Misson
+public class SailMisson : RepairMisson
 {
-    [SerializeField] private Sail sail;
-
-    protected override void Start()
-    {
-        base.Start();
-
-        sail.InitMissonObject(this);
-    }
-
     public override bool CanStartMisson()
     {
         return !isWorking;
@@ -25,6 +16,6 @@ public class SailMisson : Misson
     {
         base.StartMisson();
         
-        sail.StartMisson();
+        missonObject.StartMisson();
     }
 }

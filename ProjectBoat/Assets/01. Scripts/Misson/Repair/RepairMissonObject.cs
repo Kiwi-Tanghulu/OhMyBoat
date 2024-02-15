@@ -12,11 +12,12 @@ public class RepairMissonObject : MissonObject
 
     public override bool Interact(GameObject performer, bool actived, Vector3 point = default)
     {
-        Debug.Log("repair misson interact");
-        
-        if (performer.TryGetComponent<PlayerHand>(out PlayerHand playerHand))//filled all repair stuff
+        if (!actived)
+            return false;
+
+        if (performer.TryGetComponent<PlayerHand>(out PlayerHand playerHand))
         {
-            if (currentNeededStuffs.Count == 0)
+            if (currentNeededStuffs.Count == 0)//filled all repair stuff
             {
                 Equipment equip = playerHand.HoldingObject as Equipment;
                 if (equip == null)
@@ -26,8 +27,11 @@ public class RepairMissonObject : MissonObject
 
                 if (equipSO == repairEquip)
                 {
-                    EndMisson();
-                    Debug.Log("success repair misson interact");
+                    //EndMisson();
+                    
+                    RepairMisson misson = OwnedMisson as RepairMisson;
+                    misson.StartMiniGame(this);
+
                     return true;
                 }
             }
@@ -44,18 +48,19 @@ public class RepairMissonObject : MissonObject
                     currentNeededStuffs.Remove(stuffSO);
                     playerHand.Release();
                     Destroy(stuff.gameObject);
-                    Debug.Log("success repair misson interact");
+
                     return true;
                 }
             }
         }
 
-        Debug.Log("failed repair misson interact");
         return false;
     }
 
     public override void StartMisson() 
     {
+        base.StartMisson();
+
         for (int i = 0; i < repairStuffs.Count; i++)
             currentNeededStuffs.Add(repairStuffs[i]);
     }
@@ -65,5 +70,11 @@ public class RepairMissonObject : MissonObject
         base.EndMisson();
         
         currentNeededStuffs.Clear();
+    }
+
+    public virtual void ResetMisson()
+    {
+        for (int i = 0; i < repairStuffs.Count; i++)
+            currentNeededStuffs.Add(repairStuffs[i]);
     }
 }

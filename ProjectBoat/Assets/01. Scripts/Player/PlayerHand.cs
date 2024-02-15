@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerHand : MonoBehaviour, IHolder
 {
-    [SerializeField] InputSO input;
+    [SerializeField] PlayInputSO input;
 
     [Space(15f)]
     [SerializeField] Transform holdPosition = null;

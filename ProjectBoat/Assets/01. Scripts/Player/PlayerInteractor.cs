@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerInteractor : MonoBehaviour
 {
-	[SerializeField] InputSO input;
+	[SerializeField] PlayInputSO input;
 
     private PlayerFocuser focuser = null;
 
@@ -27,7 +27,7 @@ public class PlayerInteractor : MonoBehaviour
 
         if(lastFocusedTarget != focuser.FocusedObject)
             currentTarget = focuser.FocusedObject.CurrentObject.GetComponent<IInteractable>();
-            
+
         currentTarget?.Interact(gameObject, actived);
     }
 }

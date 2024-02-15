@@ -214,6 +214,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MiniGame"",
+            ""id"": ""dea00e81-aae5-4ef8-a0c1-05f201497227"",
+            ""actions"": [
+                {
+                    ""name"": ""Space"",
+                    ""type"": ""Button"",
+                    ""id"": ""4cf45c21-be9e-4679-8909-c9ed4334275f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""61267d66-ac4c-4e52-8766-4f06c0462096"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Space"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -244,6 +272,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Play_Collect = m_Play.FindAction("Collect", throwIfNotFound: true);
         m_Play_Interact = m_Play.FindAction("Interact", throwIfNotFound: true);
         m_Play_Fire = m_Play.FindAction("Fire", throwIfNotFound: true);
+        // MiniGame
+        m_MiniGame = asset.FindActionMap("MiniGame", throwIfNotFound: true);
+        m_MiniGame_Space = m_MiniGame.FindAction("Space", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -395,6 +426,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public PlayActions @Play => new PlayActions(this);
+
+    // MiniGame
+    private readonly InputActionMap m_MiniGame;
+    private List<IMiniGameActions> m_MiniGameActionsCallbackInterfaces = new List<IMiniGameActions>();
+    private readonly InputAction m_MiniGame_Space;
+    public struct MiniGameActions
+    {
+        private @Controls m_Wrapper;
+        public MiniGameActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Space => m_Wrapper.m_MiniGame_Space;
+        public InputActionMap Get() { return m_Wrapper.m_MiniGame; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MiniGameActions set) { return set.Get(); }
+        public void AddCallbacks(IMiniGameActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MiniGameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MiniGameActionsCallbackInterfaces.Add(instance);
+            @Space.started += instance.OnSpace;
+            @Space.performed += instance.OnSpace;
+            @Space.canceled += instance.OnSpace;
+        }
+
+        private void UnregisterCallbacks(IMiniGameActions instance)
+        {
+            @Space.started -= instance.OnSpace;
+            @Space.performed -= instance.OnSpace;
+            @Space.canceled -= instance.OnSpace;
+        }
+
+        public void RemoveCallbacks(IMiniGameActions instance)
+        {
+            if (m_Wrapper.m_MiniGameActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMiniGameActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MiniGameActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MiniGameActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MiniGameActions @MiniGame => new MiniGameActions(this);
     private int m_keyboardmouseSchemeIndex = -1;
     public InputControlScheme keyboardmouseScheme
     {
@@ -413,5 +490,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnCollect(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+    }
+    public interface IMiniGameActions
+    {
+        void OnSpace(InputAction.CallbackContext context);
     }
 }

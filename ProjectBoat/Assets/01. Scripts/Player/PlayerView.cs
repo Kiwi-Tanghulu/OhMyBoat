@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
-    [SerializeField] private InputSO input;
+    [SerializeField] private PlayInputSO input;
     [SerializeField] private CinemachineVirtualCamera playerCam;
 
     [SerializeField] private float rotateSpeed;

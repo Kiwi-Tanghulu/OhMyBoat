@@ -192,6 +192,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MiniGame",
+            "id": "dea00e81-aae5-4ef8-a0c1-05f201497227",
+            "actions": [
+                {
+                    "name": "Space",
+                    "type": "Button",
+                    "id": "4cf45c21-be9e-4679-8909-c9ed4334275f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "61267d66-ac4c-4e52-8766-4f06c0462096",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Space",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

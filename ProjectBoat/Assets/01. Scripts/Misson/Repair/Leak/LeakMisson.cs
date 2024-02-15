@@ -3,23 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeakMisson : Misson
+public class LeakMisson : RepairMisson
 {
     [SerializeField] private LeakTransformSO leakTransformsSO;
-    [SerializeField] private Leak leakPrefab;
 
-    private List<Leak> leaks;
+    private List<MissonObject> leaks;
     private int workingLeakCount;
 
     protected override void Start()
     {
-        base.Start();
+        MissonManager.Instance.RegistMisson(this);
 
-        leaks = new List<Leak>();
+        leaks = new List<MissonObject>();
         for (int i = 0; i < leakTransformsSO.LeakTransforms.Count; i++)
         {
-            Leak leak = Instantiate(
-                leakPrefab,
+            MissonObject leak = Instantiate(
+                missonObject,
                 leakTransformsSO.LeakTransforms[i].position,
                 Quaternion.Euler(leakTransformsSO.LeakTransforms[i].rotation),
                 transform);
@@ -37,7 +36,7 @@ public class LeakMisson : Misson
 
     public override void StartMisson()
     {
-        List<Leak> canStartLeaks = leaks.FindAll(x => x.IsWorking == false);
+        List<MissonObject> canStartLeaks = leaks.FindAll(x => x.IsWorking == false);
         int leakIndex = UnityEngine.Random.Range(0, canStartLeaks.Count);
 
         canStartLeaks[leakIndex].StartMisson();

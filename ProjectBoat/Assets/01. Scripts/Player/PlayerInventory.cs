@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] private InputSO input;
+    [SerializeField] private PlayInputSO input;
 
     [SerializeField] private int maxItemCount;
 
