@@ -12,8 +12,6 @@ public abstract class RepairMiniGame : MonoBehaviour
 
     private RepairMissonObject missonObject;
 
-    protected bool isSuccesses;
-
     public virtual void StartGame(RepairMissonObject missonObject)
     {
         this.missonObject = missonObject;
@@ -31,17 +29,16 @@ public abstract class RepairMiniGame : MonoBehaviour
 
         if (currentGameTime >= gameTime)
         {
-            isSuccesses = false;
-            EndGame();
+            EndGame(false);
         }
     }
 
-    public virtual void EndGame()
+    public virtual void EndGame(bool result)
     {
         inputSO.OnSpaceEvent -= Input_SpaceEvent;
         InputManager.ChangeInputMap(InputMapType.Play);
 
-        if(isSuccesses)
+        if(result)
         {
             missonObject.EndMisson();
         }
@@ -51,7 +48,6 @@ public abstract class RepairMiniGame : MonoBehaviour
         }
         
         missonObject = null;
-        isSuccesses = false;
 
         gameObject.SetActive(false);
     }

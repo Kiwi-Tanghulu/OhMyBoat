@@ -54,8 +54,7 @@ public class LeakMiniGame : RepairMiniGame
 
         if(claerCount == ponds.Count)
         {
-            isSuccesses = true;
-            EndGame();
+            EndGame(true);
         }
     }
 
