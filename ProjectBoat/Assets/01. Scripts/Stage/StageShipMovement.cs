@@ -45,6 +45,8 @@ public class StageShipMovement : MonoBehaviour
     private void HandleMove(Vector2 input)
     {
         moveDirection = new Vector3(input.x, 0f, input.y);
+        if(moveDirection.sqrMagnitude <= 0.1f)
+            return;
 
         theta = 0f;
         prevRotation = transform.rotation;

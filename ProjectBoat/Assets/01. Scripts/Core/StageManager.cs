@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour
@@ -6,10 +7,11 @@ public class StageManager : MonoBehaviour
 
     [SerializeField] StageListSO stageList = null;
 
-    private GameObject stageBoard = null;
     private GameObject currentStage = null;
+    private StageSO stageInfo = null;
 
-    public bool IsPlaying { get; private set; } = false;
+    private float playTime = 0f;
+    public float PlayTime => playTime;
 
     private void Awake()
     {
@@ -17,24 +19,31 @@ public class StageManager : MonoBehaviour
             Destroy(Instance);
 
         Instance = this;
+    }
 
-        stageBoard = GameObject.Find("StageBoard");
+    private void Update()
+    {
+        if(GameManager.Instance.GameState != GameState.Playing)
+            return;
+
+        playTime += Time.deltaTime;
+        if(playTime >= stageInfo.PlayTime)
+            GameManager.Instance.ChangeState(GameState.Finish);
     }
 
     public void StartStage(int index)
     {
-        if(IsPlaying)
-            return;
-
-        stageBoard.SetActive(false);
-        IsPlaying = true;
+        DEFINE.StageBoard.SetActive(false);
+        GameManager.Instance.ChangeState(GameState.Playing);
         
-        currentStage = Instantiate(stageList[index], Vector3.zero, Quaternion.identity);
+        stageInfo = stageList[index];
+        currentStage = Instantiate(stageInfo.StagePrefab, Vector3.zero, Quaternion.identity);
+        playTime = 0f;
     }
 
-    public void FinishStage()
+    public void DestroyStage()
     {
-        Destroy(currentStage);
-        stageBoard.SetActive(true);
+        if(currentStage)
+            Destroy(currentStage);
     }
 }
