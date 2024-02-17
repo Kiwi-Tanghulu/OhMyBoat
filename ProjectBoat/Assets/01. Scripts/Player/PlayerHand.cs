@@ -29,12 +29,6 @@ public class PlayerHand : MonoBehaviour, IHolder
         DEFINE.PlayerHand = this;
     }
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     private void OnDestroy()
     {
         input.OnCollectEvent -= HandleCollect;
