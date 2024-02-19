@@ -16,7 +16,10 @@ public class StageShip : MonoBehaviour
     private void Awake()
     {
         container = new Collider[containerSize];
+    }
 
+    private void OnEnable()
+    {
         input.OnInteractEvent += HandleInteract;
     }
 
@@ -33,7 +36,7 @@ public class StageShip : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         input.OnInteractEvent -= HandleInteract;
     }
