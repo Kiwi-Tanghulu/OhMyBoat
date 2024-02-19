@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDir;
 
     [SerializeField] private float jumpPower = 7f;
+    public UnityEvent OnJumpStart;
+    public UnityEvent OnJumpEnd;
+    private bool isJump;
 
     private CharacterController cc;
 
@@ -38,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         Gravity();
+        CheckJump();
     }
 
     private void Gravity()
@@ -69,6 +74,17 @@ public class PlayerMovement : MonoBehaviour
         if(cc.isGrounded)
         {
             verticalVelocity = jumpPower;
+            isJump = true;
+            OnJumpStart?.Invoke();
+        }
+    }
+
+    private void CheckJump()
+    {
+        if (isJump && cc.isGrounded)
+        {
+            isJump = false;
+            OnJumpEnd?.Invoke();    
         }
     }
 }
