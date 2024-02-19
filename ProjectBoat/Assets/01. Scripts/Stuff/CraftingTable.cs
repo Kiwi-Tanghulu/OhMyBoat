@@ -8,30 +8,25 @@ public class CraftingTable : MonoBehaviour, IInteractable
     [SerializeField] Transform spawnPosition;
 
     private List<StuffSO> craftingProcess = null;
-    private PlayerHand playerHand = null;
 
     private void Awake()
     {
         ResetProcess();
     }
 
-    private void Start()
-    {
-        playerHand = DEFINE.PlayerHand;
-    }
-
-    public bool Interact(GameObject performer, bool actived, Vector3 point = default)
+    public bool Interact(Component performer, bool actived, Vector3 point = default)
     {
         if(actived == false)
             return false;
 
-        if(playerHand.IsEmpty)
+        PlayerHand hand = (performer as PlayerInteractor)?.Hand;
+        if(hand == null || hand.IsEmpty)
             return false;
 
-        return CraftingProcess();
+        return CraftingProcess(hand);
     }
 
-    private bool CraftingProcess()
+    private bool CraftingProcess(PlayerHand playerHand)
     {
         Stuff holdingStuff = playerHand.HoldingObject as Stuff;
         if(holdingStuff == null)

@@ -18,7 +18,7 @@ public abstract class MissonObject : MonoBehaviour, IInteractable, IFocusable
     {
         ownedMisson = misson;
     }
-    public abstract bool Interact(GameObject performer, bool actived, Vector3 point = default);
+    public abstract bool Interact(Component performer, bool actived, Vector3 point = default);
     public virtual void StartMisson()
     {
         IsWorking = true;
