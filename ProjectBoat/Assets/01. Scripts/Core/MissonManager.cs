@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,6 +7,9 @@ using UnityEngine;
 public class MissonManager : MonoBehaviour
 {
     public static MissonManager Instance;
+
+    public event Action<MissonType> OnStartMisson;
+    public event Action<MissonType> OnEndMisson;
 
     [SerializeField] private float makeMissonInterval;
     private float lastMissonMakeTime;
@@ -44,5 +48,12 @@ public class MissonManager : MonoBehaviour
         int missonIndex = UnityEngine.Random.Range(0, canStartMissons.Count);
 
         canStartMissons[missonIndex].StartMisson();
+
+        OnStartMisson?.Invoke(canStartMissons[missonIndex].missonType);
+    }
+
+    public void EndMisson(Misson misson)
+    {
+        OnEndMisson?.Invoke(misson.missonType);
     }
 }

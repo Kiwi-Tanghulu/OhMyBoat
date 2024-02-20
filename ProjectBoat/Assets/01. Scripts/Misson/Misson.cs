@@ -5,8 +5,10 @@ using UnityEngine;
 
 public abstract class Misson : MonoBehaviour
 {
-    public Action OnStartMisson;
-    public Action OnEndMisson;
+    public event Action<MissonType> OnStartMisson;
+    public event Action<MissonType> OnEndMisson;
+
+    public MissonType missonType;
 
     [SerializeField] protected MissonObject missonObject;
 
@@ -22,12 +24,14 @@ public abstract class Misson : MonoBehaviour
     public abstract bool CanStartMisson();
     public virtual void StartMisson()
     {
-        OnStartMisson?.Invoke();
+        OnStartMisson?.Invoke(missonType);
         isWorking = true;
     }
     public virtual void EndMisson()
     {
-        OnEndMisson?.Invoke();
+        OnEndMisson?.Invoke(missonType);
         isWorking = false;
+
+        MissonManager.Instance.EndMisson(this);
     }
 }
