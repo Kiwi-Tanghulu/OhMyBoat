@@ -1936,8 +1936,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385443bf361f060409d8cc6f2c18ca50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTransitionSpeed: 0
-  inputSO: {fileID: 0}
+  moveTransitionSpeed: 3
+  inputSO: {fileID: 11400000, guid: 807403439970f0d448782817beb0e920, type: 2}
 --- !u!1 &1966202229427933839
 GameObject:
   m_ObjectHideFlags: 0

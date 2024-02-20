@@ -44,7 +44,7 @@ public class LeakMisson : RepairMisson
         workingLeakCount++;
         isWorking = true;
 
-        OnStartMisson?.Invoke();
+        base.StartMisson();
     }
 
     public override void EndMisson()
@@ -54,6 +54,6 @@ public class LeakMisson : RepairMisson
         if(workingLeakCount == 0)
             isWorking = false;
 
-        OnEndMisson?.Invoke();
+        base.EndMisson();
     }
 }
