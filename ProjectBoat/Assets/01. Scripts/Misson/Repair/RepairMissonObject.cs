@@ -10,13 +10,16 @@ public class RepairMissonObject : MissonObject
                      
     [SerializeField] protected List<StuffSO> currentNeededStuffs;
 
-    public override bool Interact(GameObject performer, bool actived, Vector3 point = default)
+    public override bool Interact(Component performer, bool actived, Vector3 point = default)
     {
         if (!actived)
             return false;
 
-        if (performer.TryGetComponent<PlayerHand>(out PlayerHand playerHand))
+        PlayerInteractor interactor = performer as PlayerInteractor;
+        if (interactor != null)
         {
+            PlayerHand playerHand = interactor.Hand;
+
             if (currentNeededStuffs.Count == 0)//filled all repair stuff
             {
                 Equipment equip = playerHand.HoldingObject as Equipment;
