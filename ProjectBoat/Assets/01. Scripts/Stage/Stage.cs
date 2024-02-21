@@ -34,8 +34,8 @@ public class Stage : MonoBehaviour
 
         GameManager.Instance.ChangeState(GameState.Playing);
 
-        MissonManager.Instance.OnStartMisson += HandleMissionStart;
-        MissonManager.Instance.OnEndMisson += HandleMissionEnd;
+        MissionManager.Instance.OnStartMission += HandleMissionStart;
+        MissionManager.Instance.OnEndMission += HandleMissionEnd;
     }
 
     public void EndStage(bool complete)
@@ -44,18 +44,18 @@ public class Stage : MonoBehaviour
 
         GameManager.Instance.ChangeState(GameState.Finish);
 
-        MissonManager.Instance.OnStartMisson -= HandleMissionStart;
-        MissonManager.Instance.OnEndMisson -= HandleMissionEnd;
+        MissionManager.Instance.OnStartMission -= HandleMissionStart;
+        MissionManager.Instance.OnEndMission -= HandleMissionEnd;
 
         StageManager.Instance.OnStageEndEvent?.Invoke(this, complete);
     }
 
-    private void HandleMissionStart(MissonType type)
+    private void HandleMissionStart(MissionType type)
     {
         accumMissionCount++;
     }
 
-    private void HandleMissionEnd(MissonType type)
+    private void HandleMissionEnd(MissionType type, bool isSuccess)
     {
         accumMissionCount--;
     }
