@@ -39,24 +39,20 @@ public class LeakMission : RepairMission
         List<MissionObject> canStartLeaks = leaks.FindAll(x => x.IsWorking == false);
         int leakIndex = UnityEngine.Random.Range(0, canStartLeaks.Count);
 
-        canStartLeaks[leakIndex].StartMission();
-
         workingLeakCount++;
+
+        canStartLeaks[leakIndex].StartMission();
 
         isWorking = true;
 
         OnStartMisson?.Invoke();
     }
 
-    public override void EndMission(bool isSuccess)
+    public override void SuccessMission()
     {
         workingLeakCount--;
 
-        if(workingLeakCount == 0)
+        if (workingLeakCount == 0)
             isWorking = false;
-
-        OnEndMisson?.Invoke(isSuccess);
-
-        MissionManager.Instance.EndMission(this, isSuccess);
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Leak : RepairMissionObject
+public class LeakMissionObject : RepairMissionObject
 {
     private ParticleSystem particle;
 
@@ -26,11 +26,19 @@ public class Leak : RepairMissionObject
         particle.Play();
     }
 
-    public override void EndMission(bool isSuccess)
+    public override void SuccessMission()
     {
-        base.EndMission(isSuccess);
+        base.SuccessMission();
 
         gameObject.SetActive(false);
         particle.Stop();
+    }
+
+    public override void FailureMission()
+    {
+        base.FailureMission();
+
+        gameObject.SetActive(true);
+        particle.Play();
     }
 }

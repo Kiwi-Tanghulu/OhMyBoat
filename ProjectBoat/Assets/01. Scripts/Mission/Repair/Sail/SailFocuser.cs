@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SailFocuser : MonoBehaviour, IFocusable
 {
-    [SerializeField] private Sail sail;
+    [SerializeField] private SailMissionObject sail;
 
     public GameObject CurrentObject => sail.gameObject;
 

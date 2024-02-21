@@ -10,7 +10,8 @@ public abstract class MissionObject : MonoBehaviour, IInteractable, IFocusable
     private Mission ownedMisson;
     public Mission OwnedMisson => ownedMisson;
 
-    public bool IsWorking { get; private set; } = false;
+    protected bool isWorking;
+    public bool IsWorking => isWorking;
 
     [SerializeField] private Transform focusedVisual;
 
@@ -31,13 +32,27 @@ public abstract class MissionObject : MonoBehaviour, IInteractable, IFocusable
 
     public virtual void StartMission()
     {
-        IsWorking = true;
+        isWorking = true;
     }
 
     public virtual void EndMission(bool isSuccess)
     {
-        IsWorking = false;
+        if (isSuccess)
+            SuccessMission();
+        else
+            FailureMission();
+
         ownedMisson.EndMission(isSuccess);
+    }
+
+    public virtual void SuccessMission()
+    {
+        isWorking = false;
+    }
+
+    public virtual void FailureMission()
+    {
+        isWorking = true;
     }
 
     public virtual void OnFocusBegin(Vector3 point)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sail : RepairMissionObject
+public class SailMissionObject : RepairMissionObject
 {
     private Animator anim;
 
@@ -23,10 +23,10 @@ public class Sail : RepairMissionObject
         anim.SetTrigger(breakHash);
     }
 
-    public override void EndMission(bool isSuccess)
+    public override void SuccessMission()
     {
-        base.EndMission(isSuccess);
-        
+        base.SuccessMission();
+
         anim.SetTrigger(fixHash);
     }
 

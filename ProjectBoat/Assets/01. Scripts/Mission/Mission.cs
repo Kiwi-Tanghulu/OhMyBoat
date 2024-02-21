@@ -37,10 +37,23 @@ public abstract class Mission : MonoBehaviour
 
     public virtual void EndMission(bool isSuccess)
     {
-        isWorking = false;
+        if (isSuccess)
+            SuccessMission();
+        else
+            FailureMission();
 
         OnEndMisson?.Invoke(isSuccess);
 
         MissionManager.Instance.EndMission(this, isSuccess);
+    }
+
+    public virtual void SuccessMission()
+    {
+        isWorking = false;
+    }
+
+    public virtual void FailureMission()
+    {
+        isWorking = true;
     }
 }

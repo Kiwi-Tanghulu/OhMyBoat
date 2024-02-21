@@ -34,6 +34,8 @@ public class RepairMissionObject : MissionObject
                     RepairMission misson = OwnedMisson as RepairMission;
                     misson.StartMiniGame(this);
 
+                    OnInteracted?.Invoke(performer);
+
                     return true;
                 }
             }
@@ -51,6 +53,8 @@ public class RepairMissionObject : MissionObject
                     playerHand.Release();
                     Destroy(stuff.gameObject);
 
+                    OnInteracted?.Invoke(performer);
+
                     return true;
                 }
             }
@@ -63,19 +67,16 @@ public class RepairMissionObject : MissionObject
     {
         base.StartMission();
 
+        currentNeededStuffs.Clear();
+
         for (int i = 0; i < repairObject.repairStuffs.Count; i++)
             currentNeededStuffs.Add(repairObject.repairStuffs[i]);
     }
 
-    public override void EndMission(bool isSuccess)
+    public override void FailureMission()
     {
-        base.EndMission(isSuccess);
+        isWorking = true;
 
-        currentNeededStuffs.Clear();
-    }
-
-    public virtual void ResetMission()
-    {
         for (int i = 0; i < repairObject.repairStuffs.Count; i++)
             currentNeededStuffs.Add(repairObject.repairStuffs[i]);
     }

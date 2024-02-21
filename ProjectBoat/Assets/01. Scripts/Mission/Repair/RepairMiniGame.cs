@@ -38,15 +38,6 @@ public abstract class RepairMiniGame : MonoBehaviour
         inputSO.OnSpaceEvent -= Input_SpaceEvent;
         InputManager.ChangeInputMap(InputMapType.Play);
 
-        //if(result)
-        //{
-        //    missonObject.EndMission(result);
-        //}
-        //else
-        //{
-        //    missonObject.ResetMission();
-        //}
-
         missonObject.EndMission(result);
 
         missonObject = null;
