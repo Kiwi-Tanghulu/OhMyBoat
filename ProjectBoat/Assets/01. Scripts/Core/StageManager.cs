@@ -6,12 +6,13 @@ public class StageManager : MonoBehaviour
     public static StageManager Instance = null;
 
     [SerializeField] StageListSO stageList = null;
+    
+    public Action<Stage, bool> OnStageEndEvent;
 
-    private GameObject currentStage = null;
-    private StageSO stageInfo = null;
+    private Stage currentStage = null;
+    public Stage CurrentStage => currentStage;
 
-    private float playTime = 0f;
-    public float PlayTime => playTime;
+    public float PlayingTime => currentStage.PlayingTime;
 
     private void Awake()
     {
@@ -21,29 +22,19 @@ public class StageManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Update()
-    {
-        if(GameManager.Instance.GameState != GameState.Playing)
-            return;
-
-        playTime += Time.deltaTime;
-        if(playTime >= stageInfo.PlayTime)
-            GameManager.Instance.ChangeState(GameState.Finish);
-    }
-
     public void StartStage(int index)
     {
         DEFINE.StageBoard.SetActive(false);
-        GameManager.Instance.ChangeState(GameState.Playing);
         
-        stageInfo = stageList[index];
-        currentStage = Instantiate(stageInfo.StagePrefab, Vector3.zero, Quaternion.identity);
-        playTime = 0f;
+        currentStage = Instantiate(stageList[index].StagePrefab, Vector3.zero, Quaternion.identity);
+        currentStage.StartStage();
     }
 
     public void DestroyStage()
     {
         if(currentStage)
-            Destroy(currentStage);
+            Destroy(currentStage.gameObject);
+
+        currentStage = null;
     }
 }

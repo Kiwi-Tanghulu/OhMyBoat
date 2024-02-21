@@ -16,7 +16,10 @@ public class TestClock : MonoBehaviour
         if(GameManager.Instance.GameState != GameState.Playing)
             return;
 
-        timeText.text = StageManager.Instance.PlayTime.ToString("0.0");
+        StageManager stageManager = StageManager.Instance;
+        Stage currentStage = stageManager.CurrentStage;
+        string text = $"{stageManager.PlayingTime.ToString("0.0")}\n{currentStage.Damage.ToString("0.0")}/{currentStage.StageInfo.DamageLimit.ToString("0.0")}";
+        timeText.text = text;
     }
 
     private void OnDestroy()

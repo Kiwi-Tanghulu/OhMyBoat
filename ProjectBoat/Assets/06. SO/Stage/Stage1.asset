@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c303f53591b321844813c9b01fe57a40, type: 3}
   m_Name: Stage1
   m_EditorClassIdentifier: 
-  StagePrefab: {fileID: 8365181710396687489, guid: 4bb6786cfbddcb047803aad38f072082,
+  StagePrefab: {fileID: 3002636361543377156, guid: fb1f8a8fba0ff72438b94bef380bf6af,
     type: 3}
   PlayTime: 30
+  damageFactor: 1
+  damageLimit: 50

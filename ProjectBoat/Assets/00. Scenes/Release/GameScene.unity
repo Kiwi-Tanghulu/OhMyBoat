@@ -5835,7 +5835,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -7415,6 +7415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34352b1b60d235648ae6fddd4f0432b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resultText: {fileID: 1831563224}
 --- !u!1001 &1673801853
 PrefabInstance:
   m_ObjectHideFlags: 0

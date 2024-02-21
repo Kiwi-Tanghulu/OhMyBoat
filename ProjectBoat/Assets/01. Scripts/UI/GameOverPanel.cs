@@ -1,17 +1,21 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class GameOverPanel : MonoBehaviour
 {
+    [SerializeField] TMP_Text resultText = null;
+
     private void Start()
     {
-        GameManager.Instance.OnGameStateChangedEvent += HandleGameStateChanged;
+        StageManager.Instance.OnStageEndEvent += HandleStageEnd;
+
         gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnGameStateChangedEvent -= HandleGameStateChanged;
+        StageManager.Instance.OnStageEndEvent -= HandleStageEnd;
     }
 
     public void ReturnToStageSelectPanel()
@@ -21,10 +25,9 @@ public class GameOverPanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void HandleGameStateChanged(GameState state)
+    private void HandleStageEnd(Stage stage, bool complete)
     {
-        if(state != GameState.Finish)
-            return;
+        resultText.text = complete ? "STAGE CLEAR!" : "STAGE FAILED!";
 
         gameObject.SetActive(true);
         GameManager.Instance.CursorActive(true);
