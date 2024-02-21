@@ -650,9 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focusedVisual: {fileID: 7850999398476796566}
-  repairStuffs:
-  - {fileID: 11400000, guid: 539df7c20df738a4fbd5a33cf56356a2, type: 2}
-  repairEquip: {fileID: 11400000, guid: 07ffd8d368f6f8247b6991df61617299, type: 2}
+  repairObject: {fileID: 11400000, guid: 8e33dd2ab853dba49ab59672c10bfc57, type: 2}
   currentNeededStuffs: []
 --- !u!95 &1559647664256153270
 Animator:

@@ -24,7 +24,7 @@ public class PlayInputSO : InputSO, IPlayActions
     public void OnMove(InputAction.CallbackContext context)
     {
         Vector2 moveDirection = context.ReadValue<Vector2>();
-        Debug.Log(moveDirection);
+        
         OnMoveEvent?.Invoke(moveDirection);
     }
 

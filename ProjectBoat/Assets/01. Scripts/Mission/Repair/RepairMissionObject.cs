@@ -5,8 +5,7 @@ using UnityEngine;
 public class RepairMissionObject : MissionObject
 {
     [Space]
-    [SerializeField] protected List<StuffSO> repairStuffs;
-    [SerializeField] protected EquipmentSO repairEquip;
+    [SerializeField] protected RepairObjectSO repairObject;
                      
     [SerializeField] protected List<StuffSO> currentNeededStuffs;
 
@@ -28,7 +27,7 @@ public class RepairMissionObject : MissionObject
 
                 EquipmentSO equipSO = equip.EquipmentData;
 
-                if (equipSO == repairEquip)
+                if (equipSO == repairObject.repairErquipment)
                 {
                     //EndMisson();
                     
@@ -64,8 +63,8 @@ public class RepairMissionObject : MissionObject
     {
         base.StartMission();
 
-        for (int i = 0; i < repairStuffs.Count; i++)
-            currentNeededStuffs.Add(repairStuffs[i]);
+        for (int i = 0; i < repairObject.repairStuffs.Count; i++)
+            currentNeededStuffs.Add(repairObject.repairStuffs[i]);
     }
 
     public override void EndMission(bool isSuccess)
@@ -77,7 +76,7 @@ public class RepairMissionObject : MissionObject
 
     public virtual void ResetMission()
     {
-        for (int i = 0; i < repairStuffs.Count; i++)
-            currentNeededStuffs.Add(repairStuffs[i]);
+        for (int i = 0; i < repairObject.repairStuffs.Count; i++)
+            currentNeededStuffs.Add(repairObject.repairStuffs[i]);
     }
 }
