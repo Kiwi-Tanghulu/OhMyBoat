@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class MissionObject : MonoBehaviour, IInteractable, IFocusable
 {
+    public Action<Component> OnInteracted;
+
     private Mission ownedMisson;
     public Mission OwnedMisson => ownedMisson;
 
@@ -18,7 +20,15 @@ public abstract class MissionObject : MonoBehaviour, IInteractable, IFocusable
     {
         ownedMisson = misson;
     }
-    public abstract bool Interact(Component performer, bool actived, Vector3 point = default);
+
+    public virtual bool Interact(Component performer, bool actived, Vector3 point = default)
+    {
+        if(actived)
+            OnInteracted?.Invoke(performer);
+
+        return actived;
+    }
+
     public virtual void StartMission()
     {
         IsWorking = true;

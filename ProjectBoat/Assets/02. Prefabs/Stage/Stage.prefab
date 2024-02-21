@@ -684,7 +684,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5370276003480446630}
-  - component: {fileID: 2153451857584503593}
+  - component: {fileID: 6382067216553715730}
   m_Layer: 0
   m_Name: MissonManager
   m_TagString: Untagged
@@ -709,7 +709,7 @@ Transform:
   - {fileID: 2271186913247818588}
   m_Father: {fileID: 6495641986286138391}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2153451857584503593
+--- !u!114 &6382067216553715730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -718,10 +718,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2817260447090522363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42804494621977b45aa2b4780a1e9f68, type: 3}
+  m_Script: {fileID: 11500000, guid: 27f93c0385e9ad442a67b953a0c7d7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  makeMissonInterval: 3
+  makeMissionInterval: 3
 --- !u!1 &2855914665726556520
 GameObject:
   m_ObjectHideFlags: 0
@@ -6126,6 +6126,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6495641986286138391}
     m_Modifications:
+    - target: {fileID: 4023268899488063962, guid: 9320781ccae17c04bad159449e26b963,
+        type: 3}
+      propertyPath: moveTransitionSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4043193883970172283, guid: 9320781ccae17c04bad159449e26b963,
         type: 3}
       propertyPath: m_LocalPosition.x

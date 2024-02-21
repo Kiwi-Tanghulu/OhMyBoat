@@ -5,8 +5,8 @@ using UnityEngine;
 
 public abstract class Mission : MonoBehaviour
 {
-    public event Action OnStartMisson;
-    public event Action<bool> OnEndMisson;
+    public Action OnStartMisson;
+    public Action<bool> OnEndMisson;
 
     public MissionType missonType;
 
@@ -21,17 +21,26 @@ public abstract class Mission : MonoBehaviour
         missonObject.InitMissionObject(this);
     }
     
-    public abstract bool CanStartMission();
+    public virtual bool CanStartMission()
+    {
+        return !isWorking;
+    }
+
     public virtual void StartMission()
     {
-        OnStartMisson?.Invoke();
         isWorking = true;
+
+        missonObject.StartMission();
+
+        OnStartMisson?.Invoke();
     }
+
     public virtual void EndMission(bool isSuccess)
     {
-        OnEndMisson?.Invoke(isSuccess);
         isWorking = false;
 
-        MissionManager.Instance.EndMission(this);
+        OnEndMisson?.Invoke(isSuccess);
+
+        MissionManager.Instance.EndMission(this, isSuccess);
     }
 }

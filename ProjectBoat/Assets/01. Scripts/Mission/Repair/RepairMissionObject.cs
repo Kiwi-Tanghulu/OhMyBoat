@@ -60,7 +60,7 @@ public class RepairMissionObject : MissionObject
         return false;
     }
 
-    public override void StartMission() 
+    public override void StartMission()
     {
         base.StartMission();
 
@@ -71,7 +71,7 @@ public class RepairMissionObject : MissionObject
     public override void EndMission(bool isSuccess)
     {
         base.EndMission(isSuccess);
-        
+
         currentNeededStuffs.Clear();
     }
 

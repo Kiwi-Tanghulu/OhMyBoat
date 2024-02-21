@@ -7,15 +7,5 @@ using UnityEngine;
 
 public class SailMission : RepairMission
 {
-    public override bool CanStartMission()
-    {
-        return !isWorking;
-    }
 
-    public override void StartMission()
-    {
-        base.StartMission();
-        
-        missonObject.StartMission();
-    }
 }

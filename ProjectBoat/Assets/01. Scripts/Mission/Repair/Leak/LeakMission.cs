@@ -42,9 +42,10 @@ public class LeakMission : RepairMission
         canStartLeaks[leakIndex].StartMission();
 
         workingLeakCount++;
+
         isWorking = true;
 
-        base.StartMission();
+        OnStartMisson?.Invoke();
     }
 
     public override void EndMission(bool isSuccess)
@@ -54,6 +55,8 @@ public class LeakMission : RepairMission
         if(workingLeakCount == 0)
             isWorking = false;
 
-        base.EndMission(isSuccess);
+        OnEndMisson?.Invoke(isSuccess);
+
+        MissionManager.Instance.EndMission(this, isSuccess);
     }
 }

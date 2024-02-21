@@ -533,6 +533,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 556757653938217074, guid: fb1f8a8fba0ff72438b94bef380bf6af,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2855914665726556520, guid: fb1f8a8fba0ff72438b94bef380bf6af,
         type: 3}
       propertyPath: m_Name
@@ -587,17 +592,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8230314644543595709, guid: fb1f8a8fba0ff72438b94bef380bf6af,
-        type: 3}
-      propertyPath: inputSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 807403439970f0d448782817beb0e920,
-        type: 2}
-    - target: {fileID: 8230314644543595709, guid: fb1f8a8fba0ff72438b94bef380bf6af,
-        type: 3}
-      propertyPath: moveTransitionSpeed
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

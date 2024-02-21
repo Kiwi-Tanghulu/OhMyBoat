@@ -9,7 +9,7 @@ public class MissionManager : MonoBehaviour
     public static MissionManager Instance;
 
     public event Action<MissionType> OnStartMission;
-    public event Action<MissionType> OnEndMission;
+    public event Action<MissionType, bool> OnEndMission;
 
     [SerializeField] private float makeMissionInterval;
     private float lastMissionMakeTime;
@@ -52,8 +52,8 @@ public class MissionManager : MonoBehaviour
         OnStartMission?.Invoke(canStartMissons[missonIndex].missonType);
     }
 
-    public void EndMission(Mission misson)
+    public void EndMission(Mission misson, bool isSuccess)
     {
-        OnEndMission?.Invoke(misson.missonType);
+        OnEndMission?.Invoke(misson.missonType, isSuccess);
     }
 }
