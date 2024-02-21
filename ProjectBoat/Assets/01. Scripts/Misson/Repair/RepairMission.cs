@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class RepairMisson : Misson
+public abstract class RepairMission : Mission
 {
     [SerializeField] protected RepairMiniGame miniGame;
 
-    public void StartMiniGame(RepairMissonObject missonObject)
+    public void StartMiniGame(RepairMissionObject missonObject)
     {
         miniGame.StartGame(missonObject);
     }

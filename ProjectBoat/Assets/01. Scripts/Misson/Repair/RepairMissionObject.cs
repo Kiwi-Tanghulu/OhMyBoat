@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RepairMissonObject : MissonObject
+public class RepairMissionObject : MissionObject
 {
     [Space]
     [SerializeField] protected List<StuffSO> repairStuffs;
@@ -32,7 +32,7 @@ public class RepairMissonObject : MissonObject
                 {
                     //EndMisson();
                     
-                    RepairMisson misson = OwnedMisson as RepairMisson;
+                    RepairMission misson = OwnedMisson as RepairMission;
                     misson.StartMiniGame(this);
 
                     return true;
@@ -60,22 +60,22 @@ public class RepairMissonObject : MissonObject
         return false;
     }
 
-    public override void StartMisson() 
+    public override void StartMission() 
     {
-        base.StartMisson();
+        base.StartMission();
 
         for (int i = 0; i < repairStuffs.Count; i++)
             currentNeededStuffs.Add(repairStuffs[i]);
     }
 
-    public override void EndMisson()
+    public override void EndMission(bool isSuccess)
     {
-        base.EndMisson();
+        base.EndMission(isSuccess);
         
         currentNeededStuffs.Clear();
     }
 
-    public virtual void ResetMisson()
+    public virtual void ResetMission()
     {
         for (int i = 0; i < repairStuffs.Count; i++)
             currentNeededStuffs.Add(repairStuffs[i]);

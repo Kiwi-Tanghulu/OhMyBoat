@@ -10,7 +10,7 @@ public enum InputMapType
     MiniGame,
 }
 
-public enum MissonType
+public enum MissionType
 {
     Sail,
     Leak,

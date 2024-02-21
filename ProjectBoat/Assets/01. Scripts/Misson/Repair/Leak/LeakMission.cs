@@ -3,57 +3,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeakMisson : RepairMisson
+public class LeakMission : RepairMission
 {
     [SerializeField] private LeakTransformSO leakTransformsSO;
 
-    private List<MissonObject> leaks;
+    private List<MissionObject> leaks;
     private int workingLeakCount;
 
     protected override void Start()
     {
-        MissonManager.Instance.RegistMisson(this);
+        MissionManager.Instance.RegistMission(this);
 
-        leaks = new List<MissonObject>();
+        leaks = new List<MissionObject>();
         for (int i = 0; i < leakTransformsSO.LeakTransforms.Count; i++)
         {
-            MissonObject leak = Instantiate(
+            MissionObject leak = Instantiate(
                 missonObject,
                 leakTransformsSO.LeakTransforms[i].position,
                 Quaternion.Euler(leakTransformsSO.LeakTransforms[i].rotation),
                 transform);
 
-            leak.InitMissonObject(this);
+            leak.InitMissionObject(this);
 
             leaks.Add(leak);
         }
     }
 
-    public override bool CanStartMisson()
+    public override bool CanStartMission()
     {
         return workingLeakCount < leaks.Count;
     }
 
-    public override void StartMisson()
+    public override void StartMission()
     {
-        List<MissonObject> canStartLeaks = leaks.FindAll(x => x.IsWorking == false);
+        List<MissionObject> canStartLeaks = leaks.FindAll(x => x.IsWorking == false);
         int leakIndex = UnityEngine.Random.Range(0, canStartLeaks.Count);
 
-        canStartLeaks[leakIndex].StartMisson();
+        canStartLeaks[leakIndex].StartMission();
 
         workingLeakCount++;
         isWorking = true;
 
-        base.StartMisson();
+        base.StartMission();
     }
 
-    public override void EndMisson()
+    public override void EndMission(bool isSuccess)
     {
         workingLeakCount--;
 
         if(workingLeakCount == 0)
             isWorking = false;
 
-        base.EndMisson();
+        base.EndMission(isSuccess);
     }
 }

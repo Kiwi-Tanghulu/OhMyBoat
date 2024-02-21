@@ -17,7 +17,7 @@ public class SailMiniGame : RepairMiniGame
     private float changeValue;
     Vector3 changeRotation;
 
-    public override void StartGame(RepairMissonObject missonObject)
+    public override void StartGame(RepairMissionObject missonObject)
     {
         base.StartGame(missonObject);
 

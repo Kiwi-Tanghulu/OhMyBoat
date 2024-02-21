@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MissonObject : MonoBehaviour, IInteractable, IFocusable
+public abstract class MissionObject : MonoBehaviour, IInteractable, IFocusable
 {
-    private Misson ownedMisson;
-    public Misson OwnedMisson => ownedMisson;
+    private Mission ownedMisson;
+    public Mission OwnedMisson => ownedMisson;
 
     public bool IsWorking { get; private set; } = false;
 
@@ -14,20 +14,20 @@ public abstract class MissonObject : MonoBehaviour, IInteractable, IFocusable
 
     public GameObject CurrentObject => gameObject;
 
-    public virtual void InitMissonObject(Misson misson)
+    public virtual void InitMissionObject(Mission misson)
     {
         ownedMisson = misson;
     }
     public abstract bool Interact(Component performer, bool actived, Vector3 point = default);
-    public virtual void StartMisson()
+    public virtual void StartMission()
     {
         IsWorking = true;
     }
 
-    public virtual void EndMisson()
+    public virtual void EndMission(bool isSuccess)
     {
         IsWorking = false;
-        ownedMisson.EndMisson();
+        ownedMisson.EndMission(isSuccess);
     }
 
     public virtual void OnFocusBegin(Vector3 point)

@@ -29,7 +29,7 @@ public class LeakMiniGame : RepairMiniGame
             isClaer.Add(false);
     }
 
-    public override void StartGame(RepairMissonObject missonObject)
+    public override void StartGame(RepairMissionObject missonObject)
     {
         base.StartGame(missonObject);
 

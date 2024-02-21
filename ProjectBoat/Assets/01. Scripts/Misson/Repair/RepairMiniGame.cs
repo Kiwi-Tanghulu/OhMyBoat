@@ -10,9 +10,9 @@ public abstract class RepairMiniGame : MonoBehaviour
     [SerializeField] private protected float gameTime = 5f;
     protected float currentGameTime;
 
-    private RepairMissonObject missonObject;
+    private RepairMissionObject missonObject;
 
-    public virtual void StartGame(RepairMissonObject missonObject)
+    public virtual void StartGame(RepairMissionObject missonObject)
     {
         this.missonObject = missonObject;
         currentGameTime = 0;
@@ -40,11 +40,11 @@ public abstract class RepairMiniGame : MonoBehaviour
 
         if(result)
         {
-            missonObject.EndMisson();
+            missonObject.EndMission(result);
         }
         else
         {
-            missonObject.ResetMisson();
+            missonObject.ResetMission();
         }
         
         missonObject = null;
