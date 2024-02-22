@@ -7,6 +7,6 @@ public class SceneChangeBtn : MonoBehaviour
 {
     public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        Fader.Instance.FadeOut(() => SceneManager.LoadScene(sceneName));
     }
 }

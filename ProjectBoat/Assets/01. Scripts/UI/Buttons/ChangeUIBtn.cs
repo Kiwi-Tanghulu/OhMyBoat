@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveBtn : MonoBehaviour
+public class ChangeUIBtn : MonoBehaviour
 {
     public GameObject activeObject;
     public GameObject deactiveObject;
 
-    public void ActiveObject()
+    public void ChangeUI()
     {
         activeObject.SetActive(true);
         deactiveObject.SetActive(false);
