@@ -11,45 +11,54 @@ public class BuoyancyObject : MonoBehaviour
     public float airDrag = 0f;
     public float airAngularDrag = 0.05f;
     public float floatingPower = 15f;
-    public float waterHeight;
+    public float gravity = -9.81f;
 
     private Rigidbody rb;
 
-    private bool underWater;
+    private bool isUnderWater;
 
     private int floatersUnderWater;
+
+    private float addPower = 0f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
     }
 
     private void FixedUpdate()
     {
         floatersUnderWater = 0;
+        addPower = 0;
 
         for (int i = 0; i < floaters.Length; i++)
         {
-            float diff = floaters[i].position.y - waterHeight;
+            float diff = floaters[i].position.y - Ocean.Instance.GetWaterHeight(floaters[i].position);
+
+            addPower += gravity / floaters.Length * Time.fixedDeltaTime;
 
             if (diff < 0f)
             {
                 floatersUnderWater++;
 
-                rb.AddForceAtPosition(Vector3.up * floatingPower * Mathf.Abs(diff), floaters[i].position, ForceMode.Force);
-                if (!underWater)
+                addPower += floatingPower * Mathf.Abs(diff) / floaters.Length;
+
+                if (!isUnderWater)
                 {
-                    underWater = true;
-                    SwitchState(underWater);
+                    isUnderWater = true;
+                    SwitchState(isUnderWater);
                 }
             }
+
+            rb.AddForceAtPosition(Vector3.up * addPower, floaters[i].position, ForceMode.Acceleration);
         }
 
-        if (underWater && floatersUnderWater == 0)
+        if (isUnderWater && floatersUnderWater == 0)
         {
-            underWater = false;
-            SwitchState(underWater);
-        }
+            isUnderWater = false;
+            SwitchState(isUnderWater);
+        }   
     }
 
     private void SwitchState(bool isUnderWater)

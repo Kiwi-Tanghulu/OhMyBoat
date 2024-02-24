@@ -22,7 +22,7 @@ public class Water : MonoBehaviour
         Vector3[] vertices = meshFilter.mesh.vertices;
         for (int i = 0; i < vertices.Length; i++)
         {
-            vertices[i].y = Wave.Instance.GetWaveHeight(transform.position.x + vertices[i].x);
+            //vertices[i].y = Ocean.Instance.GetWaterHeight();
         }
 
         meshFilter.mesh.vertices = vertices;
