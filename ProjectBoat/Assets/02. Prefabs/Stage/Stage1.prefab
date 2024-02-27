@@ -650,9 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focusedVisual: {fileID: 7850999398476796566}
-  repairStuffs:
-  - {fileID: 11400000, guid: 539df7c20df738a4fbd5a33cf56356a2, type: 2}
-  repairEquip: {fileID: 11400000, guid: 07ffd8d368f6f8247b6991df61617299, type: 2}
+  repairObject: {fileID: 11400000, guid: 8e33dd2ab853dba49ab59672c10bfc57, type: 2}
   currentNeededStuffs: []
 --- !u!95 &1559647664256153270
 Animator:
@@ -718,10 +716,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2817260447090522363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42804494621977b45aa2b4780a1e9f68, type: 3}
+  m_Script: {fileID: 11500000, guid: 27f93c0385e9ad442a67b953a0c7d7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  makeMissonInterval: 3
+  makeMissionInterval: 3
 --- !u!1 &2855914665726556520
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8436a542e5ac0f48890e2659a7b849a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageInfo: {fileID: 11400000, guid: c1241fb98e754a04db55eb05f5aa1b57, type: 2}
+  stageInfo: {fileID: 11400000, guid: d7255050108abe8499a907e78990ccb8, type: 2}
 --- !u!1 &3137222623972798053
 GameObject:
   m_ObjectHideFlags: 0

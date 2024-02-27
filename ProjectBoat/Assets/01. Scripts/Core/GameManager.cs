@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Fader.Instance.FadeIn();
+        //Fader.Instance.FadeIn();
 
         CursorActive(false);
     }
