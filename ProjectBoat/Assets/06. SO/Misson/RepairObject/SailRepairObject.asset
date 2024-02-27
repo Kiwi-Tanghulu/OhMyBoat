@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   repairStuffs:
   - {fileID: 11400000, guid: 539df7c20df738a4fbd5a33cf56356a2, type: 2}
+  - {fileID: 11400000, guid: 539df7c20df738a4fbd5a33cf56356a2, type: 2}
   repairErquipment: {fileID: 11400000, guid: 07ffd8d368f6f8247b6991df61617299, type: 2}

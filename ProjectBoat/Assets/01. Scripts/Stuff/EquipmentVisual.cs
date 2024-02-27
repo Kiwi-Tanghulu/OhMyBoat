@@ -22,7 +22,7 @@ public class EquipmentVisual : MonoBehaviour, IFocusable
         visualCollider.enabled = !grabbed;
     }
 
-    public void OnFocusBegin(Vector3 point)
+    public void OnFocusBegin(Vector3 pointr)
     {
         focusedVisual.gameObject.SetActive(true);
     }

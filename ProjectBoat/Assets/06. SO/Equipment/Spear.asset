@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StuffName: Spear
   prefab: {fileID: 5411596715210187999, guid: 2c1d74599a5232f46b4676cb2a720ba9, type: 3}
-  StuffIcon: {fileID: 0}
+  StuffIcon: {fileID: 21300000, guid: 18472817b54b00345815610145dba8bd, type: 3}
   MaxDurability: 10

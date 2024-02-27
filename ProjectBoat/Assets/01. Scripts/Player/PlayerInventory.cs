@@ -9,9 +9,11 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private PlayInputSO input;
 
     [SerializeField] private int maxItemCount;
+    public int MaxItemCount;
 
     private int currentItemIndex;
     private IGrabbable[] inventory;
+    public IGrabbable[] Inventory => inventory;
 
     public Action<int> OnChangeCurrentItemIndex;
 

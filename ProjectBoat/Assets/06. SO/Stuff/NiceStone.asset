@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StuffName: NiceStone
   prefab: {fileID: 4322069511961235232, guid: e3e2c765f3d70154e97241fb9bab6b8b, type: 3}
-  StuffIcon: {fileID: 0}
+  StuffIcon: {fileID: 21300000, guid: c723dd6eb45e3a64a9789ef64918fa9b, type: 3}

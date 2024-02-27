@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class MissionObject : MonoBehaviour, IInteractable, IFocusable
 {
@@ -16,6 +17,9 @@ public abstract class MissionObject : MonoBehaviour, IInteractable, IFocusable
     [SerializeField] private Transform focusedVisual;
 
     public GameObject CurrentObject => gameObject;
+
+    public event Action<Vector3> OnFocused;
+    public event Action OnDefocused;
 
     public virtual void InitMissionObject(Mission misson)
     {
@@ -58,10 +62,12 @@ public abstract class MissionObject : MonoBehaviour, IInteractable, IFocusable
     public virtual void OnFocusBegin(Vector3 point)
     {
         focusedVisual.gameObject.SetActive(true);
+        OnFocused?.Invoke(point);
     }
 
     public virtual void OnFocusEnd()
     {
         focusedVisual.gameObject.SetActive(false);
+        OnDefocused?.Invoke();
     }
 }
