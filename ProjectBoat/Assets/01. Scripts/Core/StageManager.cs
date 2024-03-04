@@ -5,8 +5,6 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance = null;
 
-    [SerializeField] StageListSO stageList = null;
-    
     public Action<Stage, bool> OnStageEndEvent;
 
     private Stage currentStage = null;
@@ -22,11 +20,11 @@ public class StageManager : MonoBehaviour
         Instance = this;
     }
 
-    public void StartStage(int index)
+    public void StartStage(StageSO stageData)
     {
         DEFINE.StageBoard.SetActive(false);
         
-        currentStage = Instantiate(stageList[index].StagePrefab, Vector3.zero, Quaternion.identity);
+        currentStage = Instantiate(stageData.StagePrefab, Vector3.zero, Quaternion.identity);
         currentStage.StartStage();
     }
 
