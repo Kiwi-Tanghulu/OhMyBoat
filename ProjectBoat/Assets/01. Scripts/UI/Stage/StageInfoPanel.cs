@@ -12,7 +12,7 @@ public class StageInfoPanel : MonoBehaviour
 
     private bool active = false;
     private Vector3 targetWorldPoint = Vector3.zero;
-    private readonly Vector3 OFFSET = new Vector3(0f, 10f, 0f);
+    private readonly Vector3 OFFSET = new Vector3(0f, 50f, 0f);
 
     private void Awake()
     {

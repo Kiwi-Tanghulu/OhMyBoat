@@ -21,6 +21,9 @@ public class StagePoint : MonoBehaviour, IFocusable
 
     public void OnFocusBegin(Vector3 point)
     {
+        if(stageData == null)
+            return;
+
         infoPanel.SetStageData(stageData, transform.position);
         infoPanel.Display(true);
         // UI 키기
