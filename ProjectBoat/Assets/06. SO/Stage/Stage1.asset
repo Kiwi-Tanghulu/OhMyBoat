@@ -15,5 +15,5 @@ MonoBehaviour:
   StagePrefab: {fileID: 3002636361543377156, guid: fb1f8a8fba0ff72438b94bef380bf6af,
     type: 3}
   PlayTime: 30
-  damageFactor: 1
-  damageLimit: 50
+  DamageFactor: 1
+  DamageLimit: 100
