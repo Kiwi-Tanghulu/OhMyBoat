@@ -27,11 +27,22 @@ public class LeakMission : RepairMission
 
             leaks.Add(leak);
         }
+
+        missionInterval = UnityEngine.Random.Range(minMissionInterval, maxMissionInterval);
+        currentInterval = 0;
+    }
+
+    protected override void Update()
+    {
+        if (workingLeakCount < leaks.Count)
+        {
+            currentInterval += Time.deltaTime;
+        }
     }
 
     public override bool CanStartMission()
     {
-        return workingLeakCount < leaks.Count;
+        return workingLeakCount < leaks.Count && currentInterval > missionInterval;
     }
 
     public override void StartMission()
@@ -46,6 +57,9 @@ public class LeakMission : RepairMission
         isWorking = true;
 
         OnStartMisson?.Invoke();
+
+        missionInterval = UnityEngine.Random.Range(minMissionInterval, maxMissionInterval);
+        currentInterval = 0;
     }
 
     public override void SuccessMission()

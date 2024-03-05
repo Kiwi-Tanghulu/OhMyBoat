@@ -25,12 +25,7 @@ public class MissionManager : MonoBehaviour
 
     private void Update()
     {
-        if (lastMissionMakeTime + makeMissionInterval < Time.time)
-        {
-            MakeMission();
-
-            lastMissionMakeTime = Time.time;
-        }
+        MakeMission();
     }
 
     public void RegistMission(Mission misson)
@@ -40,6 +35,7 @@ public class MissionManager : MonoBehaviour
 
     public void MakeMission()
     {
+        #region Æó±â
         List<Mission> canStartMissons = missions.FindAll(x => x.CanStartMission());
 
         if (canStartMissons.Count == 0)
@@ -50,6 +46,15 @@ public class MissionManager : MonoBehaviour
         canStartMissons[missonIndex].StartMission();
 
         OnStartMission?.Invoke(canStartMissons[missonIndex].missonType);
+        #endregion
+        for (int i = 0; i < missions.Count; i++)
+        {
+            if (missions[i].CanStartMission())
+            {
+                missions[i].StartMission();
+                OnStartMission?.Invoke(missions[i].missonType);
+            }
+        }
     }
 
     public void EndMission(Mission misson, bool isSuccess)

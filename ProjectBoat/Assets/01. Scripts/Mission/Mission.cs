@@ -15,15 +15,31 @@ public abstract class Mission : MonoBehaviour
     protected bool isWorking;
     public bool IsWorking => isWorking;
 
+    [SerializeField] protected float minMissionInterval;
+    [SerializeField] protected float maxMissionInterval;
+    protected float missionInterval;
+    protected float currentInterval;
+
     protected virtual void Start()
     {
         MissionManager.Instance.RegistMission(this);
         missonObject.InitMissionObject(this);
+
+        missionInterval = UnityEngine.Random.Range(minMissionInterval, maxMissionInterval);
+        currentInterval = 0;
     }
-    
+
+    protected virtual void Update()
+    {
+        if(!isWorking)
+        {
+            currentInterval += Time.deltaTime;
+        }
+    }
+
     public virtual bool CanStartMission()
     {
-        return !isWorking;
+        return !isWorking && currentInterval >= missionInterval;
     }
 
     public virtual void StartMission()
@@ -33,6 +49,9 @@ public abstract class Mission : MonoBehaviour
         missonObject.StartMission();
 
         OnStartMisson?.Invoke();
+
+        missionInterval = UnityEngine.Random.Range(minMissionInterval, maxMissionInterval);
+        currentInterval = 0;
     }
 
     public virtual void EndMission(bool isSuccess)
