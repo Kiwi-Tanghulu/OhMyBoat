@@ -59,6 +59,11 @@ public class StageInfoPanel : MonoBehaviour
         this.active = active;
     }
 
+    public void DisplayReady()
+    {
+        captionText.text  = "READY";
+    }
+
     private void Show()
     {
         gameObject.SetActive(true);
@@ -67,5 +72,6 @@ public class StageInfoPanel : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+        captionText.text = "";
     }
 }

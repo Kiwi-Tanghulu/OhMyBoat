@@ -9,6 +9,8 @@ public class StagePoint : MonoBehaviour, IFocusable
 
     private StageInfoPanel infoPanel = null;
 
+    private bool isReady = false;
+
     private void Awake()
     {
         infoPanel = DEFINE.MainCanvas.Find("StageSelectPanel/StageInfoPanel").GetComponent<StageInfoPanel>();
@@ -16,7 +18,10 @@ public class StagePoint : MonoBehaviour, IFocusable
 
     public void Interact()
     {
-        StageManager.Instance.StartStage(stageData);
+        if(isReady)
+            StartStage();
+        else
+            ReadyStage();
     }
 
     public void OnFocusBegin(Vector3 point)
@@ -33,5 +38,17 @@ public class StagePoint : MonoBehaviour, IFocusable
     {
         infoPanel.Display(false);
         // UI 끄기
+    }
+
+    private void ReadyStage()
+    {
+        isReady = true;
+        infoPanel.DisplayReady();
+    }
+
+    private void StartStage()
+    {
+        StageManager.Instance.StartStage(stageData);
+        infoPanel.Display(false);
     }
 }
