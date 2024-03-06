@@ -9,7 +9,8 @@ using static Controls;
 public class MiniGameInputSO : InputSO, IMiniGameActions
 {
     public event Action OnSpaceEvent;
-
+    public event Action OnAEvent;
+    public event Action OnDEvent;
     private void OnEnable()
     {
         MiniGameActions miniGame = InputManager.controls.MiniGame;
@@ -22,6 +23,22 @@ public class MiniGameInputSO : InputSO, IMiniGameActions
         if (context.started)
         {
             OnSpaceEvent?.Invoke();
+        }
+    }
+
+    public void OnA(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            OnAEvent?.Invoke();
+        }
+    }
+
+    public void OnD(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            OnDEvent?.Invoke();
         }
     }
 }

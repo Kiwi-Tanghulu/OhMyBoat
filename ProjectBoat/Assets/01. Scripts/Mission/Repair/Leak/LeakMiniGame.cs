@@ -39,23 +39,15 @@ public class LeakMiniGame : RepairMiniGame
         claerCount = 0;
         for (int i = 0; i < ponds.Count; i++)
             isClaer[i] = false;
+
+        inputSO.OnSpaceEvent += Input_SpaceEvent;
     }
 
-    protected override void Input_SpaceEvent()
+    public override void EndGame(bool result)
     {
-        for(int i = 0; i < ponds.Count; i++)
-        {
-            if (Vector2.Distance(ponds[i].position, hammer.position) <= hammerRadius && !isClaer[i])
-            {
-                claerCount++;
-                isClaer[i] = true;
-            }
-        }
+        base.EndGame(result);
 
-        if(claerCount == ponds.Count)
-        {
-            EndGame(true);
-        }
+        inputSO.OnSpaceEvent -= Input_SpaceEvent;
     }
 
     protected override void Update()
@@ -69,4 +61,22 @@ public class LeakMiniGame : RepairMiniGame
             moveDir *= -1;
         }
     }
+
+    private void Input_SpaceEvent()
+    {
+        for (int i = 0; i < ponds.Count; i++)
+        {
+            if (Vector2.Distance(ponds[i].position, hammer.position) <= hammerRadius && !isClaer[i])
+            {
+                claerCount++;
+                isClaer[i] = true;
+            }
+        }
+
+        if (claerCount == ponds.Count)
+        {
+            EndGame(true);
+        }
+    }
+
 }

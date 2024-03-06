@@ -227,6 +227,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""A"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a51c533-f2a2-4dce-a109-b3231f036a2c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""D"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7f33070-028f-4d25-a761-690aa1bec95b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -238,6 +256,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Space"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ba3b945-2660-4d18-860a-cdd32b3519be"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""A"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8c8bb6a-803a-4fb4-9bb5-dddb406dc32c"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""D"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -275,6 +315,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // MiniGame
         m_MiniGame = asset.FindActionMap("MiniGame", throwIfNotFound: true);
         m_MiniGame_Space = m_MiniGame.FindAction("Space", throwIfNotFound: true);
+        m_MiniGame_A = m_MiniGame.FindAction("A", throwIfNotFound: true);
+        m_MiniGame_D = m_MiniGame.FindAction("D", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -431,11 +473,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_MiniGame;
     private List<IMiniGameActions> m_MiniGameActionsCallbackInterfaces = new List<IMiniGameActions>();
     private readonly InputAction m_MiniGame_Space;
+    private readonly InputAction m_MiniGame_A;
+    private readonly InputAction m_MiniGame_D;
     public struct MiniGameActions
     {
         private @Controls m_Wrapper;
         public MiniGameActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Space => m_Wrapper.m_MiniGame_Space;
+        public InputAction @A => m_Wrapper.m_MiniGame_A;
+        public InputAction @D => m_Wrapper.m_MiniGame_D;
         public InputActionMap Get() { return m_Wrapper.m_MiniGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -448,6 +494,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Space.started += instance.OnSpace;
             @Space.performed += instance.OnSpace;
             @Space.canceled += instance.OnSpace;
+            @A.started += instance.OnA;
+            @A.performed += instance.OnA;
+            @A.canceled += instance.OnA;
+            @D.started += instance.OnD;
+            @D.performed += instance.OnD;
+            @D.canceled += instance.OnD;
         }
 
         private void UnregisterCallbacks(IMiniGameActions instance)
@@ -455,6 +507,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Space.started -= instance.OnSpace;
             @Space.performed -= instance.OnSpace;
             @Space.canceled -= instance.OnSpace;
+            @A.started -= instance.OnA;
+            @A.performed -= instance.OnA;
+            @A.canceled -= instance.OnA;
+            @D.started -= instance.OnD;
+            @D.performed -= instance.OnD;
+            @D.canceled -= instance.OnD;
         }
 
         public void RemoveCallbacks(IMiniGameActions instance)
@@ -494,5 +552,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IMiniGameActions
     {
         void OnSpace(InputAction.CallbackContext context);
+        void OnA(InputAction.CallbackContext context);
+        void OnD(InputAction.CallbackContext context);
     }
 }

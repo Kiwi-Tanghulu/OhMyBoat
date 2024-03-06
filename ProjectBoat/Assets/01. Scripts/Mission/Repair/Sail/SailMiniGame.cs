@@ -21,7 +21,15 @@ public class SailMiniGame : RepairMiniGame
     {
         base.StartGame(missonObject);
 
+        inputSO.OnSpaceEvent += Input_SpaceEvent;
         topSail.rotation = Quaternion.Euler(0, 0, initRotation);
+    }
+
+    public override void EndGame(bool result)
+    {
+        base.EndGame(result);
+
+        inputSO.OnSpaceEvent -= Input_SpaceEvent;
     }
 
     protected override void Update()
@@ -50,7 +58,7 @@ public class SailMiniGame : RepairMiniGame
         changeValue -= decreaseAmount;
     }
 
-    protected override void Input_SpaceEvent()
+    private void Input_SpaceEvent()
     {
         changeValue += increaseAmount;
     }

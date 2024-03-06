@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class RepairMiniGame : MonoBehaviour
 {
-    [SerializeField] private MiniGameInputSO inputSO;
+    [SerializeField] protected MiniGameInputSO inputSO;
 
     [Space]
     [SerializeField] private protected float gameTime = 5f;
@@ -17,7 +17,6 @@ public abstract class RepairMiniGame : MonoBehaviour
         this.missonObject = missonObject;
         currentGameTime = 0;
         
-        inputSO.OnSpaceEvent += Input_SpaceEvent;
         InputManager.ChangeInputMap(InputMapType.MiniGame);
 
         gameObject.SetActive(true);
@@ -35,7 +34,6 @@ public abstract class RepairMiniGame : MonoBehaviour
 
     public virtual void EndGame(bool result)
     {
-        inputSO.OnSpaceEvent -= Input_SpaceEvent;
         InputManager.ChangeInputMap(InputMapType.Play);
 
         missonObject.EndMission(result);
@@ -44,6 +42,4 @@ public abstract class RepairMiniGame : MonoBehaviour
 
         gameObject.SetActive(false);
     }
-
-    protected abstract void Input_SpaceEvent();
 }
