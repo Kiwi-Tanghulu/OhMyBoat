@@ -8,6 +8,7 @@ public enum InputMapType
 {
     Play,
     MiniGame,
+    Ship,
 }
 
 public enum MissionType
