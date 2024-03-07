@@ -1,6 +1,3 @@
 using UnityEngine;
 
-public abstract class QuestSO : ScriptableObject
-{
-	
-}
+public abstract class QuestSO : ScriptableObject { }

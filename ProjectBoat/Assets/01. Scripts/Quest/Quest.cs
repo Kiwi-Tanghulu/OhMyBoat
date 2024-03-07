@@ -2,7 +2,6 @@ public abstract class Quest
 {
     protected QuestSpot questSpot = null;
 
-
     public virtual void Initialize(QuestSpot spot, QuestSO questData)
     {
         questSpot = spot;

@@ -1,20 +1,31 @@
 using UnityEngine;
 
-public class DeliveryQuest : Quest
+public partial class DeliveryQuest : Quest
 {
     private DeliveryQuestSO questData = null;
-    private int receivedCount = 0;
+    private int[] receivedList = null;
 
     public override void Initialize(QuestSpot spot, QuestSO questData)
     {
         base.Initialize(spot, questData);
         this.questData = questData as DeliveryQuestSO;
+
+        receivedList = new int[this.questData.DeliverySlips.Count];
     }
 
     protected override bool DecisionClear()
     {
-        bool cleared = receivedCount >= questData.RequireQuantity;
-        return cleared;
+        for(int i = 0; i < questData.DeliverySlips.Count; ++i)
+        {
+            DeliverySlip slip = questData.DeliverySlips[i];
+            int requires = slip.RequireQuantity;
+            int received = receivedList[i];
+
+            if(requires > received)
+                return false;
+        }
+
+        return true;
     }
 
     protected override void OnQuestCleared()
@@ -29,9 +40,10 @@ public class DeliveryQuest : Quest
 
     protected override void ProcessQuest(StuffSO stuffData)
     {
-        if(stuffData != questData.RequireStuff)
+        int index = questData.DeliverySlips.FindIndex(i => i.RequireStuff == stuffData);   
+        if(index == -1)
             return;
 
-        receivedCount++;   
+        receivedList[index]++;   
     }
 }

@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a76b518715220b84a88507f25dd0c3bb, type: 3}
   m_Name: StoneDeliveryQuest
   m_EditorClassIdentifier: 
-  RequireStuff: {fileID: 11400000, guid: 539df7c20df738a4fbd5a33cf56356a2, type: 2}
-  RequireQuantity: 1
+  DeliverySlips:
+  - RequireStuff: {fileID: 11400000, guid: 539df7c20df738a4fbd5a33cf56356a2, type: 2}
+    RequireQuantity: 1
+  - RequireStuff: {fileID: 11400000, guid: 1583c14fcf9104c49be96a5bcfcceffc, type: 2}
+    RequireQuantity: 1
