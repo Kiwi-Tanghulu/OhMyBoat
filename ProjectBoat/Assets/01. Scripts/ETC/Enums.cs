@@ -16,3 +16,9 @@ public enum MissionType
     Sail,
     Leak,
 }
+
+public enum SailType
+{
+    Horizontal, 
+    Vertical
+}

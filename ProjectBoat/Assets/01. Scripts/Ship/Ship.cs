@@ -7,6 +7,7 @@ public class Ship : MonoBehaviour
 {
     [SerializeField] private Key key;
     [SerializeField] private Anchor anchor;
+    [SerializeField] private Sail sail;
 
     [Space]
     [SerializeField] private float maxMoveSpeed;
@@ -44,7 +45,7 @@ public class Ship : MonoBehaviour
 
     private void Move()
     {
-        transform.position += transform.forward * currentMoveSpeed * Time.deltaTime;
+        transform.position += (transform.forward * currentMoveSpeed + sail.CurrentWindForce) * Time.deltaTime;
     }
 
     private void Accel()
