@@ -6,4 +6,5 @@ using static ImportQuest;
 public class ImportQuestSO : QuestSO
 {
     public List<ImportSlip> ImportSlips = new List<ImportSlip>();
+    public ImportQuestSlot uiPrefab = null;
 }

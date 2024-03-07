@@ -3,14 +3,39 @@ using UnityEngine;
 public partial class DeliveryQuest : Quest
 {
     private DeliveryQuestSO questData = null;
+    
     private int[] receivedList = null;
+    private DeliveryQuestSlot[] uiList = null;
 
     public override void Initialize(QuestSpot spot, QuestSO questData)
     {
         base.Initialize(spot, questData);
         this.questData = questData as DeliveryQuestSO;
+    }
 
-        receivedList = new int[this.questData.DeliverySlips.Count];
+    public override void StartQuest()
+    {
+        base.StartQuest();
+        
+        receivedList = new int[questData.DeliverySlips.Count];
+        uiList = new DeliveryQuestSlot[questData.DeliverySlips.Count];
+
+        for(int i = 0; i < questData.DeliverySlips.Count; ++i)
+        {
+            DeliverySlip slip = questData.DeliverySlips[i];
+            DeliveryQuestSlot ui = progressPanel.CreateQuestSlot<DeliveryQuestSlot>(questData.uiPrefab);
+            
+            ui.Initialize(slip);
+            uiList[i] = ui;
+        }
+    }
+
+    public override void FinishQuest()
+    {
+        base.FinishQuest();
+
+        for(int i = 0; i < uiList.Length; ++i)
+            progressPanel.RemoveQuestSlot(uiList[i].transform);
     }
 
     protected override bool DecisionClear()
@@ -38,12 +63,18 @@ public partial class DeliveryQuest : Quest
         Debug.Log("Quest Failed");
     }
 
-    protected override void ProcessQuest(StuffSO stuffData)
+    protected override bool ProcessQuest(StuffSO stuffData)
     {
         int index = questData.DeliverySlips.FindIndex(i => i.RequireStuff == stuffData);   
         if(index == -1)
-            return;
+            return false;
 
-        receivedList[index]++;   
+        if(receivedList[index] >= questData.DeliverySlips[index].RequireQuantity)
+            return false;
+
+        receivedList[index]++;
+        uiList[index].SetProgress(receivedList[index]);
+        
+        return true;
     }
 }
