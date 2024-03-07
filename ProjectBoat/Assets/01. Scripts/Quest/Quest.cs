@@ -1,5 +1,8 @@
+using System;
+
 public abstract class Quest
 {
+    public QuestSO QuestData { get; private set; } = null;
     protected QuestSpot questSpot = null;
     protected QuestProgressPanel progressPanel = null;
 
@@ -8,6 +11,8 @@ public abstract class Quest
         questSpot = spot;
         questSpot.OnQuestProcessEvent += ProcessQuest;
 
+        QuestData = questData;
+
         progressPanel = QuestManager.Instance.QuestProgressPanel;
     }
 
@@ -15,6 +20,8 @@ public abstract class Quest
     protected abstract void OnQuestCleared();
     protected abstract void OnQuestFailed();
     protected abstract bool ProcessQuest(StuffSO stuffData);
+
+    public abstract void InitProgressPanel(QuestProgressPanel progressPanel, Action<int, QuestSlot> callback = null);
 
     public virtual void StartQuest()
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static ImportQuest;
 
-public class ImportQuestSlot : MonoBehaviour
+public class ImportQuestSlot : QuestSlot
 {
 	private Image requireStuffIcon = null;
     private TMP_Text stuffNameText = null;

@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class QuestBoardPanel : MonoBehaviour
 {
-	private QuestSlot[] questSlots = null;
+	private QuestBoardSlot[] questSlots = null;
 
     private void Awake()
     {
-        questSlots = transform.GetComponentsInChildren<QuestSlot>();
+        questSlots = transform.GetComponentsInChildren<QuestBoardSlot>();
     }
 
     private void Start()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public partial class ImportQuest : Quest
@@ -21,14 +22,7 @@ public partial class ImportQuest : Quest
         soldList = new int[questData.ImportSlips.Count];
         uiList = new ImportQuestSlot[questData.ImportSlips.Count];
 
-        for(int i = 0; i < questData.ImportSlips.Count; ++i)
-        {
-            ImportSlip slip = questData.ImportSlips[i];
-            ImportQuestSlot ui = progressPanel.CreateQuestSlot<ImportQuestSlot>(questData.uiPrefab);
-            
-            ui.Initialize(slip);
-            uiList[i] = ui;
-        }
+        InitProgressPanel(progressPanel, (i, slot) => uiList[i] = slot as ImportQuestSlot);
     }
 
     public override void FinishQuest()
@@ -37,6 +31,17 @@ public partial class ImportQuest : Quest
 
         for(int i = 0; i < uiList.Length; ++i)
             progressPanel.RemoveQuestSlot(uiList[i].transform);
+    }
+
+    public override void InitProgressPanel(QuestProgressPanel progressPanel, Action<int, QuestSlot> callback = null)
+    {
+        for(int i = 0; i < questData.ImportSlips.Count; ++i)
+        {
+            ImportSlip slip = questData.ImportSlips[i];
+            ImportQuestSlot ui = progressPanel.CreateQuestSlot(questData.UIPrefab) as ImportQuestSlot;
+            
+            ui.Initialize(slip);
+        }
     }
 
     protected override bool DecisionClear()

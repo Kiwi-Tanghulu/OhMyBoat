@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1032c3efc8ace22458c4f91e6187efc0, type: 3}
   m_Name: StoneImportQuest
   m_EditorClassIdentifier: 
+  UIPrefab: {fileID: 2981581164773341141, guid: 00bef32732e70ba448863a2580a46918,
+    type: 3}
+  npcImage: {fileID: 0}
+  QuestName: the quest
+  QuestContent: content
   ImportSlips:
   - RequireStuff: {fileID: 11400000, guid: 539df7c20df738a4fbd5a33cf56356a2, type: 2}
     PriceCoefficient: 1.5
-  uiPrefab: {fileID: 2981581164773341141, guid: 00bef32732e70ba448863a2580a46918,
-    type: 3}

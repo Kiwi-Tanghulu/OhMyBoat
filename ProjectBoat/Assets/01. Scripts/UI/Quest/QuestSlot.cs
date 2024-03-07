@@ -1,9 +1,6 @@
 using UnityEngine;
 
-public class QuestSlot : MonoBehaviour
+public abstract class QuestSlot : MonoBehaviour
 {
-	public void Display(bool active)
-    {
-        gameObject.SetActive(active);
-    }
+	
 }
