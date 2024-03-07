@@ -5,6 +5,7 @@ public class QuestSpot : MonoBehaviour, IInteractable
 {
     private Quest currentQuest = null;
 
+    public bool QuestActive => (currentQuest != null);
     public event Action<StuffSO> OnQuestProcessEvent;
 
     public void StartQuest(Quest quest)
@@ -12,9 +13,18 @@ public class QuestSpot : MonoBehaviour, IInteractable
         currentQuest = quest;
     }
 
+    public void FinishQuest()
+    {
+        currentQuest.FinishQuest();
+        currentQuest = null;
+    }
+
     public bool Interact(Component performer, bool actived, Vector3 point = default)
     {
         if(actived == false)
+            return false;
+
+        if(QuestActive == false)
             return false;
 
         PlayerHand hand = (performer as PlayerInteractor)?.Hand;

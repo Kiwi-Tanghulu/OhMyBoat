@@ -22,19 +22,19 @@ public class QuestManager : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.LeftControl))
         {
-            if(Input.GetKeyDown(KeyCode.Z))
+            if(Input.GetKeyDown(KeyCode.Alpha1))
             {
                 quest = new DeliveryQuest();
                 quest.Initialize(questSpot, questData);
                 quest.StartQuest();
             }
 
-            if(Input.GetKeyDown(KeyCode.X))
+            if(Input.GetKeyDown(KeyCode.Alpha2))
             {
                 if(quest == null)
                     return;
 
-                quest.FinishQuest();
+                questSpot.FinishQuest();
             }
         }
     }

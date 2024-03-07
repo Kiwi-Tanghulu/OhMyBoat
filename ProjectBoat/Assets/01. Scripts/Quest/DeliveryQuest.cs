@@ -13,7 +13,7 @@ public class DeliveryQuest : Quest
 
     protected override bool DecisionClear()
     {
-        bool cleared = receivedCount > questData.RequireQuantity;
+        bool cleared = receivedCount >= questData.RequireQuantity;
         return cleared;
     }
 
@@ -29,7 +29,7 @@ public class DeliveryQuest : Quest
 
     protected override void ProcessQuest(StuffSO stuffData)
     {
-        if(stuffData != questData)
+        if(stuffData != questData.RequireStuff)
             return;
 
         receivedCount++;   
