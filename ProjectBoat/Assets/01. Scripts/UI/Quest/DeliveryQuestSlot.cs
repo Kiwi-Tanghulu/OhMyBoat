@@ -22,7 +22,7 @@ public class DeliveryQuestSlot : MonoBehaviour
         progressText = progressPanel.Find("ProgressText").GetComponent<TMP_Text>();
     }
 
-    public void Init(DeliverySlip slip)
+    public void Initialize(DeliverySlip slip)
     {
         deliverySlip = slip;
         requireStuffIcon.sprite = deliverySlip.RequireStuff.StuffIcon;

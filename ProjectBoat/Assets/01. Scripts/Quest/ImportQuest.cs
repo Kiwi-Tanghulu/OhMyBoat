@@ -36,7 +36,7 @@ public partial class ImportQuest : Quest
             anythingImported = true;
 
         ImportSlip slip = questData.ImportSlips[index];
-        int price = Mathf.RoundToInt(stuffData.Price * slip.PriceCoefficient);
+        int price = slip.GetPrice();
         Debug.Log($"{price}$ earned!");
     }
 }
