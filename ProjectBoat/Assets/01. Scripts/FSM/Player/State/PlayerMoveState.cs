@@ -16,7 +16,7 @@ public class PlayerMoveState : PlayerGroundState
     {
         base.Update();
 
-        Vector3 moveVector = owner.transform.rotation * ((owner.MoveDir * owner.MoveSpeed) * Time.deltaTime);
+        Vector3 moveVector = owner.transform.rotation * ((owner.MoveDir * owner.MoveSpeed));
 
         owner.Move(new Vector3(moveVector.x,0,moveVector.z));
 

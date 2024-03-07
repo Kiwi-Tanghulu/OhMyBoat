@@ -11,6 +11,7 @@ public class PlayerFSM : MonoBehaviour
 
     [SerializeField] private float gravityScale;
     public float GravityScale => gravityScale;
+    private float verticalVelocity;
 
     [SerializeField] private float moveSpeed;
     public float MoveSpeed => moveSpeed;
@@ -65,6 +66,18 @@ public class PlayerFSM : MonoBehaviour
     {
         stateMachine.CurrentState.Update();
     }
+    public void Gravity()
+    {
+        if (!IsGround())
+        {
+            verticalVelocity -= gravityScale * Time.deltaTime;
+        }
+    }
+
+    public void SetVerticalVelocity(float value)
+    {
+        verticalVelocity = value;
+    }
 
     public void SetMoveDirection(Vector2 value)
     {
@@ -72,7 +85,7 @@ public class PlayerFSM : MonoBehaviour
     }
     public void Move(Vector3 moveVector)
     {
-        characterController.Move(moveVector);
+        characterController.Move((moveVector + verticalVelocity * Vector3.up) * Time.deltaTime);
     }
     public void AnimationEndTrigger()
     {
@@ -81,11 +94,6 @@ public class PlayerFSM : MonoBehaviour
 
     public bool IsGround()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 0.1f, groundLayer);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, transform.position - new Vector3(0, 0.05f, 0));
+        return Physics.Raycast(transform.position, Vector3.down, 0.2f, groundLayer);
     }
 }

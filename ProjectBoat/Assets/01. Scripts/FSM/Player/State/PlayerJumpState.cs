@@ -8,20 +8,43 @@ public class PlayerJumpState : PlayerState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
 
+        owner.SetVerticalVelocity(owner.JumpPower);
+
+        Debug.Log("점프진입");
+    }
     public override void Update()
     {
         base.Update();
 
+        owner.Gravity();
 
+        Vector3 moveVector = owner.transform.rotation * ((owner.MoveDir * owner.MoveSpeed));
 
-        Vector3 moveVector = owner.transform.rotation * ((owner.MoveDir * owner.MoveSpeed + owner.JumpPower * Vector3.up) * Time.deltaTime);
-
-        owner.Move(moveVector);
+        owner.Move(new Vector3(moveVector.x,0,moveVector.z));
 
         if (triggerCalled)
         {
-            owner.stateMachine.ChangeState(PlayerStateEnum.Fall);
+            Debug.Log("점프끝");
+            if (owner.IsGround()) 
+            {
+                owner.stateMachine.ChangeState(PlayerStateEnum.Idle);
+                Debug.Log("1");
+            }
+            else
+            {
+                owner.stateMachine.ChangeState(PlayerStateEnum.Fall);
+                Debug.Log("2");
+            }
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        owner.SetVerticalVelocity(0);
     }
 }

@@ -8,16 +8,25 @@ public class PlayerFallState : PlayerState
     {
     }
 
+    
     public override void Update()
     {
         base.Update();
 
-        Vector3 moveVector = owner.transform.rotation * ((owner.MoveDir * owner.MoveSpeed + owner.GravityScale * Vector3.down) * Time.deltaTime);
-        owner.Move(moveVector);
+        owner.Gravity();
+
+        Vector3 moveVector = owner.transform.rotation * ((owner.MoveDir * owner.MoveSpeed));
+        owner.Move(new Vector3(moveVector.x,0,moveVector.z));
 
         if (owner.IsGround())
         {
             owner.stateMachine.ChangeState(PlayerStateEnum.Idle);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        owner.SetVerticalVelocity(0);
     }
 }
