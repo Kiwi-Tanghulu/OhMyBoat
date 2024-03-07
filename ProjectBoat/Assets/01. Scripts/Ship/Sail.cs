@@ -9,24 +9,21 @@ public class Sail : MonoBehaviour
     public SailType sailType;
 
     [Space]
-    private float currentRotate;
-    private float directionConcordance;
-
-    [Space]
     [SerializeField] private float maxWindCoefficient;
     [SerializeField] private float windCoefficientIncreaseAmount;
     [SerializeField] private float windCoefficientDecreaseAmount;
     private float currentWindCoefficient;
-
     private Vector3 currentWindforce;
     public Vector3 CurrentWindForce => currentWindforce;
+    private WindManager windManager;
+
+    private float currentRotate;
+    private float directionConcordance;
 
     private bool active;
     public bool Active => active;
 
     public Action<bool> OnActiveChange;
-
-    private WindManager windManager;
 
     private void Start()
     {
@@ -54,12 +51,20 @@ public class Sail : MonoBehaviour
         float angle = 0f;
 
         angle = Vector3.Angle(forward, windManager.Wind.normalized);
-        if(angle > 90f)
+
+        if (angle > 90f)
             angle = Vector3.Angle(-forward, windManager.Wind.normalized);
 
         directionConcordance = -(angle / 90f - 1f);
 
-        currentWindforce = windManager.Wind * currentWindCoefficient * directionConcordance;
+        if (sailType == SailType.Horizontal)
+        {
+            currentWindforce = windManager.Wind * currentWindCoefficient * directionConcordance;
+        }
+        else
+        {
+            currentWindforce = forward * windManager.Wind.magnitude * currentWindCoefficient * directionConcordance;
+        }
     }
 
     private void Accel()
