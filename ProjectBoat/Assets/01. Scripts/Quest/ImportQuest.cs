@@ -54,11 +54,14 @@ public partial class ImportQuest : Quest
         Debug.Log("Nothing Sold, Quest Failed");
     }
 
-    protected override void ProcessQuest(StuffSO stuffData)
+    protected override bool ProcessQuest(StuffSO stuffData)
     {
         int index = questData.ImportSlips.FindIndex(i => i.RequireStuff == stuffData);
         if(index == -1)
-            return;
+            return false;
+
+        if(soldList[index] >= 99)
+            return false;
 
         if(anythingImported == false)
             anythingImported = true;
@@ -69,5 +72,7 @@ public partial class ImportQuest : Quest
         ImportSlip slip = questData.ImportSlips[index];
         int price = slip.GetPrice();
         Debug.Log($"{price}$ earned!");
+
+        return true;
     }
 }

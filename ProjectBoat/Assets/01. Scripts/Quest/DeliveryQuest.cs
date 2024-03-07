@@ -63,13 +63,18 @@ public partial class DeliveryQuest : Quest
         Debug.Log("Quest Failed");
     }
 
-    protected override void ProcessQuest(StuffSO stuffData)
+    protected override bool ProcessQuest(StuffSO stuffData)
     {
         int index = questData.DeliverySlips.FindIndex(i => i.RequireStuff == stuffData);   
         if(index == -1)
-            return;
+            return false;
+
+        if(receivedList[index] >= questData.DeliverySlips[index].RequireQuantity)
+            return false;
 
         receivedList[index]++;
         uiList[index].SetProgress(receivedList[index]);
+        
+        return true;
     }
 }

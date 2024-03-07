@@ -14,7 +14,7 @@ public abstract class Quest
     protected abstract bool DecisionClear();
     protected abstract void OnQuestCleared();
     protected abstract void OnQuestFailed();
-    protected abstract void ProcessQuest(StuffSO stuffData);
+    protected abstract bool ProcessQuest(StuffSO stuffData);
 
     public virtual void StartQuest()
     {
