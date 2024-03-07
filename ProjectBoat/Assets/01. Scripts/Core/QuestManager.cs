@@ -28,8 +28,14 @@ public class QuestManager : MonoBehaviour
                 quest.Initialize(questSpot, questData);
                 quest.StartQuest();
             }
-
             if(Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                quest = new ImportQuest();
+                quest.Initialize(questSpot, questData);
+                quest.StartQuest();
+            }
+
+            if(Input.GetKeyDown(KeyCode.Alpha0))
             {
                 if(quest == null)
                     return;

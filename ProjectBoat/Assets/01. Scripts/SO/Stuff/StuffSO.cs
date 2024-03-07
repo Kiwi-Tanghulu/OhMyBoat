@@ -6,4 +6,5 @@ public class StuffSO : ScriptableObject
     public string StuffName = "unnamed";
     public GameObject prefab = null;
     public Sprite StuffIcon = null;
+    public int Price = 10;
 }
