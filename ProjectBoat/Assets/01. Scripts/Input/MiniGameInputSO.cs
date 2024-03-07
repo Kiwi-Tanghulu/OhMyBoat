@@ -11,8 +11,10 @@ public class MiniGameInputSO : InputSO, IMiniGameActions
     public event Action OnSpaceEvent;
     public event Action OnAEvent;
     public event Action OnDEvent;
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         MiniGameActions miniGame = InputManager.controls.MiniGame;
         miniGame.SetCallbacks(this);
         InputManager.RegistInputMap(this, miniGame.Get());

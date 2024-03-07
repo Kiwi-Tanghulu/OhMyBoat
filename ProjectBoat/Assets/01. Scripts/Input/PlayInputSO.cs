@@ -14,8 +14,10 @@ public class PlayInputSO : InputSO, IPlayActions
     public Action<bool> OnInteractEvent;
     public Action OnFireEvent;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         PlayActions play = InputManager.controls.Play;
         play.SetCallbacks(this);
         InputManager.RegistInputMap(this, play.Get());

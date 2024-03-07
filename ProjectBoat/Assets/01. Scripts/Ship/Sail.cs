@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.WSA;
 
 public class Sail : MonoBehaviour
 {
     public SailType sailType;
+
+    [SerializeField] private GameObject[] deactiveSailObjects;
+    [SerializeField] private GameObject[] activeSailObjects;
+    [SerializeField] private Transform[] sailAnchorTrms;
 
     [Space]
     [SerializeField] private float maxWindCoefficient;
@@ -16,8 +21,8 @@ public class Sail : MonoBehaviour
     private Vector3 currentWindforce;
     public Vector3 CurrentWindForce => currentWindforce;
     private WindManager windManager;
+    [SerializeField] private float currentRotate;
 
-    private float currentRotate;
     private float directionConcordance;
 
     private bool active;
@@ -28,13 +33,15 @@ public class Sail : MonoBehaviour
     private void Start()
     {
         windManager = WindManager.Instance;
+
+        SetActive(false);
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            ToggleActive();
+            SetActive(!active);
         }
 
         if (active)
@@ -47,7 +54,11 @@ public class Sail : MonoBehaviour
 
     private void SetWindForce()
     {
-        Vector3 forward = Quaternion.Euler(0f, 0f, currentRotate) * Vector3.forward;
+        Vector3 forward = new Vector3(
+            Mathf.Sin(Mathf.Deg2Rad * (currentRotate + transform.eulerAngles.y)),
+            0f,
+            Mathf.Cos(Mathf.Deg2Rad * (currentRotate + transform.eulerAngles.y)));
+        
         float angle = 0f;
 
         angle = Vector3.Angle(forward, windManager.Wind.normalized);
@@ -63,7 +74,7 @@ public class Sail : MonoBehaviour
         }
         else
         {
-            currentWindforce = forward * windManager.Wind.magnitude * currentWindCoefficient * directionConcordance;
+            currentWindforce = transform.forward * windManager.Wind.magnitude * currentWindCoefficient * directionConcordance;
         }
     }
 
@@ -80,19 +91,22 @@ public class Sail : MonoBehaviour
 
     private void Deaccel()
     {
-        if (currentWindCoefficient <= 0f)
-        {
-            currentWindCoefficient = 0f;
-            return;
-        }
+        currentWindCoefficient -= windCoefficientDecreaseAmount * Time.deltaTime;
 
-        currentWindCoefficient += windCoefficientDecreaseAmount * Time.deltaTime;
+        if (currentWindCoefficient <= 0f)
+            currentWindCoefficient = 0f;
     }
 
-    private void ToggleActive()
+    private void SetActive(bool value)
     {
-        active = !active;
+        active = value;
 
         OnActiveChange?.Invoke(active);
+
+        for(int i = 0; i < activeSailObjects.Length; i++)
+        {
+            activeSailObjects[i].SetActive(active);
+            deactiveSailObjects[i].SetActive(!active);
+        }
     }
 }

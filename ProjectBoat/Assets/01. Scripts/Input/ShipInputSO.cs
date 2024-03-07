@@ -10,9 +10,11 @@ public class ShipInputSO : InputSO, IShipActions
 {
     public Action<Vector2> OnMoveEvent;
     public Action OnFEvent;
-
-    private void OnEnable()
+     
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         ShipActions ship = InputManager.controls.Ship;
         ship.SetCallbacks(this);
         InputManager.RegistInputMap(this, ship.Get());
