@@ -6,4 +6,5 @@ using static DeliveryQuest;
 public class DeliveryQuestSO : QuestSO
 {
     public List<DeliverySlip> DeliverySlips = new List<DeliverySlip>();
+    public DeliveryQuestSlot uiPrefab = null;
 }

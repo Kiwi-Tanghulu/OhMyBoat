@@ -9,6 +9,6 @@ public partial class ImportQuest
         [Range(1f, 5f)] public float PriceCoefficient = 1.1f;
 
         public int GetPrice() => Mathf.RoundToInt(RequireStuff.Price * PriceCoefficient);
-        public int GetPriceDiff() => RequireStuff.Price - GetPrice();
+        public int GetPriceDiff() => GetPrice() - RequireStuff.Price;
     }
 }

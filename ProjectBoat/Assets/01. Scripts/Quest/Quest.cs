@@ -1,12 +1,14 @@
 public abstract class Quest
 {
     protected QuestSpot questSpot = null;
-
+    protected QuestProgressPanel progressPanel = null;
 
     public virtual void Initialize(QuestSpot spot, QuestSO questData)
     {
         questSpot = spot;
         questSpot.OnQuestProcessEvent += ProcessQuest;
+
+        progressPanel = QuestManager.Instance.QuestProgressPanel;
     }
 
     protected abstract bool DecisionClear();
@@ -14,12 +16,12 @@ public abstract class Quest
     protected abstract void OnQuestFailed();
     protected abstract void ProcessQuest(StuffSO stuffData);
 
-    public void StartQuest()
+    public virtual void StartQuest()
     {
         questSpot.StartQuest(this);
     }
 
-    public void FinishQuest()
+    public virtual void FinishQuest()
     {
         bool questCleared = DecisionClear();
         if (questCleared)

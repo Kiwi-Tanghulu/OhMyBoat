@@ -15,3 +15,5 @@ MonoBehaviour:
   ImportSlips:
   - RequireStuff: {fileID: 11400000, guid: 539df7c20df738a4fbd5a33cf56356a2, type: 2}
     PriceCoefficient: 1.5
+  uiPrefab: {fileID: 2981581164773341141, guid: 00bef32732e70ba448863a2580a46918,
+    type: 3}

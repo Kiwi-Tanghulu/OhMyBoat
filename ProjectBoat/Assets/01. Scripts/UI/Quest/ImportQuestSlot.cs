@@ -27,7 +27,7 @@ public class ImportQuestSlot : MonoBehaviour
         stuffNameText.text = importSlip.RequireStuff.StuffName;
 
         int priceDiff = importSlip.GetPriceDiff();
-        string sign = priceDiff > 0 ? "+" : "-";
+        string sign = priceDiff > 0 ? "+" : "";
         priceText.text = $"{sign}{priceDiff}\n{importSlip.RequireStuff.Price}";
 
         progressText.text = "0";
