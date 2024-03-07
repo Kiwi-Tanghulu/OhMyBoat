@@ -6,7 +6,7 @@ public class QuestSpot : MonoBehaviour, IInteractable
     private Quest currentQuest = null;
 
     public bool QuestActive => (currentQuest != null);
-    public event Action<StuffSO> OnQuestProcessEvent;
+    public event Func<StuffSO, bool> OnQuestProcessEvent;
 
     public void StartQuest(Quest quest)
     {
@@ -35,7 +35,8 @@ public class QuestSpot : MonoBehaviour, IInteractable
         if (holdingStuff == null)
             return false;
 
-        ProcessQuest(holdingStuff.StuffData);
+        if(ProcessQuest(holdingStuff.StuffData) == false)
+            return false;
 
         hand.Release();
         Destroy(holdingStuff.gameObject);
@@ -43,8 +44,11 @@ public class QuestSpot : MonoBehaviour, IInteractable
         return true;
     }
 
-    private void ProcessQuest(StuffSO stuffData)
+    private bool ProcessQuest(StuffSO stuffData)
     {
-        OnQuestProcessEvent?.Invoke(stuffData);
+        if(OnQuestProcessEvent == null)
+            return false;
+
+        return OnQuestProcessEvent.Invoke(stuffData);
     }
 }

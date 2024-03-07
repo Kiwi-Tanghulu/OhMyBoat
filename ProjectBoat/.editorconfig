@@ -59,3 +59,4 @@ cpp_space_around_ternary_operator=insert
 cpp_wrap_preserve_blocks=one_liners
 
 dotnet_diagnostic.IDE0047.severity = none
+dotnet_diagnostic.IDE0051.severity = none

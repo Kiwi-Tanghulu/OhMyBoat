@@ -8,10 +8,17 @@ public enum InputMapType
 {
     Play,
     MiniGame,
+    Ship,
 }
 
 public enum MissionType
 {
     Sail,
     Leak,
+}
+
+public enum SailType
+{
+    Horizontal, 
+    Vertical
 }
