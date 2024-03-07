@@ -9,11 +9,6 @@ public class QuestProgressPanel : MonoBehaviour
         contentTransform = transform.Find("Content");
     }
 
-    // private void Start()
-    // {
-    //     gameObject.SetActive(false);
-    // }
-
     public T CreateQuestSlot<T>(T slotPrefab) where T : MonoBehaviour
     {
         T slot = Instantiate(slotPrefab, contentTransform);

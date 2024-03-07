@@ -2268,7 +2268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questSpot: {fileID: 1593618701}
-  questData: {fileID: 11400000, guid: ef56749f37c71be4397d36ff9072282a, type: 2}
+  questData: {fileID: 11400000, guid: 49425c03020caee49b474915d3c86c17, type: 2}
 --- !u!1001 &444441637
 PrefabInstance:
   m_ObjectHideFlags: 0
