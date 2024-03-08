@@ -9,9 +9,13 @@ public class Sail : MonoBehaviour
 {
     public SailType sailType;
 
+    [SerializeField] private ShipInputSO inputSO;
+
+    [Space]
     [SerializeField] private GameObject[] deactiveSailObjects;
     [SerializeField] private GameObject[] activeSailObjects;
     [SerializeField] private Transform[] sailAnchorTrms;
+    [SerializeField] private Cloth[] clothes;
 
     [Space]
     [SerializeField] private float maxWindCoefficient;
@@ -21,8 +25,12 @@ public class Sail : MonoBehaviour
     private Vector3 currentWindforce;
     public Vector3 CurrentWindForce => currentWindforce;
     private WindManager windManager;
-    [SerializeField] private float currentRotate;
 
+
+    [Space]
+    [SerializeField] private float currentRotate;
+    [SerializeField] private float turnSpeed;
+    private float turnDir;
     private float directionConcordance;
 
     private bool active;
@@ -32,9 +40,16 @@ public class Sail : MonoBehaviour
 
     private void Start()
     {
+        inputSO.OnArrowEvent += SetTrunDirection;
+
         windManager = WindManager.Instance;
 
         SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        inputSO.OnArrowEvent -= SetTrunDirection;
     }
 
     private void Update()
@@ -50,6 +65,11 @@ public class Sail : MonoBehaviour
             Deaccel();
 
         SetWindForce();
+
+        for (int i = 0; i < clothes.Length; i++)
+            clothes[i].externalAcceleration = windManager.Wind;
+
+        Turn();
     }
 
     private void SetWindForce()
@@ -104,9 +124,22 @@ public class Sail : MonoBehaviour
         OnActiveChange?.Invoke(active);
 
         for(int i = 0; i < activeSailObjects.Length; i++)
-        {
             activeSailObjects[i].SetActive(active);
+
+        for(int i = 0; i < deactiveSailObjects.Length; i++)
             deactiveSailObjects[i].SetActive(!active);
-        }
+    }
+
+    private void Turn()
+    {
+        currentRotate += turnSpeed * turnDir * Time.deltaTime;
+
+        for (int i = 0; i < sailAnchorTrms.Length; i++)
+            sailAnchorTrms[i].localRotation = Quaternion.Euler(0f, currentRotate, 0f);
+    }
+
+    private void SetTrunDirection(Vector2 input)
+    {
+        turnDir = -input.x;
     }
 }

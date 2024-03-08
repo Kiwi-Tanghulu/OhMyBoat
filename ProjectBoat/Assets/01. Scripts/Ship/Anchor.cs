@@ -14,6 +14,8 @@ public class Anchor : MonoBehaviour
 
     public Action<bool> OnActiveChange;
 
+    private Coroutine activeCoroutine;
+
     private void Start()
     {
         inputSO.OnFEvent += ShipInputSO_OnFEvent;
@@ -26,7 +28,8 @@ public class Anchor : MonoBehaviour
 
     private void ToggleActive()
     {
-        StartCoroutine(ToggleActiveDelay());
+        if(activeCoroutine == null)
+            activeCoroutine = StartCoroutine(ToggleActiveDelay());
     }
 
     private IEnumerator ToggleActiveDelay()
@@ -36,6 +39,8 @@ public class Anchor : MonoBehaviour
         active = !active;
         
         OnActiveChange?.Invoke(active);
+
+        activeCoroutine = null;
     }
 
     private void ShipInputSO_OnFEvent()
