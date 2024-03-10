@@ -40,6 +40,7 @@ public partial class DeliveryQuest : Quest
             DeliveryQuestSlot ui = progressPanel.CreateQuestSlot(questData.UIPrefab) as DeliveryQuestSlot;
             
             ui.Initialize(slip);
+            callback?.Invoke(i, ui);
         }
     }
 

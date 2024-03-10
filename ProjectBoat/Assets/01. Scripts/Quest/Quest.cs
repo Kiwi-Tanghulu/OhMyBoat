@@ -23,6 +23,9 @@ public abstract class Quest
 
     public abstract void InitProgressPanel(QuestProgressPanel progressPanel, Action<int, QuestSlot> callback = null);
 
+    /// <summary>
+    /// only quest manager calls
+    /// </summary>
     public virtual void StartQuest()
     {
         questSpot.StartQuest(this);

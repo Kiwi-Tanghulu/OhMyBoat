@@ -4,11 +4,8 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance = null;
 
-    #region Test Codes
-    public QuestSpot questSpot = null;
-    public QuestSO questData = null;
-    private Quest quest = null;
-    #endregion
+    private Quest currentQuest = null;
+    public bool QuestActive => currentQuest == null;
 
     private QuestProgressPanel questProgressPanel = null;
     public QuestProgressPanel QuestProgressPanel => questProgressPanel;
@@ -23,34 +20,11 @@ public class QuestManager : MonoBehaviour
         questProgressPanel = DEFINE.MainCanvas.Find("QuestProgressPanel").GetComponent<QuestProgressPanel>();
     }
 
-    #region Test Codes
-    private void Update()
+    public void StartQuest(Quest quest)
     {
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                quest = new DeliveryQuest();
-                quest.Initialize(questSpot, questData);
-                quest.StartQuest();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                quest = new ImportQuest();
-                quest.Initialize(questSpot, questData);
-                quest.StartQuest();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                if (quest == null)
-                    return;
-
-                questSpot.FinishQuest();
-            }
-        }
+        currentQuest = quest;
+        currentQuest.StartQuest();
     }
-    #endregion
 
     public void CreateQuest()
     {

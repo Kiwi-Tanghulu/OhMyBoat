@@ -9,8 +9,7 @@ public class QuestDetailPanel : MonoBehaviour
     private TMP_Text contentText = null;
     private RawImage npcImage = null;
 
-    public QuestSpot a;
-    public QuestSO b;
+    private Quest quest = null;
 
     private void Awake()
     {
@@ -20,25 +19,26 @@ public class QuestDetailPanel : MonoBehaviour
         npcImage = transform.Find("ContentPanel/NPCImage").GetComponent<RawImage>();
     }
 
-    private void Update()
+    private void Start()
     {
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            Quest quest = new DeliveryQuest();
-            quest.Initialize(a, b);
-
-            Initialize(quest);
-        }
+        Display(false);
     }
 
     public void Initialize(Quest quest)
     {
+        this.quest = quest;
+
         QuestSO questData = quest.QuestData;
         contentText.text = questData.QuestContent;
         titleText.text = questData.QuestName;
         npcImage.texture = questData.npcImage;
         
         quest.InitProgressPanel(progressPanel);
+    }
+
+    public void StartQuest()
+    {
+        QuestManager.Instance.StartQuest(quest);
     }
 
     public void Display(bool active)

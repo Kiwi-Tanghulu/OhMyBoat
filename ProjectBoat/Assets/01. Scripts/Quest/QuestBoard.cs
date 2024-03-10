@@ -53,7 +53,7 @@ public class QuestBoard : MonoBehaviour, IInteractable
         OnFocusedEvent?.Invoke(isFocused);
     }
 
-    private void Release()
+    public void Release()
     {
         InputManager.ChangeInputMap(InputMapType.Play);
         ToggleFocus(false);
