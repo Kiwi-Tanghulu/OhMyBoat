@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSwimState : MonoBehaviour
+public class PlayerSwimState : PlayerState
 {
-    // Start is called before the first frame update
-    void Start()
+    public PlayerSwimState(PlayerFSM _owner, StateMachine<PlayerFSM, PlayerStateEnum> _stateMachine, string _animationBoolName) : base(_owner, _stateMachine, _animationBoolName)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

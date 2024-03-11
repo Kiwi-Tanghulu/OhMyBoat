@@ -13,12 +13,12 @@ public class PlayerFallState : PlayerState
     {
         base.Update();
 
-        owner.Gravity();
+        owner.playerMovement.Gravity();
 
-        Vector3 moveVector = owner.transform.rotation * ((owner.MoveDir * owner.MoveSpeed));
-        owner.Move(new Vector3(moveVector.x,0,moveVector.z));
+        Vector3 moveVector = owner.transform.rotation * ((owner.playerMovement.MoveDir * owner.playerMovement.MoveSpeed));
+        owner.playerMovement.Move(new Vector3(moveVector.x,0,moveVector.z));
 
-        if (owner.IsGround())
+        if (owner.playerMovement.IsGround())
         {
             owner.stateMachine.ChangeState(PlayerStateEnum.Idle);
         }
@@ -27,6 +27,6 @@ public class PlayerFallState : PlayerState
     public override void Exit()
     {
         base.Exit();
-        owner.SetVerticalVelocity(0);
+        owner.playerMovement.SetVerticalVelocity(0);
     }
 }

@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerGroundState
     {
         base.Update();
 
-        if (owner.MoveDir.sqrMagnitude > 0.01f)
+        if (owner.playerMovement.MoveDir.sqrMagnitude > 0.01f)
         {
             stateMachine.ChangeState(PlayerStateEnum.Move);
         }

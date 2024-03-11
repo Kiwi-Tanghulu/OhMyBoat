@@ -1045,6 +1045,7 @@ GameObject:
   - component: {fileID: 6491978880585842489}
   - component: {fileID: 4092773977553701340}
   - component: {fileID: 8035084077432443946}
+  - component: {fileID: 8035084077432443947}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1131,14 +1132,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade6c85b0b613444f80272bedcd19851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8035084077432443947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5868566777957813119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b887c3c02e3fa4c821316e73d6a8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: 807403439970f0d448782817beb0e920, type: 2}
+  moveSpeed: 2
+  jumpPower: 3
+  gravityScale: 9.81
   groundLayer:
     serializedVersion: 2
     m_Bits: 4096
-  groundChecklength: 0
-  input: {fileID: 11400000, guid: 807403439970f0d448782817beb0e920, type: 2}
-  gravityScale: 9.81
-  moveSpeed: 1.5
-  jumpPower: 3
 --- !u!4 &8074798706328997098
 Transform:
   m_ObjectHideFlags: 0

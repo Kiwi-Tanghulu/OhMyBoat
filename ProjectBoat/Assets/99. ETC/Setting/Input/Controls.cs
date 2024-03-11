@@ -89,6 +89,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""032397b5-70b7-42cc-8e65-3820394f40c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -210,6 +219,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14f7b672-efff-400b-8855-8843b020def8"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -404,6 +424,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Play_Collect = m_Play.FindAction("Collect", throwIfNotFound: true);
         m_Play_Interact = m_Play.FindAction("Interact", throwIfNotFound: true);
         m_Play_Fire = m_Play.FindAction("Fire", throwIfNotFound: true);
+        m_Play_Run = m_Play.FindAction("Run", throwIfNotFound: true);
         // MiniGame
         m_MiniGame = asset.FindActionMap("MiniGame", throwIfNotFound: true);
         m_MiniGame_Space = m_MiniGame.FindAction("Space", throwIfNotFound: true);
@@ -481,6 +502,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Play_Collect;
     private readonly InputAction m_Play_Interact;
     private readonly InputAction m_Play_Fire;
+    private readonly InputAction m_Play_Run;
     public struct PlayActions
     {
         private @Controls m_Wrapper;
@@ -492,6 +514,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Collect => m_Wrapper.m_Play_Collect;
         public InputAction @Interact => m_Wrapper.m_Play_Interact;
         public InputAction @Fire => m_Wrapper.m_Play_Fire;
+        public InputAction @Run => m_Wrapper.m_Play_Run;
         public InputActionMap Get() { return m_Wrapper.m_Play; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -522,6 +545,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
         }
 
         private void UnregisterCallbacks(IPlayActions instance)
@@ -547,6 +573,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
         }
 
         public void RemoveCallbacks(IPlayActions instance)
@@ -698,6 +727,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnCollect(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
     public interface IMiniGameActions
     {

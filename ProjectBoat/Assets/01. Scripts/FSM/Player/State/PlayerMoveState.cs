@@ -16,11 +16,11 @@ public class PlayerMoveState : PlayerGroundState
     {
         base.Update();
 
-        Vector3 moveVector = owner.transform.rotation * ((owner.MoveDir * owner.MoveSpeed));
+        Vector3 moveVector = owner.transform.rotation * ((owner.playerMovement.MoveDir * owner.playerMovement.MoveSpeed));
 
-        owner.Move(new Vector3(moveVector.x,0,moveVector.z));
+        owner.playerMovement.Move(new Vector3(moveVector.x,0,moveVector.z));
 
-        if(owner.MoveDir.sqrMagnitude < 0.01f)
+        if(owner.playerMovement.MoveDir.sqrMagnitude < 0.01f)
         {
             stateMachine.ChangeState(PlayerStateEnum.Idle);
         }

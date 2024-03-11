@@ -4,31 +4,14 @@ using UnityEngine;
 using System;
 public class PlayerFSM : MonoBehaviour
 {
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float groundChecklength;
-    [SerializeField] private PlayInputSO input;
-    public PlayInputSO Input => input;
-
-    [SerializeField] private float gravityScale;
-    public float GravityScale => gravityScale;
-    private float verticalVelocity;
-
-    [SerializeField] private float moveSpeed;
-    public float MoveSpeed => moveSpeed;
-
-    [SerializeField] private float jumpPower;
-    public float JumpPower => jumpPower;
-
-
     public StateMachine<PlayerFSM, PlayerStateEnum> stateMachine;
     public Animator AnimatorCompo { get; private set; }
-    public Vector3 MoveDir { get; private set; }
 
 
-    private CharacterController characterController;
+    public PlayerMovement playerMovement { get; private set; }
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        playerMovement = GetComponent<PlayerMovement>();
         AnimatorCompo = transform.Find("Visual").GetComponent<Animator>();
 
         stateMachine = new StateMachine<PlayerFSM, PlayerStateEnum>();
@@ -53,47 +36,25 @@ public class PlayerFSM : MonoBehaviour
 
     private void Start()
     {
-        input.OnMoveEvent += SetMoveDirection;
-
         stateMachine.Initialize(PlayerStateEnum.Idle, this);
-    }
-
-    private void OnDestroy()
-    {
-        input.OnMoveEvent -= SetMoveDirection;
     }
     void Update()
     {
         stateMachine.CurrentState.Update();
     }
-    public void Gravity()
-    {
-        if (!IsGround())
-        {
-            verticalVelocity -= gravityScale * Time.deltaTime;
-        }
-    }
 
-    public void SetVerticalVelocity(float value)
-    {
-        verticalVelocity = value;
-    }
-
-    public void SetMoveDirection(Vector2 value)
-    {
-        MoveDir = new Vector3(value.x, 0f, value.y);
-    }
-    public void Move(Vector3 moveVector)
-    {
-        characterController.Move((moveVector + verticalVelocity * Vector3.up) * Time.deltaTime);
-    }
     public void AnimationEndTrigger()
     {
         stateMachine.CurrentState.AnimationFinishTrigger();
     }
 
-    public bool IsGround()
+    //Test
+    public void TestRunAnimation(bool value)
     {
-        return Physics.Raycast(transform.position, Vector3.down, 0.2f, groundLayer);
+        if (value)
+            AnimatorCompo.SetFloat("move_speed", 1f);
+        else
+            AnimatorCompo.SetFloat("move_speed", 0f);
     }
+
 }
