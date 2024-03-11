@@ -20,7 +20,7 @@ public class WindManager : MonoBehaviour
 
     private void Update()
     {
-        text.text = Vector3.Angle(Vector3.forward, Wind.normalized).ToString("F2");
-        arrowTrm.localRotation = Quaternion.Euler(0f, 0f, Vector3.Angle(Vector3.forward, Wind.normalized));
+        //text.text = Vector3.Angle(Vector3.forward, Wind.normalized).ToString("F2");
+        //arrowTrm.localRotation = Quaternion.Euler(0f, 0f, Vector3.Angle(Vector3.forward, Wind.normalized));
     }
 }

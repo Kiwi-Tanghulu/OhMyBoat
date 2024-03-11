@@ -34,7 +34,7 @@ public class BuoyancyObject : MonoBehaviour
 
         for (int i = 0; i < floaters.Length; i++)
         {
-            float diff = floaters[i].position.y - Ocean.Instance.GetWaterHeight(floaters[i].position);
+            float diff = floaters[i].position.y;// - Ocean.Instance.GetWaterHeight(floaters[i].position);
 
             addPower += gravity / floaters.Length * Time.fixedDeltaTime;
 
