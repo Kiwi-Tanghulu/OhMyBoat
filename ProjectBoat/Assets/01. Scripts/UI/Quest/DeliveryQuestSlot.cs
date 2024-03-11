@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static DeliveryQuest;
 
-public class DeliveryQuestSlot : MonoBehaviour
+public class DeliveryQuestSlot : QuestSlot
 {
 	private Image requireStuffIcon = null;
     private Image completeImage = null;
