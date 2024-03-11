@@ -8,6 +8,16 @@ public class QuestSpot : MonoBehaviour, IInteractable
     public bool QuestActive => (currentQuest != null);
     public event Func<StuffSO, bool> OnQuestProcessEvent;
 
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.LeftControl))
+            if(Input.GetKeyDown(KeyCode.Alpha0))
+                FinishQuest();
+    }
+
+    /// <summary>
+    /// only quest calls
+    /// </summary>
     public void StartQuest(Quest quest)
     {
         currentQuest = quest;

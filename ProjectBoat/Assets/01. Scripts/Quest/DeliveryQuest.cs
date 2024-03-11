@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public partial class DeliveryQuest : Quest
@@ -20,14 +21,7 @@ public partial class DeliveryQuest : Quest
         receivedList = new int[questData.DeliverySlips.Count];
         uiList = new DeliveryQuestSlot[questData.DeliverySlips.Count];
 
-        for(int i = 0; i < questData.DeliverySlips.Count; ++i)
-        {
-            DeliverySlip slip = questData.DeliverySlips[i];
-            DeliveryQuestSlot ui = progressPanel.CreateQuestSlot<DeliveryQuestSlot>(questData.uiPrefab);
-            
-            ui.Initialize(slip);
-            uiList[i] = ui;
-        }
+        InitProgressPanel(progressPanel, (i, slot) => uiList[i] = slot as DeliveryQuestSlot);
     }
 
     public override void FinishQuest()
@@ -36,6 +30,18 @@ public partial class DeliveryQuest : Quest
 
         for(int i = 0; i < uiList.Length; ++i)
             progressPanel.RemoveQuestSlot(uiList[i].transform);
+    }
+
+    public override void InitProgressPanel(QuestProgressPanel progressPanel, Action<int, QuestSlot> callback = null)
+    {
+        for(int i = 0; i < questData.DeliverySlips.Count; ++i)
+        {
+            DeliverySlip slip = questData.DeliverySlips[i];
+            DeliveryQuestSlot ui = progressPanel.CreateQuestSlot(questData.UIPrefab) as DeliveryQuestSlot;
+            
+            ui.Initialize(slip);
+            callback?.Invoke(i, ui);
+        }
     }
 
     protected override bool DecisionClear()
