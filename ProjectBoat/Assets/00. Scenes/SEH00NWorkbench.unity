@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f72aaa292a7084aa02bc7a41feb754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questList: {fileID: 11400000, guid: 67bd3cc087445914aa64a179141de512, type: 2}
 --- !u!1001 &96224432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17732,6 +17733,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1220129944529154471, guid: bf6230b2938fc0e41b49309931ef5edc,
+        type: 3}
+      propertyPath: focusingLayer.m_Bits
+      value: 7104
+      objectReference: {fileID: 0}
     - target: {fileID: 2850567526916172211, guid: bf6230b2938fc0e41b49309931ef5edc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18758,6 +18764,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 3e1f510499d850c4eab0183471c7d28b, type: 2}
+  questSpots:
+  - {fileID: 93277798}
 --- !u!1001 &1503323926
 PrefabInstance:
   m_ObjectHideFlags: 0

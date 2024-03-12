@@ -5,6 +5,8 @@ public class QuestSpot : MonoBehaviour, IInteractable
 {
     private Quest currentQuest = null;
 
+    [SerializeField] QuestListSO questList = null;
+
     public bool QuestActive => (currentQuest != null);
     public event Func<StuffSO, bool> OnQuestProcessEvent;
 
@@ -29,6 +31,13 @@ public class QuestSpot : MonoBehaviour, IInteractable
     {
         currentQuest.FinishQuest();
         currentQuest = null;
+    }
+
+    public Quest CreateQuest()
+    {
+        QuestSO questData = questList.QuestList.PickRandom();
+        Quest quest = questData.CreateQuest(this);
+        return quest;
     }
 
     public bool Interact(Component performer, bool actived, Vector3 point = default)

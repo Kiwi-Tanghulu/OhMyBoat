@@ -2,11 +2,6 @@ using UnityEngine;
 
 public class QuestBoardPanel : MonoBehaviour
 {
-    #region Test Codes
-    public QuestSpot spot;
-    public QuestSO questData;
-    #endregion
-
 	private QuestBoardSlot[] questSlots = null;
 
     private void Awake()
@@ -16,15 +11,15 @@ public class QuestBoardPanel : MonoBehaviour
 
     private void Start()
     {
-        #region Test Codes
-        Quest quest = new DeliveryQuest();
-        quest.Initialize(spot, questData);
-
-        for(int i = 0; i < questSlots.Length; ++i)
-            questSlots[i].Initialize(quest);
-        #endregion
-
         Display(false);
+    }
+
+    public void InitailizeSlot(Quest quest, int index)
+    {
+        if(quest == null)
+            return;
+
+        questSlots[index].Initialize(quest);
     }
 
     public void Display(bool active)

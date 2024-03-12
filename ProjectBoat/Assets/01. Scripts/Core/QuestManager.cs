@@ -25,9 +25,4 @@ public class QuestManager : MonoBehaviour
         currentQuest = quest;
         currentQuest.StartQuest();
     }
-
-    public void CreateQuest()
-    {
-        
-    }
 }
