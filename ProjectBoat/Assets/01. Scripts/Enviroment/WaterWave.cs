@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class WaterWave : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class WaterWave : MonoBehaviour
 
     [SerializeField] private Transform ocean;
     private Material oceanMat;
+
+    [Space]
+    [SerializeField] private int samplingCount = 3;
 
     private Vector4 waveA;
     private Vector4 waveB;
@@ -28,32 +32,55 @@ public class WaterWave : MonoBehaviour
         waveD = oceanMat.GetVector("_WaveD");
     }
 
-    public float GetWaveHeight(Vector3 pos)
+    public Vector3 GetWaveHeight(Vector3 pos)
     {
-        float y = 0;
+        Vector3 w1 = Vector3.zero;
+        Vector3 w2 = Vector3.zero;
+        Vector3 w3 = Vector3.zero;
+        Vector3 w4 = Vector3.zero;
 
-        y += GenerateWave(waveA, pos).y;
-        y += GenerateWave(waveB, pos).y;
-        y += GenerateWave(waveC, pos).y;
-        y += GenerateWave(waveD, pos).y;
+        w1 = GerstnerWave(waveA, pos);
+        w1 = GerstnerWave(waveA, pos - w1);
+        w1 = GerstnerWave(waveA, pos - w1);
+        w1 = GerstnerWave(waveA, pos - w1);
 
-        Debug.Log(y);
+        w2 = GerstnerWave(waveB, pos);
+        w2 = GerstnerWave(waveB, pos - w2);
+        w2 = GerstnerWave(waveB, pos - w2);
+        w2 = GerstnerWave(waveB, pos - w2);
 
-        return y * 100;
+        w3 = GerstnerWave(waveC, pos);
+        w3 = GerstnerWave(waveC, pos - w3);
+        w3 = GerstnerWave(waveC, pos - w3);
+        w3 = GerstnerWave(waveC, pos - w3);
+
+        w4 = GerstnerWave(waveD, pos);
+        w4 = GerstnerWave(waveD, pos - w4);
+        w4 = GerstnerWave(waveD, pos - w4);
+        w4 = GerstnerWave(waveD, pos - w4);
+
+        return w1 + w2 + w3 + w4 + transform.position;
     }
 
-    private Vector3 GenerateWave(Vector4 waveParam, Vector3 pos)
+   private Vector3 GerstnerWave(Vector4 wave, Vector3 p)
     {
-        Vector2 d = new Vector2(waveParam.x, waveParam.y).normalized;
-        float k = Mathf.PI * 2 * waveParam.w;
+        Vector3 pos = p;
+        Vector3 diff = Vector3.zero;
+        Vector3 result = Vector3.zero;
+
+        float steepness = wave.z;
+        float wavelength = wave.w;
+        float k = 2 * Mathf.PI / wavelength;
         float c = Mathf.Sqrt(9.8f / k);
-        float f = Vector2.Dot(d, new Vector2(pos.x, pos.z).normalized) - (Time.time * c) * k;
-        float a = waveParam.z / k;
+        Vector2 d = new Vector2(wave.x, wave.y).normalized;
+        float f = k * (Vector2.Dot(d, new Vector2(pos.x, pos.z)) - c * Time.time);
+        float a = steepness / k;
 
-        float x = Mathf.Cos(f) * a * d.x + pos.x;
-        float y = Mathf.Sin(f) * a;
-        float z = Mathf.Cos(f) * a * d.y + pos.x;
+        result = new Vector3(
+            d.x * (a * Mathf.Cos(f)),
+            a * Mathf.Sin(f),
+            d.y * (a * Mathf.Cos(f)));
 
-        return new Vector3(x, y, z);
+        return result;
     }
 }
