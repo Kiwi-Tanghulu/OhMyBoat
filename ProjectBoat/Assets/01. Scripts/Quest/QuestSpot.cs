@@ -5,9 +5,23 @@ public class QuestSpot : MonoBehaviour, IInteractable
 {
     private Quest currentQuest = null;
 
-    public bool QuestActive => (currentQuest != null);
-    public event Action<StuffSO> OnQuestProcessEvent;
+    [SerializeField] QuestListSO questList = null;
 
+    public bool QuestActive => (currentQuest != null);
+    public event Func<StuffSO, bool> OnQuestProcessEvent;
+
+    #region Test Codes
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.LeftControl))
+            if(Input.GetKeyDown(KeyCode.Alpha0))
+                FinishQuest();
+    }
+    #endregion
+
+    /// <summary>
+    /// only quest calls
+    /// </summary>
     public void StartQuest(Quest quest)
     {
         currentQuest = quest;
@@ -17,6 +31,13 @@ public class QuestSpot : MonoBehaviour, IInteractable
     {
         currentQuest.FinishQuest();
         currentQuest = null;
+    }
+
+    public Quest CreateQuest()
+    {
+        QuestSO questData = questList.QuestList.PickRandom();
+        Quest quest = questData.CreateQuest(this);
+        return quest;
     }
 
     public bool Interact(Component performer, bool actived, Vector3 point = default)
@@ -35,7 +56,8 @@ public class QuestSpot : MonoBehaviour, IInteractable
         if (holdingStuff == null)
             return false;
 
-        ProcessQuest(holdingStuff.StuffData);
+        if(ProcessQuest(holdingStuff.StuffData) == false)
+            return false;
 
         hand.Release();
         Destroy(holdingStuff.gameObject);
@@ -43,8 +65,11 @@ public class QuestSpot : MonoBehaviour, IInteractable
         return true;
     }
 
-    private void ProcessQuest(StuffSO stuffData)
+    private bool ProcessQuest(StuffSO stuffData)
     {
-        OnQuestProcessEvent?.Invoke(stuffData);
+        if(OnQuestProcessEvent == null)
+            return false;
+
+        return OnQuestProcessEvent.Invoke(stuffData);
     }
 }

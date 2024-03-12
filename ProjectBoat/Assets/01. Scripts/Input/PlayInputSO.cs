@@ -13,6 +13,7 @@ public class PlayInputSO : InputSO, IPlayActions
     public Action OnCollectEvent;
     public Action<bool> OnInteractEvent;
     public Action OnFireEvent;
+    public Action OnRunEvent;
 
     protected override void OnEnable()
     {
@@ -26,7 +27,6 @@ public class PlayInputSO : InputSO, IPlayActions
     public void OnMove(InputAction.CallbackContext context)
     {
         Vector2 moveDirection = context.ReadValue<Vector2>();
-        
         OnMoveEvent?.Invoke(moveDirection);
     }
 
@@ -68,5 +68,13 @@ public class PlayInputSO : InputSO, IPlayActions
     {
         if(context.started)
             OnFireEvent?.Invoke();
+    }
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            OnRunEvent?.Invoke();
+        if (context.canceled)
+            OnRunEvent?.Invoke();
     }
 }

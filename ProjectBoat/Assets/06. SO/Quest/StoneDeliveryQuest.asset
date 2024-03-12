@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a76b518715220b84a88507f25dd0c3bb, type: 3}
   m_Name: StoneDeliveryQuest
   m_EditorClassIdentifier: 
+  UIPrefab: {fileID: 9122437072376071210, guid: f4bcf407f2d1174438b103772f39cf4e,
+    type: 3}
+  npcImage: {fileID: 0}
+  QuestName: the quest
+  QuestContent: content
   DeliverySlips:
   - RequireStuff: {fileID: 11400000, guid: 539df7c20df738a4fbd5a33cf56356a2, type: 2}
     RequireQuantity: 1

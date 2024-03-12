@@ -7,84 +7,75 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private PlayInputSO input;
-
-    [SerializeField] private float gravityScale;
-    private float verticalVelocity;
+    public PlayInputSO Input => input;
 
     [SerializeField] private float moveSpeed;
-    private Vector3 moveDir;
+    public float MoveSpeed => moveSpeed;
+    private float currentSpeed;
 
-    [SerializeField] private float jumpPower = 7f;
-    public UnityEvent OnJumpStart;
-    public UnityEvent OnJumpEnd;
-    private bool isJump;
+    [SerializeField] private float jumpPower;
+    public float JumpPower => jumpPower;
 
-    private CharacterController cc;
+    [SerializeField] private float gravityScale;
+    public float GravityScale => gravityScale;
+    private float verticalVelocity;
+    public Vector3 MoveDir { get; private set; }
+    public bool IsRun { get; private set; }
+
+    [SerializeField] private LayerMask groundLayer;
+
+    private CharacterController characterController;
+
+    //Test
+    private PlayerFSM playerFSM;
 
     private void Awake()
     {
-        cc = GetComponent<CharacterController>();
-    }
+        characterController = GetComponent<CharacterController>();
 
+        //Test
+        playerFSM = GetComponent<PlayerFSM>();
+    }
     private void Start()
     {
         input.OnMoveEvent += SetMoveDirection;
-        input.OnJumpEvent += Jump;
-    }
+        input.OnRunEvent += SetRun;
 
+        IsRun = false;
+    }
     private void OnDestroy()
     {
         input.OnMoveEvent -= SetMoveDirection;
-        input.OnJumpEvent -= Jump;
+        input.OnRunEvent -= SetRun;
     }
 
-    private void Update()
+    public void Gravity()
     {
-        Move();
-        Gravity();
-        CheckJump();
-    }
-
-    private void Gravity()
-    {
-        if(!cc.isGrounded)
+        if (!IsGround())
         {
-            verticalVelocity += gravityScale * Time.deltaTime;
-        }
-        else
-        {
-            verticalVelocity = gravityScale * 0.3f * Time.deltaTime;
+            verticalVelocity -= gravityScale * Time.deltaTime;
         }
     }
-
+    private void SetRun()
+    {
+        IsRun = !IsRun;
+        //Test
+        playerFSM.TestRunAnimation(IsRun);
+    }
+    public void SetVerticalVelocity(float value)
+    {
+        verticalVelocity = value;
+    }
+    public void Move(Vector3 moveVector)
+    {
+        characterController.Move((moveVector + verticalVelocity * Vector3.up) * Time.deltaTime);
+    }
     public void SetMoveDirection(Vector2 value)
     {
-        moveDir = new Vector3(value.x, 0f, value.y);
+        MoveDir = new Vector3(value.x, 0f, value.y);
     }
-
-    private void Move()
+    public bool IsGround()
     {
-        Vector3 moveVector = transform.rotation * ((moveDir * moveSpeed + verticalVelocity * Vector3.up) * Time.deltaTime);
-
-        cc.Move(moveVector);
-    }
-
-    private void Jump()
-    {
-        if(cc.isGrounded)
-        {
-            verticalVelocity = jumpPower;
-            isJump = true;
-            OnJumpStart?.Invoke();
-        }
-    }
-
-    private void CheckJump()
-    {
-        if (isJump && cc.isGrounded)
-        {
-            isJump = false;
-            OnJumpEnd?.Invoke();    
-        }
+        return Physics.Raycast(transform.position, Vector3.down, 0.2f, groundLayer);
     }
 }
