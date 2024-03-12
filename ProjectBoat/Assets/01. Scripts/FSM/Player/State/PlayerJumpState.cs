@@ -12,21 +12,19 @@ public class PlayerJumpState : PlayerState
     {
         base.Enter();
 
-        owner.playerMovement.SetVerticalVelocity(owner.playerMovement.JumpPower);
+        playerMovement.SetVerticalVelocity(playerMovement.JumpPower);
     }
     public override void Update()
     {
         base.Update();
 
-        owner.playerMovement.Gravity();
+        playerMovement.Gravity();
 
-        Vector3 moveVector = owner.transform.rotation * ((owner.playerMovement.MoveDir * owner.playerMovement.MoveSpeed));
-
-        owner.playerMovement.Move(new Vector3(moveVector.x,0,moveVector.z));
+        playerMovement.Move();
 
         if (triggerCalled)
         {
-            if (owner.playerMovement.IsGround()) 
+            if (playerMovement.IsGround()) 
             {
                 owner.stateMachine.ChangeState(PlayerStateEnum.Idle);
             }
@@ -40,6 +38,6 @@ public class PlayerJumpState : PlayerState
     public override void Exit()
     {
         base.Exit();
-        owner.playerMovement.SetVerticalVelocity(0);
+        playerMovement.SetVerticalVelocity(0);
     }
 }

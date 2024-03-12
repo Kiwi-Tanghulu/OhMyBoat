@@ -11,13 +11,13 @@ public class PlayerGroundState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        owner.playerMovement.Input.OnJumpEvent += HandleJumpEvent;
+        playerMovement.Input.OnJumpEvent += HandleJumpEvent;
     }
 
     public override void Update()
     {
         base.Update();
-        if (!owner.playerMovement.IsGround())
+        if (!playerMovement.IsGround())
         {
             stateMachine.ChangeState(PlayerStateEnum.Fall);
         }
@@ -25,13 +25,13 @@ public class PlayerGroundState : PlayerState
 
     public override void Exit()
     {
-        owner.playerMovement.Input.OnJumpEvent -= HandleJumpEvent;
+        playerMovement.Input.OnJumpEvent -= HandleJumpEvent;
         base.Exit();
     }
 
     protected void HandleJumpEvent()
     {
-        if (owner.playerMovement.IsGround())
+        if (playerMovement.IsGround())
         {
             stateMachine.ChangeState(PlayerStateEnum.Jump);
         }

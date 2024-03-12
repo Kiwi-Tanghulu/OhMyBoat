@@ -9,9 +9,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayInputSO input;
     public PlayInputSO Input => input;
 
-    [SerializeField] private float moveSpeed;
-    public float MoveSpeed => moveSpeed;
+    [SerializeField] private float speedMultiplier;
+
+    [SerializeField] private float runSpeed;
+    public float RunSpeed => runSpeed;
+    [SerializeField] private float walkSpeed;
+    public float WalkSpeed => walkSpeed;
+    [SerializeField] private float swimSpeed;
+    public float SwimSpeed => swimSpeed;
+
+    private float currentMaxSpeed;
+    public float CurrentMaxSpeed => currentMaxSpeed;
     private float currentSpeed;
+    public float CurrentSpeed => currentSpeed;
+
+    [SerializeField] private float climbSpeed;
+    public float ClimbSpeed => climbSpeed;
 
     [SerializeField] private float jumpPower;
     public float JumpPower => jumpPower;
@@ -20,33 +33,23 @@ public class PlayerMovement : MonoBehaviour
     public float GravityScale => gravityScale;
     private float verticalVelocity;
     public Vector3 MoveDir { get; private set; }
-    public bool IsRun { get; private set; }
+    private Vector3 lastMoveDir;
 
     [SerializeField] private LayerMask groundLayer;
 
     private CharacterController characterController;
 
-    //Test
-    private PlayerFSM playerFSM;
-
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-
-        //Test
-        playerFSM = GetComponent<PlayerFSM>();
     }
     private void Start()
     {
         input.OnMoveEvent += SetMoveDirection;
-        input.OnRunEvent += SetRun;
-
-        IsRun = false;
     }
     private void OnDestroy()
     {
         input.OnMoveEvent -= SetMoveDirection;
-        input.OnRunEvent -= SetRun;
     }
 
     public void Gravity()
@@ -56,23 +59,35 @@ public class PlayerMovement : MonoBehaviour
             verticalVelocity -= gravityScale * Time.deltaTime;
         }
     }
-    private void SetRun()
+    public void SetCurrentMaxSpeed(float _currentMaxSpeed)
     {
-        IsRun = !IsRun;
-        //Test
-        playerFSM.TestRunAnimation(IsRun);
+        currentMaxSpeed = _currentMaxSpeed;
+    }
+    public void SpeedCalculate()
+    {
+        if (currentSpeed > currentMaxSpeed)
+            currentSpeed += -speedMultiplier * Time.deltaTime;
+        else
+            currentSpeed += (MoveDir.sqrMagnitude > 0.1f ? speedMultiplier : -speedMultiplier) * Time.deltaTime;
+        currentSpeed = Mathf.Clamp(currentSpeed, 0f, runSpeed);
+    }
+    public void ResetSpeed()
+    {
+        currentSpeed = 0f;
     }
     public void SetVerticalVelocity(float value)
     {
         verticalVelocity = value;
     }
-    public void Move(Vector3 moveVector)
+    public void Move()
     {
-        characterController.Move((moveVector + verticalVelocity * Vector3.up) * Time.deltaTime);
+        characterController.Move((transform.rotation * lastMoveDir * currentSpeed + verticalVelocity * Vector3.up) * Time.deltaTime);
     }
     public void SetMoveDirection(Vector2 value)
     {
         MoveDir = new Vector3(value.x, 0f, value.y);
+        if (value.sqrMagnitude > 0.1f)
+            lastMoveDir = MoveDir;
     }
     public bool IsGround()
     {
