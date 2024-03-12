@@ -16,13 +16,10 @@ public class Ship : MonoBehaviour
 
     private bool canMove;
 
-    private void Awake()
-    {
-        InputManager.ChangeInputMap(InputMapType.Ship);
-    }
-
     private void Start()
     {
+        InputManager.ChangeInputMap(InputMapType.Ship);
+
         anchor.OnActiveChange += Anchor_OnActiveChange;
     }
 
@@ -31,11 +28,14 @@ public class Ship : MonoBehaviour
         Rotate();
 
         if (canMove)
+        {
             Accel();
+            Move();
+        }
         else
+        {
             Stop();
-
-        Move();
+        }
     }
 
     private void OnDestroy()
@@ -61,7 +61,7 @@ public class Ship : MonoBehaviour
 
     private void Rotate()
     {
-        transform.Rotate(new Vector3(0f, key.CurrentRotate * Time.deltaTime, 0f));
+        transform.Rotate(new Vector3(0f, key.CurrentRotation * Time.deltaTime, 0f));
     }
 
     private void Anchor_OnActiveChange(bool active)

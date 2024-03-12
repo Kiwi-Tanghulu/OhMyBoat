@@ -15,7 +15,6 @@ public static class InputManager
     {
         controls = new Controls();
         inputMapDic = new Dictionary<InputMapType, InputActionMap>();
-        currentInputMapType = InputMapType.Play;
     }
 
     public static void RegistInputMap(InputSO inputSO, InputActionMap actionMap)
@@ -26,8 +25,10 @@ public static class InputManager
 
     public static void ChangeInputMap(InputMapType inputMapType)
     {
-        inputMapDic[currentInputMapType].Disable();
+        if(inputMapDic.ContainsKey(currentInputMapType))
+            inputMapDic[currentInputMapType]?.Disable();
         currentInputMapType = inputMapType;
-        inputMapDic[currentInputMapType].Enable();
+        if (inputMapDic.ContainsKey(currentInputMapType))
+            inputMapDic[currentInputMapType]?.Enable();
     }
 }

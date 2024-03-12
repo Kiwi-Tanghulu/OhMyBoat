@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
             Destroy(Instance);
 
         Instance = this;
-        InputManager.ChangeInputMap(InputMapType.Play);
+        
     }
 
     private void Start()
@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
         //Fader.Instance.FadeIn();
 
         CursorActive(false);
+
+        InputManager.ChangeInputMap(InputMapType.Play);
     }
 
     public void ChangeState(GameState state)

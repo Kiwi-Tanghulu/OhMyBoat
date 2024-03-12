@@ -9,10 +9,13 @@ using static Controls;
 public class ShipInputSO : InputSO, IShipActions
 {
     public Action<Vector2> OnMoveEvent;
+    public Action<Vector2> OnArrowEvent;
     public Action OnFEvent;
-
-    private void OnEnable()
+     
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         ShipActions ship = InputManager.controls.Ship;
         ship.SetCallbacks(this);
         InputManager.RegistInputMap(this, ship.Get());
@@ -27,5 +30,10 @@ public class ShipInputSO : InputSO, IShipActions
     {
         if (context.started)
             OnFEvent?.Invoke();
+    }
+
+    public void OnArrow(InputAction.CallbackContext context)
+    {
+        OnArrowEvent?.Invoke(context.ReadValue<Vector2>());
     }
 }
