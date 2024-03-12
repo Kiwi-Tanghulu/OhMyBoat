@@ -34,6 +34,8 @@ public partial class DeliveryQuest : Quest
 
     public override void InitProgressPanel(QuestProgressPanel progressPanel, Action<int, QuestSlot> callback = null)
     {
+        progressPanel.Clear();
+
         for(int i = 0; i < questData.DeliverySlips.Count; ++i)
         {
             DeliverySlip slip = questData.DeliverySlips[i];

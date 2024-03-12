@@ -324,6 +324,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Arrow"",
+                    ""type"": ""Value"",
+                    ""id"": ""22f86d8a-8666-42f4-ae4d-2d32b4ab498a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -392,6 +401,61 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""F"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Arrow"",
+                    ""id"": ""c8da762a-371f-4dc3-866a-319b38a7f3b0"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""d6448ce4-0ffd-46b1-9bdc-8bc66a85c032"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5e2a3e73-1557-4d3f-9046-0a67fab81f78"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""96d17c0e-c922-4637-a435-f897bdbd616f"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""41ce5cfb-1b6e-46f3-9060-55c19eb45673"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -462,6 +526,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Ship = asset.FindActionMap("Ship", throwIfNotFound: true);
         m_Ship_Move = m_Ship.FindAction("Move", throwIfNotFound: true);
         m_Ship_F = m_Ship.FindAction("F", throwIfNotFound: true);
+        m_Ship_Arrow = m_Ship.FindAction("Arrow", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
@@ -692,12 +757,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IShipActions> m_ShipActionsCallbackInterfaces = new List<IShipActions>();
     private readonly InputAction m_Ship_Move;
     private readonly InputAction m_Ship_F;
+    private readonly InputAction m_Ship_Arrow;
     public struct ShipActions
     {
         private @Controls m_Wrapper;
         public ShipActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Ship_Move;
         public InputAction @F => m_Wrapper.m_Ship_F;
+        public InputAction @Arrow => m_Wrapper.m_Ship_Arrow;
         public InputActionMap Get() { return m_Wrapper.m_Ship; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -713,6 +780,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @F.started += instance.OnF;
             @F.performed += instance.OnF;
             @F.canceled += instance.OnF;
+            @Arrow.started += instance.OnArrow;
+            @Arrow.performed += instance.OnArrow;
+            @Arrow.canceled += instance.OnArrow;
         }
 
         private void UnregisterCallbacks(IShipActions instance)
@@ -723,6 +793,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @F.started -= instance.OnF;
             @F.performed -= instance.OnF;
             @F.canceled -= instance.OnF;
+            @Arrow.started -= instance.OnArrow;
+            @Arrow.performed -= instance.OnArrow;
+            @Arrow.canceled -= instance.OnArrow;
         }
 
         public void RemoveCallbacks(IShipActions instance)
@@ -816,6 +889,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnF(InputAction.CallbackContext context);
+        void OnArrow(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

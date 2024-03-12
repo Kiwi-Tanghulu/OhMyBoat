@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
 public class QuestBoard : MonoBehaviour, IInteractable
 {
     [SerializeField] UIInputSO input = null;
+    
+    [Space(15f)]
+    [SerializeField] List<QuestSpot> questSpots = null;
 
     private const int FOCUSED_PRIORITY = 10;
     private const int UNFOCUSED_PRIORITY = 1;
@@ -19,11 +23,11 @@ public class QuestBoard : MonoBehaviour, IInteractable
     {
         focusedVCam = transform.Find("FocusedVCam").GetComponent<CinemachineVirtualCamera>();
         boardUI = transform.Find("Canvas/Board").GetComponent<QuestBoardPanel>();
-    }
-
-    private void Start()
-    {
+        
         input.OnEscapeEvent += HandleEscape;
+
+        for(int i = 0; i < 4; ++i)
+            boardUI.InitailizeSlot(CreateQuest(), i);
     }
 
     public bool Interact(Component performer, bool actived, Vector3 point = default)
@@ -51,6 +55,13 @@ public class QuestBoard : MonoBehaviour, IInteractable
         GameManager.Instance.CursorActive(isFocused);
         
         OnFocusedEvent?.Invoke(isFocused);
+    }
+
+    private Quest CreateQuest()
+    {
+        QuestSpot spot = questSpots?.PickRandom();
+        Quest quest = spot?.CreateQuest();
+        return quest;
     }
 
     public void Release()

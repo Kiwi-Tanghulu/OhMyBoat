@@ -9,8 +9,6 @@ public abstract class Quest
     public virtual void Initialize(QuestSpot spot, QuestSO questData)
     {
         questSpot = spot;
-        questSpot.OnQuestProcessEvent += ProcessQuest;
-
         QuestData = questData;
 
         progressPanel = QuestManager.Instance.QuestProgressPanel;
@@ -28,6 +26,7 @@ public abstract class Quest
     /// </summary>
     public virtual void StartQuest()
     {
+        questSpot.OnQuestProcessEvent += ProcessQuest;
         questSpot.StartQuest(this);
     }
 

@@ -9,4 +9,6 @@ public abstract class QuestSO : ScriptableObject
     public string QuestName = "the quest";
     [TextArea]
     public string QuestContent = "content";
+
+    public abstract Quest CreateQuest(QuestSpot spot);
 }

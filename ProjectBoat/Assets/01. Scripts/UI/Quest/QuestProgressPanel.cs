@@ -15,10 +15,10 @@ public class QuestProgressPanel : MonoBehaviour
         return slot;
     }
 
-    public T CreateQuestSlot<T>(T slotPrefab) where T : MonoBehaviour
+    public void Clear()
     {
-        T slot = Instantiate(slotPrefab, contentTransform);
-        return slot;
+        foreach(Transform child in contentTransform)
+            Destroy(child.gameObject);
     }
 
     public void RemoveQuestSlot(Transform questSlot)

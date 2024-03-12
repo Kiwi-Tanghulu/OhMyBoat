@@ -35,12 +35,15 @@ public partial class ImportQuest : Quest
 
     public override void InitProgressPanel(QuestProgressPanel progressPanel, Action<int, QuestSlot> callback = null)
     {
+        progressPanel.Clear();
+
         for(int i = 0; i < questData.ImportSlips.Count; ++i)
         {
             ImportSlip slip = questData.ImportSlips[i];
             ImportQuestSlot ui = progressPanel.CreateQuestSlot(questData.UIPrefab) as ImportQuestSlot;
-            
+
             ui.Initialize(slip);
+            callback?.Invoke(i, ui);
         }
     }
 
