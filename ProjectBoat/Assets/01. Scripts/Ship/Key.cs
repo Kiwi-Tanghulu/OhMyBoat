@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour
+public class Key : MonoBehaviour, IInteractable, IFocusable
 {
     [SerializeField] private ShipInputSO inputSO;
 
@@ -19,7 +19,13 @@ public class Key : MonoBehaviour
 
     private float handlingDir;
 
+    [Space]
+    [SerializeField] private GameObject focusedVisual;
+
     public event Action<float> OnKeyRotate;
+    public event Action OnInteracted;
+
+    public GameObject CurrentObject => gameObject;
 
     private void Start()
     {
@@ -55,5 +61,22 @@ public class Key : MonoBehaviour
 
             OnKeyRotate?.Invoke(handlingDir);
         }
+    }
+
+    public bool Interact(Component performer, bool actived, Vector3 point = default)
+    {
+        OnInteracted?.Invoke();
+
+        return true;
+    }
+
+    public void OnFocusBegin(Vector3 point)
+    {
+        //focusedVisual.SetActive(true);
+    }
+
+    public void OnFocusEnd()
+    {
+        //focusedVisual.SetActive(false);
     }
 }
