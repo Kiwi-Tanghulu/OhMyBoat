@@ -1,5 +1,4 @@
 using UnityEngine;
-using static ShopSO;
 
 public class ShopPanel : MonoBehaviour
 {
@@ -12,8 +11,12 @@ public class ShopPanel : MonoBehaviour
     private void Update()
     {
         if(Input.GetKey(KeyCode.LeftControl))
+        {
             if(Input.GetKeyDown(KeyCode.F))
                 Initialize(test);
+            if(Input.GetKeyDown(KeyCode.Alpha0))
+                test[0].ModifyCount(-1);
+        }
     }
 
     public void Initialize(ShopSO shopData)
@@ -31,7 +34,10 @@ public class ShopPanel : MonoBehaviour
     public void Clear()
     {
         for(int i = 0; i < slots.Length; ++i)
+        {
+            slots[i].Release();
             Destroy(slots[i].gameObject);
+        }
 
         slots = null;
     }

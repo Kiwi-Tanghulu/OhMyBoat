@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stocks:
   - StuffData: {fileID: 11400000, guid: 539df7c20df738a4fbd5a33cf56356a2, type: 2}
-    StockCount: 10
     PriceCoefficient: 1
+    stockCount: 10
   - StuffData: {fileID: 11400000, guid: 1583c14fcf9104c49be96a5bcfcceffc, type: 2}
-    StockCount: 20
     PriceCoefficient: 1
+    stockCount: 10

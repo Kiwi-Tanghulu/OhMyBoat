@@ -10,6 +10,7 @@ public class StockSlot : MonoBehaviour
     private TMP_Text priceText = null;
     private TMP_Text countText = null;
 
+    private StockInfo stockInfo = null;
 	public StuffSO StuffData {get; private set;} = null;
 
     private void Awake()
@@ -22,15 +23,23 @@ public class StockSlot : MonoBehaviour
 
     public void Initialize(StockInfo info)
     {
-        StuffData = info.StuffData;
+        stockInfo = info;
+        StuffData = stockInfo.StuffData;
 
         iconImage.sprite = StuffData.StuffIcon;
         nameText.text = StuffData.StuffName;
-        priceText.text = StuffData.Price.ToString();
-        countText.text = info.GetPrice().ToString();
+        priceText.text = stockInfo.GetPrice().ToString();
+        countText.text = stockInfo.StockCount.ToString();
+
+        stockInfo.OnStockCountChanged += HandleStockCountChanged;
     }
 
-    public void ModifyCount(int count)
+    public void Release()
+    {
+        stockInfo.OnStockCountChanged -= HandleStockCountChanged;
+    }
+
+    private void HandleStockCountChanged(int count)
     {
         countText.text = count.ToString();
     }
