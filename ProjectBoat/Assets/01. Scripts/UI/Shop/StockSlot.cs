@@ -10,8 +10,9 @@ public class StockSlot : MonoBehaviour
     private TMP_Text priceText = null;
     private TMP_Text countText = null;
 
+    private ShopPanel shopPanel = null;
     private StockInfo stockInfo = null;
-	public StuffSO StuffData {get; private set;} = null;
+	public StuffSO StuffData { get; private set; } = null;
 
     private void Awake()
     {
@@ -21,10 +22,11 @@ public class StockSlot : MonoBehaviour
         countText = transform.Find("CountText").GetComponent<TMP_Text>();
     }
 
-    public void Initialize(StockInfo info)
+    public void Initialize(StockInfo info, ShopPanel shopPanel)
     {
         stockInfo = info;
         StuffData = stockInfo.StuffData;
+        this.shopPanel = shopPanel;
 
         iconImage.sprite = StuffData.StuffIcon;
         nameText.text = StuffData.StuffName;
@@ -37,6 +39,11 @@ public class StockSlot : MonoBehaviour
     public void Release()
     {
         stockInfo.OnStockCountChanged -= HandleStockCountChanged;
+    }
+
+    public void HandleClicked()
+    {
+        shopPanel.DisplayInfo(stockInfo);
     }
 
     private void HandleStockCountChanged(int count)

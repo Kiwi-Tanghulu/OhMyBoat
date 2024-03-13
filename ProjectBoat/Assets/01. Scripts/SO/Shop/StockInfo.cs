@@ -3,7 +3,7 @@ using UnityEngine;
 
 public partial class ShopSO
 {
-    [System.Serializable]
+    [Serializable]
     public class StockInfo
     {
         public StuffSO StuffData;
