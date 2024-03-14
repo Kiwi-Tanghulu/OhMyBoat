@@ -4,7 +4,10 @@ using UnityEngine;
 public class StuffSO : ScriptableObject
 {
     public string StuffName = "unnamed";
-    public GameObject prefab = null;
+    [TextArea]
+    public string StuffContent = "nice stuff";
+    public GameObject Prefab = null;
     public Sprite StuffIcon = null;
     public int Price = 10;
+    public int Weight = 10;
 }

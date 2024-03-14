@@ -79,7 +79,7 @@ public partial class ImportQuest : Quest
 
         ImportSlip slip = questData.ImportSlips[index];
         int price = slip.GetPrice();
-        Debug.Log($"{price}$ earned!");
+        questData.Wallet.ModifyMoney(price);
 
         return true;
     }

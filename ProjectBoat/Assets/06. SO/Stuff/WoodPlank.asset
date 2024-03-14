@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ab63fc8fff2fc45a2b2ce877e2a579, type: 3}
   m_Name: WoodPlank
   m_EditorClassIdentifier: 
-  StuffName: Woodenplanks
-  prefab: {fileID: 4235180519265199145, guid: 28c3dc3cb6b6760468084dca9f8f56e8, type: 3}
+  StuffName: Wood Plank
+  StuffContent: nice stuff
+  Prefab: {fileID: 4235180519265199145, guid: 28c3dc3cb6b6760468084dca9f8f56e8, type: 3}
   StuffIcon: {fileID: 21300000, guid: 19823a5957eadbb46808d4e78a9f3df9, type: 3}
+  Price: 10
+  Weight: 10

@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Wood
   m_EditorClassIdentifier: 
   StuffName: Wood
-  prefab: {fileID: 1304825814063464494, guid: 9b911bd47ec22514f9f98d44aaec5a7e, type: 3}
+  StuffContent: nice stuff
+  Prefab: {fileID: 1304825814063464494, guid: 9b911bd47ec22514f9f98d44aaec5a7e, type: 3}
   StuffIcon: {fileID: 21300000, guid: c723dd6eb45e3a64a9789ef64918fa9b, type: 3}
+  Price: 10
+  Weight: 10
