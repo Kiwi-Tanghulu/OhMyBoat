@@ -8,8 +8,9 @@ public class UIInputSO : InputSO, IUIActions
 {
     public Action OnEscapeEvent = null;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         UIActions play = InputManager.controls.UI;
         play.SetCallbacks(this);
         InputManager.RegistInputMap(this, play.Get());

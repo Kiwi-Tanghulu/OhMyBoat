@@ -526,6 +526,74 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Port"",
+            ""id"": ""60ee9a95-949e-416e-8e7a-f3a0d25577d4"",
+            ""actions"": [
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""4660d517-abc2-4808-8fd0-753ba5043cb8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""7315794e-c5d3-4db6-bb2d-8cddf70911af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseDelta"",
+                    ""type"": ""Value"",
+                    ""id"": ""fb38fbc6-55e8-4d95-9139-a02f7b10c406"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""710e91d2-aaa2-4542-b4e6-129f161ca574"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48b15b09-099c-44de-8269-651515008957"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e3609f20-e78b-4695-83d3-0d90e0d6705d"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -572,6 +640,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
+        // Port
+        m_Port = asset.FindActionMap("Port", throwIfNotFound: true);
+        m_Port_RightClick = m_Port.FindAction("RightClick", throwIfNotFound: true);
+        m_Port_LeftClick = m_Port.FindAction("LeftClick", throwIfNotFound: true);
+        m_Port_MouseDelta = m_Port.FindAction("MouseDelta", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -917,6 +990,68 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Port
+    private readonly InputActionMap m_Port;
+    private List<IPortActions> m_PortActionsCallbackInterfaces = new List<IPortActions>();
+    private readonly InputAction m_Port_RightClick;
+    private readonly InputAction m_Port_LeftClick;
+    private readonly InputAction m_Port_MouseDelta;
+    public struct PortActions
+    {
+        private @Controls m_Wrapper;
+        public PortActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @RightClick => m_Wrapper.m_Port_RightClick;
+        public InputAction @LeftClick => m_Wrapper.m_Port_LeftClick;
+        public InputAction @MouseDelta => m_Wrapper.m_Port_MouseDelta;
+        public InputActionMap Get() { return m_Wrapper.m_Port; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PortActions set) { return set.Get(); }
+        public void AddCallbacks(IPortActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PortActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PortActionsCallbackInterfaces.Add(instance);
+            @RightClick.started += instance.OnRightClick;
+            @RightClick.performed += instance.OnRightClick;
+            @RightClick.canceled += instance.OnRightClick;
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
+            @MouseDelta.started += instance.OnMouseDelta;
+            @MouseDelta.performed += instance.OnMouseDelta;
+            @MouseDelta.canceled += instance.OnMouseDelta;
+        }
+
+        private void UnregisterCallbacks(IPortActions instance)
+        {
+            @RightClick.started -= instance.OnRightClick;
+            @RightClick.performed -= instance.OnRightClick;
+            @RightClick.canceled -= instance.OnRightClick;
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
+            @MouseDelta.started -= instance.OnMouseDelta;
+            @MouseDelta.performed -= instance.OnMouseDelta;
+            @MouseDelta.canceled -= instance.OnMouseDelta;
+        }
+
+        public void RemoveCallbacks(IPortActions instance)
+        {
+            if (m_Wrapper.m_PortActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPortActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PortActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PortActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PortActions @Port => new PortActions(this);
     private int m_keyboardmouseSchemeIndex = -1;
     public InputControlScheme keyboardmouseScheme
     {
@@ -954,5 +1089,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IUIActions
     {
         void OnEscape(InputAction.CallbackContext context);
+    }
+    public interface IPortActions
+    {
+        void OnRightClick(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
+        void OnMouseDelta(InputAction.CallbackContext context);
     }
 }

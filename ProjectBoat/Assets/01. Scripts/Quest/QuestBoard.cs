@@ -10,7 +10,7 @@ public class QuestBoard : MonoBehaviour, IInteractable
     [Space(15f)]
     [SerializeField] List<QuestSpot> questSpots = null;
 
-    private const int FOCUSED_PRIORITY = 10;
+    private const int FOCUSED_PRIORITY = 20;
     private const int UNFOCUSED_PRIORITY = 1;
 
     public event Action<bool> OnFocusedEvent = null;
