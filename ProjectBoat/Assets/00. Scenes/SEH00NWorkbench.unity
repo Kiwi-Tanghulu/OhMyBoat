@@ -41767,6 +41767,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3170344563276075542, guid: bf6230b2938fc0e41b49309931ef5edc,
+        type: 3}
+      propertyPath: runSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170344563276075542, guid: bf6230b2938fc0e41b49309931ef5edc,
+        type: 3}
+      propertyPath: jumpPower
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170344563276075542, guid: bf6230b2938fc0e41b49309931ef5edc,
+        type: 3}
+      propertyPath: swimSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170344563276075542, guid: bf6230b2938fc0e41b49309931ef5edc,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170344563276075542, guid: bf6230b2938fc0e41b49309931ef5edc,
+        type: 3}
+      propertyPath: climbSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170344563276075542, guid: bf6230b2938fc0e41b49309931ef5edc,
+        type: 3}
+      propertyPath: speedMultiplier
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6122361958964744349, guid: bf6230b2938fc0e41b49309931ef5edc,
         type: 3}
       propertyPath: m_Name
