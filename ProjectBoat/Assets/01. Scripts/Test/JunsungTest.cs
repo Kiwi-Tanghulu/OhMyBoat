@@ -7,7 +7,7 @@ public class JunsungTest : MonoBehaviour
     private void Update()
     {
         Vector3 pos = transform.position;
-        float y = WaterWave.Instance.GetWaveHeight(pos).y;
+        float y = WaterManager.Instance.GetWaveHeight(pos);
         pos.y = y;
 
         transform.position = pos;
