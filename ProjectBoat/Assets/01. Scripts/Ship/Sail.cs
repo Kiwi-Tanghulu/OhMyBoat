@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.WSA;
 
-public class Sail : MonoBehaviour
+public class Sail : MonoBehaviour, IInteractable, IFocusable
 {
     public SailType sailType;
 
@@ -36,12 +36,15 @@ public class Sail : MonoBehaviour
     private bool active;
     public bool Active => active;
 
+    public GameObject CurrentObject => gameObject;
+
     public Action<bool> OnActiveChange;
+    public event Action OnInteracted;
 
     private void Start()
     {
         inputSO.OnArrowEvent += InputSO_OnArrowEvent;
-        inputSO.OnSpaceEvetnt += InputSO_OnSpaceInput;
+        //inputSO.OnSpaceEvetnt += InputSO_OnSpaceInput;
 
         windManager = WindManager.Instance;
 
@@ -51,7 +54,7 @@ public class Sail : MonoBehaviour
     private void OnDestroy()
     {
         inputSO.OnArrowEvent -= InputSO_OnArrowEvent;
-        inputSO.OnSpaceEvetnt -= InputSO_OnSpaceInput;
+        //inputSO.OnSpaceEvetnt -= InputSO_OnSpaceInput;
     }
 
     private void Update()
@@ -153,8 +156,26 @@ public class Sail : MonoBehaviour
         SetTrunDirection(input);
     }
 
-    private void InputSO_OnSpaceInput()
+    //private void InputSO_OnSpaceInput()
+    //{
+    //    SetActive(!active);
+    //}
+
+    public void OnFocusBegin(Vector3 point)
     {
-        SetActive(!active);
+        Debug.Log("focuesd sail");
+    }
+
+    public void OnFocusEnd()
+    {
+        Debug.Log("focue end sail");
+    }
+
+    public bool Interact(Component performer, bool actived, Vector3 point = default)
+    {
+        //SetActive(!active);
+        OnInteracted?.Invoke();
+
+        return true;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Anchor : MonoBehaviour
+public class Anchor : MonoBehaviour, IInteractable, IFocusable
 {
     [SerializeField] private ShipInputSO inputSO;
 
@@ -12,7 +12,9 @@ public class Anchor : MonoBehaviour
     private bool active = true;
     public bool Active => active;
 
-    public Action<bool> OnActiveChange;
+    public GameObject CurrentObject => gameObject;
+
+    public event Action<bool> OnActiveChange;
 
     private Coroutine activeCoroutine;
 
@@ -46,5 +48,22 @@ public class Anchor : MonoBehaviour
     private void ShipInputSO_OnFEvent()
     {
         ToggleActive();
+    }
+
+    public void OnFocusBegin(Vector3 point)
+    {
+        Debug.Log("focuesd anchor");
+    }
+
+    public void OnFocusEnd()
+    {
+        Debug.Log("focue end anchor");
+    }
+
+    public bool Interact(Component performer, bool actived, Vector3 point = default)
+    {
+        ToggleActive();
+
+        return true;
     }
 }
