@@ -80,13 +80,15 @@ public class Ship : MonoBehaviour
         if(startControl)
         {
             InputManager.ChangeInputMap(InputMapType.Ship);
-            shipCam.Priority = 100;
+            //shipCam.Priority = 100;
         }
         else
         {
             InputManager.ChangeInputMap(InputMapType.Play);
-            shipCam.Priority = 0;
+            //shipCam.Priority = 0;
         }
+
+        Debug.Log($"Ship Control : {startControl}");
     }
 
     private void Anchor_OnActiveChange(bool active)

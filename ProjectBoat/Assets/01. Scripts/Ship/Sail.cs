@@ -40,16 +40,18 @@ public class Sail : MonoBehaviour
 
     private void Start()
     {
-        inputSO.OnArrowEvent += SetTrunDirection;
+        inputSO.OnArrowEvent += InputSO_OnArrowEvent;
+        inputSO.OnSpaceEvetnt += InputSO_OnSpaceInput;
 
         windManager = WindManager.Instance;
 
-        SetActive(false);
+        SetActive(true);
     }
 
     private void OnDestroy()
     {
-        inputSO.OnArrowEvent -= SetTrunDirection;
+        inputSO.OnArrowEvent -= InputSO_OnArrowEvent;
+        inputSO.OnSpaceEvetnt -= InputSO_OnSpaceInput;
     }
 
     private void Update()
@@ -119,6 +121,9 @@ public class Sail : MonoBehaviour
 
     private void SetActive(bool value)
     {
+        if (sailType == SailType.Vertical)
+            return;
+
         active = value;
 
         OnActiveChange?.Invoke(active);
@@ -141,5 +146,15 @@ public class Sail : MonoBehaviour
     private void SetTrunDirection(Vector2 input)
     {
         turnDir = -input.x;
+    }
+
+    private void InputSO_OnArrowEvent(Vector2 input)
+    {
+        SetTrunDirection(input);
+    }
+
+    private void InputSO_OnSpaceInput()
+    {
+        SetActive(!active);
     }
 }

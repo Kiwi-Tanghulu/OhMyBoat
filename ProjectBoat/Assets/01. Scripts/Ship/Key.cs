@@ -8,7 +8,6 @@ public class Key : MonoBehaviour, IInteractable, IFocusable
     [SerializeField] private ShipInputSO inputSO;
 
     [Space]
-    [SerializeField] private Transform keyTrm;
     [SerializeField] private float keyRotateSpeed;
 
     [Space]
@@ -16,8 +15,10 @@ public class Key : MonoBehaviour, IInteractable, IFocusable
     [SerializeField] private float maxRotation;
     private float currentRotation = 0f;
     public float CurrentRotation => currentRotation;
-
     private float handlingDir;
+
+    [Space]
+    [SerializeField] private Transform rudderTrm;
 
     [Space]
     [SerializeField] private GameObject focusedVisual;
@@ -58,6 +59,7 @@ public class Key : MonoBehaviour, IInteractable, IFocusable
         else
         {
             transform.Rotate(new Vector3(0f, 0f, keyRotateSpeed * handlingDir * Time.deltaTime));
+            rudderTrm.localRotation = Quaternion.Euler(0f, currentRotation, 0f);
 
             OnKeyRotate?.Invoke(handlingDir);
         }

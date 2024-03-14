@@ -123,9 +123,17 @@ public class Buoyancy : MonoBehaviour
         }
         #endregion
 
+        SetTransform();
+    }
+
+    //by lerp
+    private void SetTransform()
+    {
         //position
         float waterHeight = WaterWave.Instance.GetWaveHeight(transform.position).y + floatingOffset;
         float y = Mathf.Lerp(waterHeight, transform.position.y, Time.deltaTime * floatingPower);
+        float dot;
+        float singleAngle;
         Vector3 pos = transform.position;
         Vector3 angle = transform.eulerAngles;
 
@@ -135,18 +143,53 @@ public class Buoyancy : MonoBehaviour
         //x rotation
         Vector3 frontVector = new Vector3(frontFloatingPoint.position.x, WaterWave.Instance.GetWaveHeight(frontFloatingPoint.position).y, frontFloatingPoint.position.z);
         Vector3 backVector = new Vector3(backFloatingPoint.position.x, WaterWave.Instance.GetWaveHeight(backFloatingPoint.position).y, backFloatingPoint.position.z);
-        Vector3 forwardVector = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized;
+        Vector3 forwardDir = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized;
         Vector3 hypotenuse = (frontVector - backVector).normalized;
-        float dot = Mathf.Abs(Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(hypotenuse, forwardVector)));
-        angle.x = frontVector.y < backVector.y ? dot : -dot;
+        dot = Mathf.Clamp(Vector3.Dot(hypotenuse, forwardDir), -1f, 1f);
+        try
+        {
+            singleAngle = Mathf.Abs(Mathf.Rad2Deg * Mathf.Acos(dot));
+            singleAngle *= frontVector.y < backVector.y ? 1 : -1;
+        }
+        catch
+        {
+            singleAngle = angle.x;
+        }
+
+        angle.x = singleAngle;
+
+        #region exception handling
+        //if (!(forwardDir == Vector3.zero || hypotenuse == Vector3.zero))
+        //{
+        //    dot = Mathf.Abs(Mathf.Rad2Deg * ;
+        //    angle.x = frontVector.y < backVector.y ? dot : -dot;
+        //}
+        #endregion
 
         //z rotation
         Vector3 leftVector = new Vector3(leftFloatingPoint.position.x, WaterWave.Instance.GetWaveHeight(leftFloatingPoint.position).y, leftFloatingPoint.position.z);
         Vector3 rightVector = new Vector3(rightFloatingPoint.position.x, WaterWave.Instance.GetWaveHeight(rightFloatingPoint.position).y, rightFloatingPoint.position.z);
         Vector3 rightDir = new Vector3(transform.right.x, 0f, transform.right.z).normalized;
         hypotenuse = (rightVector - leftVector).normalized;
-        dot = Mathf.Abs(Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(hypotenuse, rightDir)));
-        angle.z = leftVector.y < rightVector.y ? dot : -dot;
+        dot = Mathf.Clamp(Vector3.Dot(hypotenuse, rightDir), -1f, 1f);
+        try
+        {
+            singleAngle = Mathf.Abs(Mathf.Rad2Deg * Mathf.Acos(dot));
+            singleAngle *= leftVector.y < rightVector.y ? 1 : -1;
+        }
+        catch
+        {
+            singleAngle = angle.z;
+        }
+
+        angle.z = singleAngle;
+        #region exception handling
+        //if (!(rightDir == Vector3.zero || hypotenuse == Vector3.zero))
+        //{
+        //    dot = Mathf.Abs(Mathf.Rad2Deg * Mathf.Acos(Mathf.Clamp(Vector3.Dot(hypotenuse, rightDir), -1f, 1f)));
+        //    angle.z = leftVector.y < rightVector.y ? dot : -dot;
+        //}
+        #endregion
 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(angle), Time.deltaTime * floatingPower);
     }
