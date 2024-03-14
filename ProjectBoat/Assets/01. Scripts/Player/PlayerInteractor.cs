@@ -9,6 +9,9 @@ public class PlayerInteractor : MonoBehaviour
     private PlayerHand hand = null;
     public PlayerHand Hand => hand;
 
+    private PlayerMovement movement = null;
+    public PlayerMovement Movement => movement;
+
     private IFocusable lastFocusedTarget = null;
     private IInteractable currentTarget = null;
 
@@ -17,6 +20,7 @@ public class PlayerInteractor : MonoBehaviour
         input.OnInteractEvent += HandleInteract;
         focuser = GetComponent<PlayerFocuser>();
         hand = GetComponent<PlayerHand>();
+        movement = GetComponent<PlayerMovement>();
     }
 
     private void OnDestroy()
@@ -32,6 +36,6 @@ public class PlayerInteractor : MonoBehaviour
         if(lastFocusedTarget != focuser.FocusedObject)
             currentTarget = focuser.FocusedObject.CurrentObject.GetComponent<IInteractable>();
 
-        currentTarget?.Interact(this, actived);
+        currentTarget?.Interact(this, actived, focuser.FocusedPoint);
     }
 }

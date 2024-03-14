@@ -11,6 +11,8 @@ public class PlayerFocuser : MonoBehaviour
 
     public bool IsEmpty => focusedObject == null;
 
+    public Vector3 FocusedPoint = Vector3.zero;
+
     private void Awake()
     {
         eyeTranform = Camera.main.transform;
@@ -30,6 +32,8 @@ public class PlayerFocuser : MonoBehaviour
 
         if(focusedObject != other)
             FocusObject(other, point);
+
+        FocusedPoint = point;
     }
 
     private void FocusObject(IFocusable other, Vector3 point)

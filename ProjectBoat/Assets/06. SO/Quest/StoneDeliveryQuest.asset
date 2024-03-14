@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIPrefab: {fileID: 9122437072376071210, guid: f4bcf407f2d1174438b103772f39cf4e,
     type: 3}
+  Wallet: {fileID: 11400000, guid: e3e1d6dd68f597f498c23a035d7b7556, type: 2}
   npcImage: {fileID: 0}
   QuestName: the quest
   QuestContent: content
