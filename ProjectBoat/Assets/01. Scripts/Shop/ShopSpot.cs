@@ -4,7 +4,7 @@ using UnityEngine;
 public class ShopSpot : MonoBehaviour, IInteractable
 {
     [SerializeField] UIInputSO input = null;
-    [SerializeField] PlayerWallet wallet = null;
+    [SerializeField] PlayerWalletSO wallet = null;
 
     [Space(15f)]
     [SerializeField] ShopSO shopData = null;
@@ -83,9 +83,6 @@ public class ShopSpot : MonoBehaviour, IInteractable
         int price = info.GetPrice();
         if(wallet.CheckEnough(price) == false)
             return false;
-
-        Debug.Log($"use {info.GetPrice()}$");
-        Debug.Log($"Bought {info.StuffData.StuffName}");
 
         Instantiate(info.StuffData.Prefab, spawnPoint.position, Quaternion.identity);
         info.ModifyCount(-1);

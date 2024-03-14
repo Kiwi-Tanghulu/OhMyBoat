@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Player/Wallet")]
-public class PlayerWallet : ScriptableObject
+public class PlayerWalletSO : ScriptableObject
 {
     [SerializeField] int money = 0;
 	public int Money => money;
