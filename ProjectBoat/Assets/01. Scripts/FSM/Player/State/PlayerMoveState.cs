@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundState
 {
+    private bool isRun;
     public PlayerMoveState(PlayerFSM _owner, StateMachine<PlayerFSM, PlayerStateEnum> _stateMachine, string _animationBoolName) : base(_owner, _stateMachine, _animationBoolName)
     {
     }
@@ -11,23 +12,44 @@ public class PlayerMoveState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
+        playerMovement.Input.OnRunEvent += SetRun;
+        isRun = false;
+        playerMovement.SetCurrentMaxSpeed(playerMovement.WalkSpeed);
     }
     public override void Update()
     {
         base.Update();
 
-        Vector3 moveVector = owner.transform.rotation * ((owner.playerMovement.MoveDir * owner.playerMovement.MoveSpeed));
+        playerMovement.Move();
 
-        owner.playerMovement.Move(new Vector3(moveVector.x,0,moveVector.z));
+        playerMovement.SpeedCalculate();
 
-        if(owner.playerMovement.MoveDir.sqrMagnitude < 0.01f)
+        if(playerMovement.CurrentSpeed > playerMovement.WalkSpeed + 0.1f)
+        {
+            animator.SetFloat("move_speed", 
+                (playerMovement.CurrentSpeed - playerMovement.WalkSpeed) / (playerMovement.RunSpeed - playerMovement.WalkSpeed));
+        }
+
+        if(playerMovement.CurrentSpeed < 0.1f && playerMovement.MoveDir.sqrMagnitude < 0.1f)
         {
             stateMachine.ChangeState(PlayerStateEnum.Idle);
         }
     }
 
+    private void SetRun(bool value)
+    {
+        isRun = value;
+        if (isRun)
+            playerMovement.SetCurrentMaxSpeed(playerMovement.RunSpeed);
+        else
+        {
+            playerMovement.SetCurrentMaxSpeed(playerMovement.WalkSpeed);
+        }
+    }
+
     public override void Exit()
     {
+        playerMovement.Input.OnRunEvent -= SetRun;
         base.Exit();
     }
 

@@ -6,12 +6,10 @@ public class PlayerFSM : MonoBehaviour
 {
     public StateMachine<PlayerFSM, PlayerStateEnum> stateMachine;
     public Animator AnimatorCompo { get; private set; }
-
-
-    public PlayerMovement playerMovement { get; private set; }
+    public PlayerMovement PlayerMovement { get; private set; }
     private void Awake()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+        PlayerMovement = GetComponent<PlayerMovement>();
         AnimatorCompo = transform.Find("Visual").GetComponent<Animator>();
 
         stateMachine = new StateMachine<PlayerFSM, PlayerStateEnum>();
@@ -48,13 +46,5 @@ public class PlayerFSM : MonoBehaviour
         stateMachine.CurrentState.AnimationFinishTrigger();
     }
 
-    //Test
-    public void TestRunAnimation(bool value)
-    {
-        if (value)
-            AnimatorCompo.SetFloat("move_speed", 1f);
-        else
-            AnimatorCompo.SetFloat("move_speed", 0f);
-    }
 
 }

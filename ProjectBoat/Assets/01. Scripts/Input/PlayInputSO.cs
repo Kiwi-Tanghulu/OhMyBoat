@@ -13,7 +13,7 @@ public class PlayInputSO : InputSO, IPlayActions
     public Action OnCollectEvent;
     public Action<bool> OnInteractEvent;
     public Action OnFireEvent;
-    public Action OnRunEvent;
+    public Action <bool>OnRunEvent;
 
     protected override void OnEnable()
     {
@@ -73,8 +73,8 @@ public class PlayInputSO : InputSO, IPlayActions
     public void OnRun(InputAction.CallbackContext context)
     {
         if (context.started)
-            OnRunEvent?.Invoke();
-        if (context.canceled)
-            OnRunEvent?.Invoke();
+            OnRunEvent?.Invoke(true);
+        else if (context.canceled)
+            OnRunEvent?.Invoke(false);
     }
 }
