@@ -52,7 +52,7 @@ public class CraftingTable : MonoBehaviour, IInteractable
 
     private void OnCrafted()
     {
-        Instantiate(recipe.Result.prefab, spawnPosition.position, spawnPosition.rotation);
+        Instantiate(recipe.Result.Prefab, spawnPosition.position, spawnPosition.rotation);
         ResetProcess();
     }
 }
