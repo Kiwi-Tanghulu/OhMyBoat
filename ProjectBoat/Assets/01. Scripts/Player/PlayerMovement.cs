@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Gravity()
     {
-            verticalVelocity -= gravityScale * Time.deltaTime;
+        verticalVelocity -= gravityScale * Time.deltaTime;
     }
     public void SetCurrentMaxSpeed(float _currentMaxSpeed)
     {
@@ -99,19 +99,23 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Teleport(Vector3 teleportPos)
     {
-        characterController.Move(teleportPos);
+        characterController.enabled = false;
+        transform.position = teleportPos;
+        characterController.enabled = true;
+        Debug.Log("Teleport");
     }
     #region Clim
     public void Climing()
     {
         characterController.Move(climbSpeed * MoveDir.z * Vector3.up * Time.deltaTime);
     }
-    public void SetClimingPos(Vector3 ladderUp, Vector3 ladderDown, Vector3 upArrive, Vector3 downArrive)
+    public void SetClimingPos(Vector3 ladderUp, Vector3 ladderDown, Vector3 upArrive, Vector3 downArrive, Vector3 teleportPos)
     {
         LadderUpPos = ladderUp;
         LadderDownPos = ladderDown;
         UpArrivePos = upArrive;
         DownArrivePos = downArrive;
+        Teleport(teleportPos);
         playerFSM.stateMachine.ChangeState(PlayerStateEnum.Clim);
     }
     #endregion

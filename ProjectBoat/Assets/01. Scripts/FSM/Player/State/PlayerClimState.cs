@@ -20,6 +20,8 @@ public class PlayerClimState : PlayerState
         ladderDownPos = playerMovement.LadderDownPos;
         upArrivePos = playerMovement.UpArrivePos;
         downArrivePos = playerMovement.DownArrivePos;
+
+        animator.SetFloat("ClimSpeed", 0f);
     }
 
     public override void Update()
@@ -42,7 +44,7 @@ public class PlayerClimState : PlayerState
 
     private void HandleClimEvent(Vector2 moveDir)
     {
-        if (moveDir.y < 0.1f)
+        if (Mathf.Abs(moveDir.y) < 0.1f)
         {
             animator.SetFloat("ClimSpeed", 0f);
         }

@@ -18,10 +18,8 @@ public class Ladder : MonoBehaviour, IInteractable
             return false;
 
         PlayerMovement playerMovement = (performer as PlayerInteractor).Movement;
-        playerMovement.SetClimingPos(ladderUpTrm.position, ladderDownTrm.position, upArriveTrm.position, downArriveTrm.position);
-
-        float telePortPosY = Mathf.Lerp(ladderDownTrm.position.y, ladderUpTrm.position.y, point.y / ladderUpTrm.position.y);
-        playerMovement.Teleport(new Vector3(transform.position.z, telePortPosY, transform.position.z) + correctionValue);
+        playerMovement.SetClimingPos(ladderUpTrm.position, ladderDownTrm.position, upArriveTrm.position, downArriveTrm.position, 
+            new Vector3(transform.position.x, point.y, transform.position.z) + correctionValue);
 
         return true;
     }
