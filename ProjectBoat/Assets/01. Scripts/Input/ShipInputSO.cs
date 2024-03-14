@@ -11,6 +11,8 @@ public class ShipInputSO : InputSO, IShipActions
     public Action<Vector2> OnMoveEvent;
     public Action<Vector2> OnArrowEvent;
     public Action OnFEvent;
+    public Action OnEscapeEvetnt;
+    public Action OnSpaceEvetnt;
      
     protected override void OnEnable()
     {
@@ -35,5 +37,15 @@ public class ShipInputSO : InputSO, IShipActions
     public void OnArrow(InputAction.CallbackContext context)
     {
         OnArrowEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnESC(InputAction.CallbackContext context)
+    {
+        OnEscapeEvetnt?.Invoke();
+    }
+
+    public void OnSpace(InputAction.CallbackContext context)
+    {
+        OnSpaceEvetnt?.Invoke();
     }
 }

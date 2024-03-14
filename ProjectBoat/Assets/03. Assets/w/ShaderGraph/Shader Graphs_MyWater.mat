@@ -54,6 +54,10 @@ Material:
     - Color_07d66dbf459a427290c7b0403283d67f: {r: 1, g: 1, b: 1, a: 1}
     - Deep: {r: 0.13333334, g: 0.35686275, b: 0.6039216, a: 1}
     - Shallow: {r: 0.47058824, g: 0.7764706, b: 0.8392157, a: 1}
+    - _WaveA: {r: 0, g: -1, b: 0.25, a: 5}
+    - _WaveB: {r: 1, g: 1, b: 0.25, a: 40}
+    - _WaveC: {r: 1, g: 0, b: 0.25, a: 15}
+    - _WaveD: {r: -1, g: 1, b: 0.25, a: 60}
   m_BuildTextureStacks: []
 --- !u!114 &7776504666144076986
 MonoBehaviour:

@@ -333,6 +333,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""fff57c53-3369-46a3-80ca-00b214e83dd9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Space"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7866a41-b5ea-43fd-9b6b-17840ab72bd5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -456,6 +474,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Arrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebc485d5-aeb3-4b4f-a696-2b3469dca972"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ESC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7226bd7-833f-495a-aa1d-dc6f864de53d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Space"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -527,6 +567,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Ship_Move = m_Ship.FindAction("Move", throwIfNotFound: true);
         m_Ship_F = m_Ship.FindAction("F", throwIfNotFound: true);
         m_Ship_Arrow = m_Ship.FindAction("Arrow", throwIfNotFound: true);
+        m_Ship_ESC = m_Ship.FindAction("ESC", throwIfNotFound: true);
+        m_Ship_Space = m_Ship.FindAction("Space", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
@@ -758,6 +800,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Ship_Move;
     private readonly InputAction m_Ship_F;
     private readonly InputAction m_Ship_Arrow;
+    private readonly InputAction m_Ship_ESC;
+    private readonly InputAction m_Ship_Space;
     public struct ShipActions
     {
         private @Controls m_Wrapper;
@@ -765,6 +809,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Ship_Move;
         public InputAction @F => m_Wrapper.m_Ship_F;
         public InputAction @Arrow => m_Wrapper.m_Ship_Arrow;
+        public InputAction @ESC => m_Wrapper.m_Ship_ESC;
+        public InputAction @Space => m_Wrapper.m_Ship_Space;
         public InputActionMap Get() { return m_Wrapper.m_Ship; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -783,6 +829,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Arrow.started += instance.OnArrow;
             @Arrow.performed += instance.OnArrow;
             @Arrow.canceled += instance.OnArrow;
+            @ESC.started += instance.OnESC;
+            @ESC.performed += instance.OnESC;
+            @ESC.canceled += instance.OnESC;
+            @Space.started += instance.OnSpace;
+            @Space.performed += instance.OnSpace;
+            @Space.canceled += instance.OnSpace;
         }
 
         private void UnregisterCallbacks(IShipActions instance)
@@ -796,6 +848,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Arrow.started -= instance.OnArrow;
             @Arrow.performed -= instance.OnArrow;
             @Arrow.canceled -= instance.OnArrow;
+            @ESC.started -= instance.OnESC;
+            @ESC.performed -= instance.OnESC;
+            @ESC.canceled -= instance.OnESC;
+            @Space.started -= instance.OnSpace;
+            @Space.performed -= instance.OnSpace;
+            @Space.canceled -= instance.OnSpace;
         }
 
         public void RemoveCallbacks(IShipActions instance)
@@ -890,6 +948,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnF(InputAction.CallbackContext context);
         void OnArrow(InputAction.CallbackContext context);
+        void OnESC(InputAction.CallbackContext context);
+        void OnSpace(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
