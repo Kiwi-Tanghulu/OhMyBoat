@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class QuestSO : ScriptableObject 
 {
     public QuestSlot UIPrefab = null;
+    public PlayerWalletSO Wallet = null;
 
     [Space(15f)]
     public RenderTexture npcImage = null;

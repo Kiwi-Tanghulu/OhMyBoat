@@ -26,7 +26,7 @@ public class PlayerFocuser : MonoBehaviour
         bool rayResult = Physics.Raycast(eyeTranform.position, eyeTranform.forward, out RaycastHit hit, distance, focusingLayer);
         if(rayResult)
         {
-            hit.transform.TryGetComponent<IFocusable>(out other);
+            hit.collider.TryGetComponent<IFocusable>(out other);
             point = hit.point;
         }
 
