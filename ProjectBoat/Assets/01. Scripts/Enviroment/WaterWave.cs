@@ -15,6 +15,9 @@ public class WaterWave : MonoBehaviour
     [Space]
     [SerializeField] private int samplingCount = 3;
 
+    [Space]
+    [SerializeField] private int waveCount = 4;
+
     private Vector4 waveA;
     private Vector4 waveB;
     private Vector4 waveC;
@@ -44,22 +47,22 @@ public class WaterWave : MonoBehaviour
         w1 = GerstnerWave(waveA, pos - w1);
         w1 = GerstnerWave(waveA, pos - w1);
 
-        //w2 = GerstnerWave(waveB, pos);
-        //w2 = GerstnerWave(waveB, pos - w2);
-        //w2 = GerstnerWave(waveB, pos - w2);
-        //w2 = GerstnerWave(waveB, pos - w2);
+        w2 = GerstnerWave(waveB, pos);
+        w2 = GerstnerWave(waveB, pos - w2);
+        w2 = GerstnerWave(waveB, pos - w2);
+        w2 = GerstnerWave(waveB, pos - w2);
 
-        //w3 = GerstnerWave(waveC, pos);
-        //w3 = GerstnerWave(waveC, pos - w3);
-        //w3 = GerstnerWave(waveC, pos - w3);
-        //w3 = GerstnerWave(waveC, pos - w3);
+        w3 = GerstnerWave(waveC, pos);
+        w3 = GerstnerWave(waveC, pos - w3);
+        w3 = GerstnerWave(waveC, pos - w3);
+        w3 = GerstnerWave(waveC, pos - w3);
 
-        //w4 = GerstnerWave(waveD, pos);
-        //w4 = GerstnerWave(waveD, pos - w4);
-        //w4 = GerstnerWave(waveD, pos - w4);
-        //w4 = GerstnerWave(waveD, pos - w4);
+        w4 = GerstnerWave(waveD, pos);
+        w4 = GerstnerWave(waveD, pos - w4);
+        w4 = GerstnerWave(waveD, pos - w4);
+        w4 = GerstnerWave(waveD, pos - w4);
 
-        return w1 + w2 + w3 + w4 + transform.position;
+        return ((w1 + w2 + w3 + w4) / waveCount) + transform.position;
     }
 
    private Vector3 GerstnerWave(Vector4 wave, Vector3 p)
