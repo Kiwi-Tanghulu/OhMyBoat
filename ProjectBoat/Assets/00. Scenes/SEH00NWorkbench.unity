@@ -54431,6 +54431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 3e1f510499d850c4eab0183471c7d28b, type: 2}
+  wallet: {fileID: 11400000, guid: e3e1d6dd68f597f498c23a035d7b7556, type: 2}
   shopData: {fileID: 11400000, guid: e1890fde33e90664d93fa2b6ce014c23, type: 2}
   spawnPoint: {fileID: 544795225}
 --- !u!1001 &2137484353
