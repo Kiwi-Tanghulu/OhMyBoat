@@ -10,6 +10,8 @@ public class StockInfoPanel : MonoBehaviour
     private TMP_Text contentText = null;
     private TMP_Text priceText = null;
     private TMP_Text weightText = null;
+    private Button purchaseButton = null;
+    private Button cancelButton = null;
 
     private void Awake()
     {
@@ -19,9 +21,15 @@ public class StockInfoPanel : MonoBehaviour
         nameText = textContainer.Find("NameText").GetComponent<TMP_Text>();
         contentText = textContainer.Find("ContentText").GetComponent<TMP_Text>();
 
+        Transform purchasePanel = transform.Find("PurchasePanel");
+        purchaseButton = purchasePanel.Find("PurchaseButton").GetComponent<Button>();
+        cancelButton = purchasePanel.Find("CancelButton").GetComponent<Button>();
+
         Transform infoPanel = textContainer.Find("InfoPanel");
         priceText = infoPanel.Find("PriceBlock/Text").GetComponent<TMP_Text>();
         weightText = infoPanel.Find("WeightBlock/Text").GetComponent<TMP_Text>();
+
+        Release();
     }
 
     public void Initialize(StockInfo stockInfo)
@@ -35,6 +43,9 @@ public class StockInfoPanel : MonoBehaviour
         contentText.text = stuffData.StuffContent;
         priceText.text = stockInfo.GetPrice().ToString();
         weightText.text = $"x {stuffData.Weight}";
+
+        purchaseButton.interactable = true;
+        cancelButton.interactable = true;
     }
 
     public void Release()
@@ -46,5 +57,8 @@ public class StockInfoPanel : MonoBehaviour
         contentText.text = "";
         priceText.text = "";
         weightText.text = "";
+
+        purchaseButton.interactable = false;
+        cancelButton.interactable = false;
     }
 }

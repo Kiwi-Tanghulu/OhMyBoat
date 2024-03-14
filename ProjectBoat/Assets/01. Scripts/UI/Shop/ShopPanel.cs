@@ -7,27 +7,15 @@ public class ShopPanel : MonoBehaviour
     [SerializeField] Transform slotContainer = null;
     [SerializeField] StockSlot slotPrefab = null;
     [SerializeField] StockInfoPanel infoPanel = null;
+
     private StockSlot[] slots = null;
+    private StockInfo focusedStock = null;
+    public event Func<StockInfo, bool> OnPurchaseButtonClickedEvent = null;
 
     private void Start()
     {
         gameObject.SetActive(false);
     }
-
-    #region Test Codes
-    [SerializeField] ShopSO test;
-
-    private void Update()
-    {
-        if(Input.GetKey(KeyCode.LeftControl))
-        {
-            if(Input.GetKeyDown(KeyCode.F))
-                Initialize(test);
-            if(Input.GetKeyDown(KeyCode.Alpha0))
-                test[0].ModifyCount(-1);
-        }
-    }
-    #endregion
 
     public void Initialize(ShopSO shopData)
     {
@@ -63,6 +51,12 @@ public class ShopPanel : MonoBehaviour
 
     public void DisplayInfo(StockInfo stockInfo)
     {
-        infoPanel.Initialize(stockInfo);
+        focusedStock = stockInfo;
+        infoPanel.Initialize(focusedStock);
+    }
+
+    public void HandlePurchase()
+    {
+        OnPurchaseButtonClickedEvent?.Invoke(focusedStock);
     }
 }

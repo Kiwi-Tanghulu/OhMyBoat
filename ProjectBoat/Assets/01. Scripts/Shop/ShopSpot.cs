@@ -7,6 +7,7 @@ public class ShopSpot : MonoBehaviour, IInteractable
 
     [Space(15f)]
     [SerializeField] ShopSO shopData = null;
+    [SerializeField] Transform spawnPoint = null;
 
     private bool isFocused = false;
     private ShopPanel shopPanel = null;
@@ -21,6 +22,7 @@ public class ShopSpot : MonoBehaviour, IInteractable
     private void Start()
     {
         shopPanel = DEFINE.MainCanvas.Find("ShopPanel").GetComponent<ShopPanel>();
+        shopPanel.OnPurchaseButtonClickedEvent += HandlePurchase;
     }
 
     public bool Interact(Component performer, bool actived, Vector3 point = default)
@@ -63,5 +65,22 @@ public class ShopSpot : MonoBehaviour, IInteractable
     private void HandleEscape()
     {
         ToggleFocus(false);
+    }
+
+    private bool HandlePurchase(ShopSO.StockInfo info)
+    {
+        if(info.StockCount <= 0)
+        {
+            Debug.Log($"There is No Stock");
+            return false;
+        }
+
+        Debug.Log($"use {info.GetPrice()}$");
+        Debug.Log($"Bought {info.StuffData.StuffName}");
+
+        Instantiate(info.StuffData.Prefab, spawnPoint.position, Quaternion.identity);
+        info.ModifyCount(-1);
+
+        return true;
     }
 }
