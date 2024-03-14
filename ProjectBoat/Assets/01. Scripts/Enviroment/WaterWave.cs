@@ -44,20 +44,20 @@ public class WaterWave : MonoBehaviour
         w1 = GerstnerWave(waveA, pos - w1);
         w1 = GerstnerWave(waveA, pos - w1);
 
-        w2 = GerstnerWave(waveB, pos);
-        w2 = GerstnerWave(waveB, pos - w2);
-        w2 = GerstnerWave(waveB, pos - w2);
-        w2 = GerstnerWave(waveB, pos - w2);
+        //w2 = GerstnerWave(waveB, pos);
+        //w2 = GerstnerWave(waveB, pos - w2);
+        //w2 = GerstnerWave(waveB, pos - w2);
+        //w2 = GerstnerWave(waveB, pos - w2);
 
-        w3 = GerstnerWave(waveC, pos);
-        w3 = GerstnerWave(waveC, pos - w3);
-        w3 = GerstnerWave(waveC, pos - w3);
-        w3 = GerstnerWave(waveC, pos - w3);
+        //w3 = GerstnerWave(waveC, pos);
+        //w3 = GerstnerWave(waveC, pos - w3);
+        //w3 = GerstnerWave(waveC, pos - w3);
+        //w3 = GerstnerWave(waveC, pos - w3);
 
-        w4 = GerstnerWave(waveD, pos);
-        w4 = GerstnerWave(waveD, pos - w4);
-        w4 = GerstnerWave(waveD, pos - w4);
-        w4 = GerstnerWave(waveD, pos - w4);
+        //w4 = GerstnerWave(waveD, pos);
+        //w4 = GerstnerWave(waveD, pos - w4);
+        //w4 = GerstnerWave(waveD, pos - w4);
+        //w4 = GerstnerWave(waveD, pos - w4);
 
         return w1 + w2 + w3 + w4 + transform.position;
     }
