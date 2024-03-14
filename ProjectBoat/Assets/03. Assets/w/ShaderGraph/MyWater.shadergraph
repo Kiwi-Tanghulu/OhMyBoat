@@ -2371,10 +2371,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -52.0,
-            "y": -476.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": -47.999977111816409,
+            "y": -598.0000610351563,
+            "width": 129.99998474121095,
+            "height": 118.00003051757813
         }
     },
     "m_Slots": [
@@ -2393,7 +2393,7 @@
         "divided by"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -3706,10 +3706,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -284.9999694824219,
-            "y": -384.9999694824219,
-            "width": 135.99998474121095,
-            "height": 33.999969482421878
+            "x": -281.0,
+            "y": -514.0000610351563,
+            "width": 136.0,
+            "height": 34.000030517578128
         }
     },
     "m_Slots": [
@@ -4298,10 +4298,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 36.999996185302737,
-            "y": -340.0,
-            "width": 126.00000762939453,
-            "height": 118.00000762939453
+            "x": -1692.9998779296875,
+            "y": -781.9999389648438,
+            "width": 125.9998779296875,
+            "height": 118.0
         }
     },
     "m_Slots": [
@@ -5549,10 +5549,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 184.00003051757813,
-            "y": -300.0,
+            "x": -1545.9998779296875,
+            "y": -741.9999389648438,
             "width": 130.0,
-            "height": 118.00000762939453
+            "height": 118.0
         }
     },
     "m_Slots": [
@@ -7001,10 +7001,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -42.99997329711914,
-            "y": -221.99998474121095,
-            "width": 206.00001525878907,
-            "height": 132.00001525878907
+            "x": -1772.9998779296875,
+            "y": -663.9999389648438,
+            "width": 205.9998779296875,
+            "height": 131.0
         }
     },
     "m_Slots": [
@@ -7252,8 +7252,8 @@
     "m_ObjectId": "b6dfe5dc9160472ca6a7704ad107cd09",
     "m_Title": "Vertex Displacement",
     "m_Position": {
-        "x": -151.99993896484376,
-        "y": -399.0
+        "x": -1881.9998779296875,
+        "y": -840.9999389648438
     }
 }
 
@@ -9366,8 +9366,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -126.99995422363281,
-            "y": -300.0,
+            "x": -1856.9998779296875,
+            "y": -741.9999389648438,
             "width": 144.0,
             "height": 34.0
         }
