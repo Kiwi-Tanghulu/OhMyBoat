@@ -10,6 +10,7 @@ public enum PlayerStateEnum
     Jump,
     Fall,
     Swim,
+    Clim,
 }
 public class StateMachine<T, U> where T : class where U : Enum
 {

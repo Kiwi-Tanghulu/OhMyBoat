@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     public float WalkSpeed => walkSpeed;
     [SerializeField] private float swimSpeed;
     public float SwimSpeed => swimSpeed;
+    [SerializeField] private float climSpeed;
+    public float ClimSpeed => climbSpeed;
 
     private float currentMaxSpeed;
     public float CurrentMaxSpeed => currentMaxSpeed;
@@ -35,13 +37,22 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 MoveDir { get; private set; }
     private Vector3 lastMoveDir;
 
+    #region LadderVariable
+    public Vector3 LadderUpPos { get; private set; }
+    public Vector3 LadderDownPos { get; private set; }
+    public Vector3 UpArrivePos { get; private set; }
+    public Vector3 DownArrivePos { get; private set; }
+    #endregion
+
     [SerializeField] private LayerMask groundLayer;
 
+    private PlayerFSM playerFSM;
     private CharacterController characterController;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        playerFSM = GetComponent<PlayerFSM>();
     }
     private void Start()
     {
@@ -54,10 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Gravity()
     {
-        if (!IsGround())
-        {
-            verticalVelocity -= gravityScale * Time.deltaTime;
-        }
+        verticalVelocity -= gravityScale * Time.deltaTime;
     }
     public void SetCurrentMaxSpeed(float _currentMaxSpeed)
     {
@@ -89,8 +97,35 @@ public class PlayerMovement : MonoBehaviour
         if (value.sqrMagnitude > 0.1f)
             lastMoveDir = MoveDir;
     }
+    public void Teleport(Vector3 teleportPos)
+    {
+        characterController.enabled = false;
+        transform.position = teleportPos;
+        characterController.enabled = true;
+        Debug.Log("Teleport");
+    }
+    #region Clim
+    public void Climing()
+    {
+        characterController.Move(climbSpeed * MoveDir.z * Vector3.up * Time.deltaTime);
+    }
+    public void SetClimingPos(Vector3 ladderUp, Vector3 ladderDown, Vector3 upArrive, Vector3 downArrive, Vector3 teleportPos)
+    {
+        LadderUpPos = ladderUp;
+        LadderDownPos = ladderDown;
+        UpArrivePos = upArrive;
+        DownArrivePos = downArrive;
+        Teleport(teleportPos);
+        playerFSM.stateMachine.ChangeState(PlayerStateEnum.Clim);
+    }
+    #endregion
     public bool IsGround()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 0.2f, groundLayer);
+        return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.12f, groundLayer);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 0.1f  + Vector3.down * 0.1f);
     }
 }
