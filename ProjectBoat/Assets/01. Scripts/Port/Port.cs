@@ -5,6 +5,8 @@ using UnityEngine;
 public class Port : MonoBehaviour
 {
     [SerializeField] UIInputSO input = null;
+
+    [Space(15f)]
     [SerializeField] float rotateSpeed = 5f;
     [SerializeField] float zoomSpeed = 5f;
     [SerializeField] Vector2 zoomClamp = new Vector2(1f, 50f);
@@ -12,28 +14,19 @@ public class Port : MonoBehaviour
 	private const int FOCUSED_PRIORITY = 20;
     private const int UNFOCUSED_PRIORITY = 1;
 
+    private PortPanel portPanel = null;
     private Transform focusPoint = null;
     private CinemachineVirtualCamera focusCam = null;
     private bool focused = false;
 
     private void Awake()
     {
+        portPanel = DEFINE.MainCanvas.Find("PortPanel").GetComponent<PortPanel>();
         focusPoint = transform.Find("FocusPoint");
         focusCam = focusPoint.Find("FocusCam").GetComponent<CinemachineVirtualCamera>();
 
         input.OnEscapeEvent += HandleEscape;
         input.OnScrollEvent += HandleScroll;
-    }
-
-    private void Update()
-    {
-        if(Input.GetKey(KeyCode.LeftControl))
-        {
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-                Toggle(true);
-            }
-        }
     }
 
     private void FixedUpdate()
@@ -44,16 +37,27 @@ public class Port : MonoBehaviour
         focusPoint.Rotate(Vector3.up, -rotateSpeed * Time.fixedDeltaTime);
     }
 
-    private void Toggle(bool value)
+    public void Initialize()
     {
-        focused = value;
-        focusCam.Priority = focused ? FOCUSED_PRIORITY : UNFOCUSED_PRIORITY;
-        InputManager.ChangeInputMap(focused ? InputMapType.UI : InputMapType.Play);
+        focused = true;
+        focusCam.Priority = FOCUSED_PRIORITY;
+        InputManager.ChangeInputMap(InputMapType.UI);
+        GameManager.Instance.CursorActive(focused);
+
+        portPanel.Display(true);
+    }
+
+    public void Release()
+    {
+        focused = false;
+        focusCam.Priority = UNFOCUSED_PRIORITY;
+        InputManager.ChangeInputMap(InputMapType.Play);
+        GameManager.Instance.CursorActive(focused);
     }
 
     private void HandleEscape()
     {
-        Toggle(false);
+        Release();
     }
 
     private void HandleScroll(float delta)

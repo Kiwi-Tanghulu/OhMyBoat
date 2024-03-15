@@ -9,12 +9,12 @@ public class PortPanel : MonoBehaviour
     private void Awake()
     {
         statPanel = transform.Find("StatPanel").GetComponent<ShipStatPanel>();
+        Initialize(a);
     }
 
-    private void Update()
+    private void Start()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-            Initialize(a);
+        Display(false);
     }
 
     public void Initialize(ShipSO shipData)
