@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.WSA;
 
-public class Sail : MonoBehaviour, IInteractable, IFocusable
+public class Sail : MonoBehaviour
 {
     public SailType sailType;
 
@@ -39,7 +39,6 @@ public class Sail : MonoBehaviour, IInteractable, IFocusable
     public GameObject CurrentObject => gameObject;
 
     public Action<bool> OnActiveChange;
-    public event Action OnInteracted;
 
     private void Start()
     {
@@ -160,22 +159,4 @@ public class Sail : MonoBehaviour, IInteractable, IFocusable
     //{
     //    SetActive(!active);
     //}
-
-    public void OnFocusBegin(Vector3 point)
-    {
-        Debug.Log("focuesd sail");
-    }
-
-    public void OnFocusEnd()
-    {
-        Debug.Log("focue end sail");
-    }
-
-    public bool Interact(Component performer, bool actived, Vector3 point = default)
-    {
-        //SetActive(!active);
-        OnInteracted?.Invoke();
-
-        return true;
-    }
 }

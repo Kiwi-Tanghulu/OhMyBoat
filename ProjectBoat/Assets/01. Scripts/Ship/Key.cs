@@ -75,12 +75,10 @@ public class Key : MonoBehaviour, IInteractable, IFocusable
     public void OnFocusBegin(Vector3 point)
     {
         Debug.Log("focuesd key");
-        //focusedVisual.SetActive(true);
     }
 
     public void OnFocusEnd()
     {
         Debug.Log("focue end key");
-        //focusedVisual.SetActive(false);
     }
 }

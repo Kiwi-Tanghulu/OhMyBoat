@@ -29,7 +29,6 @@ public class Ship : MonoBehaviour
 
         inputSO.OnEscapeEvetnt += ShipInputSO_OnEscapeEvent;
         anchor.OnActiveChange += Anchor_OnActiveChange;
-        sail.OnInteracted += Sail_OnInteracted;
         key.OnInteracted += Key_OnInteracted;
     }
 
@@ -92,10 +91,12 @@ public class Ship : MonoBehaviour
     {
         if(startControl)
         {
+            shipCam.Priority = 100;
             InputManager.ChangeInputMap(InputMapType.Ship);
         }
         else
         {
+            shipCam.Priority = 0;
             InputManager.ChangeInputMap(InputMapType.Play);
         }
 
@@ -104,12 +105,7 @@ public class Ship : MonoBehaviour
 
     private void Anchor_OnActiveChange(bool active)
     {
-        canMove = !active;
-    }
-
-    private void Sail_OnInteracted()
-    {
-        ControlShip(true); 
+        canMove = !active; 
     }
 
     private void Key_OnInteracted()
