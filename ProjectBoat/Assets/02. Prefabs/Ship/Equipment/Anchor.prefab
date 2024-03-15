@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2007872485418435362}
   serializedVersion: 2
   m_LocalRotation: {x: -0.023825476, y: 0.37194458, z: 0.065871425, w: 0.9256082}
-  m_LocalPosition: {x: -7.4480076, y: -0.777, z: 6.36932}
+  m_LocalPosition: {x: -7.4480076, y: -0.78, z: 6.36932}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -92,8 +92,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4781580492089624368}
-  - component: {fileID: 3533363963449075979}
   - component: {fileID: 4754103059684209027}
+  - component: {fileID: 6826746192049571942}
   m_Layer: 16
   m_Name: Anchor
   m_TagString: Untagged
@@ -117,20 +117,6 @@ Transform:
   - {fileID: 2985444490519170677}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3533363963449075979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3689780122810856308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8a6b92a78626d4880f343fd4438793, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputSO: {fileID: 11400000, guid: b374d39e6e61bba439a65e1fae261b70, type: 2}
-  activeDelay: 2
 --- !u!65 &4754103059684209027
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -150,5 +136,19 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.826416, y: 1.740634, z: 1.9699097}
+  m_Center: {x: 0.8078613, y: 4.0803165, z: 14.410225}
+--- !u!114 &6826746192049571942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3689780122810856308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9904f5c6c4220f042afc28909092e4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputSO: {fileID: 11400000, guid: b374d39e6e61bba439a65e1fae261b70, type: 2}
+  activeDelay: 2

@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Ship : MonoBehaviour
@@ -9,19 +10,21 @@ public class Ship : MonoBehaviour
     [SerializeField] private ShipInputSO inputSO;
 
     [Space]
-    [SerializeField] private Key key;
-    [SerializeField] private Anchor anchor;
-    [SerializeField] private Sail sail;
+    [SerializeField] private ShipKey key;
+    [SerializeField] private ShipAnchor anchor;
+    [SerializeField] private ShipSail sail;
+    public ShipKey Key => key;
+    public ShipAnchor Anchor => anchor;
+    public ShipSail Sail => sail;
 
     [Space]
     [SerializeField] private float maxMoveSpeed;
     [SerializeField] private float currentMoveSpeed;
     [SerializeField] private float moveAcceleration;
 
-    [Space]
-    [SerializeField] private CinemachineVirtualCamera shipCam;
-
     private bool canMove;
+
+    public event Action<bool> OnShipControlChanged;
 
     private void Start()
     {
@@ -87,20 +90,20 @@ public class Ship : MonoBehaviour
         transform.Rotate(new Vector3(0f, key.CurrentRotation * Time.deltaTime, 0f));
     }
 
-    private void ControlShip(bool startControl)
+    private void ControlShip(bool isControl)
     {
-        if(startControl)
+        if(isControl)
         {
-            shipCam.Priority = 100;
             InputManager.ChangeInputMap(InputMapType.Ship);
         }
         else
         {
-            shipCam.Priority = 0;
             InputManager.ChangeInputMap(InputMapType.Play);
         }
 
-        Debug.Log($"Ship Control : {startControl}");
+        OnShipControlChanged?.Invoke(isControl);
+
+        Debug.Log($"Ship Control : {isControl}");
     }
 
     private void Anchor_OnActiveChange(bool active)
