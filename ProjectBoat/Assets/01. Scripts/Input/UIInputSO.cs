@@ -7,6 +7,7 @@ using static Controls;
 public class UIInputSO : InputSO, IUIActions
 {
     public Action OnEscapeEvent = null;
+    public Action<float> OnScrollEvent = null;
 
     protected override void OnEnable()
     {
@@ -18,7 +19,13 @@ public class UIInputSO : InputSO, IUIActions
 
     public void OnEscape(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if(context.performed)
             OnEscapeEvent?.Invoke();
+    }
+
+    public void OnScroll(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnScrollEvent?.Invoke(context.ReadValue<float>());
     }
 }

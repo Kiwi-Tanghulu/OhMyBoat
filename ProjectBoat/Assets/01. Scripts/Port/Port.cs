@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Port : MonoBehaviour
 {
-    [SerializeField] PortInputSO input = null;
+    [SerializeField] UIInputSO input = null;
     [SerializeField] float rotateSpeed = 5f;
+    [SerializeField] float zoomSpeed = 5f;
+    [SerializeField] Vector2 zoomClamp = new Vector2(1f, 50f);
 
 	private const int FOCUSED_PRIORITY = 20;
     private const int UNFOCUSED_PRIORITY = 1;
@@ -13,14 +15,14 @@ public class Port : MonoBehaviour
     private Transform focusPoint = null;
     private CinemachineVirtualCamera focusCam = null;
     private bool focused = false;
-    private bool hold = false;
 
     private void Awake()
     {
         focusPoint = transform.Find("FocusPoint");
         focusCam = focusPoint.Find("FocusCam").GetComponent<CinemachineVirtualCamera>();
 
-        input.OnRightClickedEvent += HandleRightClick;
+        input.OnEscapeEvent += HandleEscape;
+        input.OnScrollEvent += HandleScroll;
     }
 
     private void Update()
@@ -29,43 +31,38 @@ public class Port : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.F))
             {
-                Toggle();
+                Toggle(true);
             }
         }
     }
 
     private void FixedUpdate()
     {
-        if(hold == false)
+        if(focused == false)
             return;
 
-        Vector3 dir = new Vector3(-input.MouseDelta.y, input.MouseDelta.x, 0f) * Time.fixedDeltaTime * rotateSpeed;
-        focusPoint.Rotate(dir);
-
-        Vector3 euler = focusPoint.eulerAngles;
-        if(euler.x >= 180f)
-            euler.x -= 360f;
-        euler.x = Mathf.Clamp(euler.x, -80f, 80f);
-        euler.z = 0f;
-
-        focusPoint.eulerAngles = euler;
+        focusPoint.Rotate(Vector3.up, -rotateSpeed * Time.fixedDeltaTime);
     }
 
-    private void OnDestroy()
+    private void Toggle(bool value)
     {
-        input.OnRightClickedEvent -= HandleRightClick;
-    }
-
-    private void Toggle()
-    {
-        focused = !focused;
+        focused = value;
         focusCam.Priority = focused ? FOCUSED_PRIORITY : UNFOCUSED_PRIORITY;
-        InputManager.ChangeInputMap(focused ? InputMapType.Port : InputMapType.Play);
+        InputManager.ChangeInputMap(focused ? InputMapType.UI : InputMapType.Play);
     }
 
-    private void HandleRightClick(bool active)
+    private void HandleEscape()
     {
-        hold = active;
+        Toggle(false);
+    }
+
+    private void HandleScroll(float delta)
+    {
+        Vector3 localPosition = focusCam.transform.localPosition;
+        localPosition.z += delta * zoomSpeed * Time.deltaTime;
+        localPosition.z = Mathf.Clamp(localPosition.z, zoomClamp.x, zoomClamp.y);
+
+        focusCam.transform.localPosition = localPosition;
     }
 }
 
