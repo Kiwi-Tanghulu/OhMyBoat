@@ -1,4 +1,3 @@
-using System;
 using Cinemachine;
 using UnityEngine;
 
@@ -8,8 +7,8 @@ public class Port : MonoBehaviour
 
     [Space(15f)]
     [SerializeField] float rotateSpeed = 5f;
-    [SerializeField] float zoomSpeed = 5f;
-    [SerializeField] Vector2 zoomClamp = new Vector2(1f, 50f);
+    // [SerializeField] float zoomSpeed = 5f;
+    // [SerializeField] Vector2 zoomClamp = new Vector2(1f, 50f);
 
 	private const int FOCUSED_PRIORITY = 20;
     private const int UNFOCUSED_PRIORITY = 1;
@@ -26,7 +25,7 @@ public class Port : MonoBehaviour
         focusCam = focusPoint.Find("FocusCam").GetComponent<CinemachineVirtualCamera>();
 
         input.OnEscapeEvent += HandleEscape;
-        input.OnScrollEvent += HandleScroll;
+        // input.OnScrollEvent += HandleScroll;
     }
 
     private void FixedUpdate()
@@ -60,13 +59,13 @@ public class Port : MonoBehaviour
         Release();
     }
 
-    private void HandleScroll(float delta)
-    {
-        Vector3 localPosition = focusCam.transform.localPosition;
-        localPosition.z += delta * zoomSpeed * Time.deltaTime;
-        localPosition.z = Mathf.Clamp(localPosition.z, zoomClamp.x, zoomClamp.y);
+    // private void HandleScroll(float delta)
+    // {
+    //     Vector3 localPosition = focusCam.transform.localPosition;
+    //     localPosition.z += delta * zoomSpeed * Time.deltaTime;
+    //     localPosition.z = Mathf.Clamp(localPosition.z, zoomClamp.x, zoomClamp.y);
 
-        focusCam.transform.localPosition = localPosition;
-    }
+    //     focusCam.transform.localPosition = localPosition;
+    // }
 }
 

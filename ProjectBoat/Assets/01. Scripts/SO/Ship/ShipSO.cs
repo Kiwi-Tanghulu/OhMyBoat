@@ -8,4 +8,5 @@ public class ShipSO : ScriptableObject
     public string Content = "unbubblelievable";
     public Ship ShipPrefab = null;
     public ShipStatSO ShipStat = null;
+    public int Level = 0;
 }

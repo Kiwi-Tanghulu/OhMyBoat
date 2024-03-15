@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
-using static ShipStatPanel.DisplayFormat;
+using static ShipInfoPanel.DisplayFormat;
 
-public partial class ShipStatPanel : MonoBehaviour
+public partial class ShipInfoPanel : MonoBehaviour
 {
 	private TMP_Text nameText = null;
 	private TMP_Text contentText = null;
@@ -14,8 +14,8 @@ public partial class ShipStatPanel : MonoBehaviour
 
     private void Awake()
     {
-        Transform topPanel = transform.Find("Panels/TopPanel");
-        Transform statPanel = transform.Find("Panels/StatPanel/ContentPanel");
+        Transform topPanel = transform.Find("TopPanel");
+        Transform statPanel = transform.Find("StatPanel/ContentPanel");
 
         nameText = topPanel.Find("NameText").GetComponent<TMP_Text>();
         contentText = topPanel.Find("ContentText").GetComponent<TMP_Text>();
@@ -31,7 +31,8 @@ public partial class ShipStatPanel : MonoBehaviour
     {
         ShipStatSO stat = shipData.ShipStat;
 
-        nameText.text = string.Format(NameFormat, shipData.ShipName);
+        string level = shipData.Level > 0 ? $"+{shipData.Level}" : "";
+        nameText.text = string.Format(NameFormat, shipData.ShipName, level);
         contentText.text = string.Format(ContentFormat, shipData.Content);
 
         durabilityText.text = string.Format(DurabilityFormat, stat.Durability.CurrentValue);

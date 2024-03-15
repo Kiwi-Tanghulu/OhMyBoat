@@ -1,10 +1,8 @@
-using UnityEngine;
-
-public partial class ShipStatPanel
+public partial class ShipInfoPanel
 {
 	public class DisplayFormat
     {
-        public const string NameFormat = "[ {0} ]";
+        public const string NameFormat = "[ {0} {1} ]";
         public const string ContentFormat = "{0}";
         public const string DurabilityFormat = "DURABILITY : {0}";
         public const string RateOfTurnFormat = "RATE OF TURN : {0} rpm";

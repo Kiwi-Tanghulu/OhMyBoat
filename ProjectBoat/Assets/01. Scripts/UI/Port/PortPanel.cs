@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class PortPanel : MonoBehaviour
 {
-	private ShipStatPanel statPanel = null;
+	private ShipInfoPanel infoPanel = null;
 
     public ShipSO a;
 
     private void Awake()
     {
-        statPanel = transform.Find("StatPanel").GetComponent<ShipStatPanel>();
+        infoPanel = transform.Find("InfoPanel").GetComponent<ShipInfoPanel>();
         Initialize(a);
     }
 
@@ -19,7 +19,7 @@ public class PortPanel : MonoBehaviour
 
     public void Initialize(ShipSO shipData)
     {
-        statPanel.Initialize(shipData);
+        infoPanel.Initialize(shipData);
     }
 
     public void Display(bool active)
