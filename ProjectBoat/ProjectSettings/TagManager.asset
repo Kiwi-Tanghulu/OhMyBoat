@@ -22,7 +22,7 @@ TagManager:
   - ShopSpot
   - MiniMapIcon
   - ShipEquipment
-  - 
+  - PortSpot
   - 
   - Structure
   - 
@@ -37,7 +37,6 @@ TagManager:
   - 
   - 
   - 
-  - TGrabbable
   m_SortingLayers:
   - name: Default
     uniqueID: 0

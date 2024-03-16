@@ -10,7 +10,7 @@ public class QuestBoard : MonoBehaviour, IInteractable
     [Space(15f)]
     [SerializeField] List<QuestSpot> questSpots = null;
 
-    private const int FOCUSED_PRIORITY = 10;
+    private const int FOCUSED_PRIORITY = 20;
     private const int UNFOCUSED_PRIORITY = 1;
 
     public event Action<bool> OnFocusedEvent = null;
@@ -28,6 +28,11 @@ public class QuestBoard : MonoBehaviour, IInteractable
 
         for(int i = 0; i < 4; ++i)
             boardUI.InitailizeSlot(CreateQuest(), i);
+    }
+
+    private void OnDestroy()
+    {
+        input.OnEscapeEvent -= HandleEscape;
     }
 
     public bool Interact(Component performer, bool actived, Vector3 point = default)
