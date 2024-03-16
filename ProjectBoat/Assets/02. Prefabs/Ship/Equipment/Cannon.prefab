@@ -245,6 +245,7 @@ MonoBehaviour:
   inputSO: {fileID: 11400000, guid: b374d39e6e61bba439a65e1fae261b70, type: 2}
   firePoint: {fileID: 3258672066221724982}
   firePower: 10
+  fireDelay: 3
   cannonBallPrefab: {fileID: 5192810437580947135, guid: c01fad637255ed94a8e3d47ef5d15c8b,
     type: 3}
   OnFire:
