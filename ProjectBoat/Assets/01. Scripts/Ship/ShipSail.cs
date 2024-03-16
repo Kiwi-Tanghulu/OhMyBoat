@@ -32,6 +32,7 @@ public class ShipSail : MonoBehaviour
     [SerializeField] private float turnSpeed;
     private float turnDir;
     private float directionConcordance;
+    public float CurrentRotate => CurrentRotate;
 
     private bool active;
     public bool Active => active;
