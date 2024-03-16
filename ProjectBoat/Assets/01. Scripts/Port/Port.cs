@@ -57,6 +57,8 @@ public class Port : MonoBehaviour
         InputManager.ChangeInputMap(InputMapType.UI);
         GameManager.Instance.CursorActive(focused);
 
+        portData.ChangeShip(portData.CurrentShipIndex);
+
         portPanel.Initialize(portData.CurrentShipData);
         portPanel.Display(true);
     }
