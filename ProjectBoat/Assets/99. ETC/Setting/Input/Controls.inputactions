@@ -329,6 +329,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "M",
+                    "type": "Button",
+                    "id": "ce493f40-3eef-4726-86e2-853f5ee08a6d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -472,6 +481,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Space",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "752a13ec-368f-48ee-b4d0-14288e579454",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "M",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
