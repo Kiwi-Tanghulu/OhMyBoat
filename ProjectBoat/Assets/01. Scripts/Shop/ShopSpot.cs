@@ -28,6 +28,11 @@ public class ShopSpot : MonoBehaviour, IInteractable
         shopPanel.OnPurchaseButtonClickedEvent += HandlePurchase;
     }
 
+    private void OnDestroy()
+    {
+        input.OnEscapeEvent -= HandleEscape;
+    }
+
     public void RestockShop()
     {
         liveShopData = ScriptableObject.Instantiate(shopData);

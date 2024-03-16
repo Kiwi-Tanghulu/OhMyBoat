@@ -5,6 +5,8 @@ using static ShipInfoPanel.DisplayFormat;
 
 public partial class ShipInfoPanel : MonoBehaviour
 {
+    [SerializeField] PortSO portData = null;
+
 	private TMP_Text nameText = null;
 	private TMP_Text contentText = null;
 	private TMP_Text durabilityText = null;

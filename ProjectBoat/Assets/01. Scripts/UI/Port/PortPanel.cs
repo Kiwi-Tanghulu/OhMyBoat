@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class PortPanel : MonoBehaviour
 {
+    [SerializeField] PortSO portData = null;
+
 	private ShipInfoPanel infoPanel = null;
     private ShipPurchasePanel purchasePanel = null;
     private ShipPurchasePanel upgradePanel = null;
 
     private ShipSO focusedShipData = null;
-    public ShipSO a;
 
     public event Action<ShipSO> OnPurchaseEvent = null;
     public event Action<ShipSO> OnUpgradeEvent = null;
@@ -20,14 +21,19 @@ public class PortPanel : MonoBehaviour
         upgradePanel = transform.Find("UpgradePanel").GetComponent<ShipPurchasePanel>();
 
         purchasePanel.OnPurchaseEvent += () => OnPurchaseEvent?.Invoke(focusedShipData);
-        upgradePanel.OnPurchaseEvent += () => OnUpgradeEvent?.Invoke(focusedShipData);;
+        upgradePanel.OnPurchaseEvent += () => OnUpgradeEvent?.Invoke(focusedShipData);
+
+        portData.OnCurrentShipChangedEvent += HandleShipChanged;
     }
 
     private void Start()
     {
-        Initialize(a);
-
         Display(false);
+    }
+
+    private void OnDestroy()
+    {
+        portData.OnCurrentShipChangedEvent -= HandleShipChanged;
     }
 
     public void Initialize(ShipSO shipData)
@@ -62,5 +68,10 @@ public class PortPanel : MonoBehaviour
         int price = focusedShipData.Level > DEFINE.ShipMaxLevel ? -1 : focusedShipData.GetPrice();
         purchasePanel.SetPrice(price);
         upgradePanel.SetPrice(price);
+    }
+
+    private void HandleShipChanged()
+    {
+        Initialize(portData.CurrentShipData);
     }
 }

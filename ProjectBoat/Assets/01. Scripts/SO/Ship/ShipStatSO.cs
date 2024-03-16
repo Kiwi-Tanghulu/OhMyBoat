@@ -28,7 +28,15 @@ public class ShipStatSO : ScriptableObject
         {
             FieldInfo statField = characterStatType.GetField(statType.ToString());
             if(statField != null)
+            {
                 stats.Add(statType, statField.GetValue(this) as Stat);
+                stats[statType].CalculateValue();
+            }
         }
+    }
+
+    private void OnValidate()
+    {
+        OnEnable();
     }
 }

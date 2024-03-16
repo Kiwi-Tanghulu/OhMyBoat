@@ -30,6 +30,11 @@ public class QuestBoard : MonoBehaviour, IInteractable
             boardUI.InitailizeSlot(CreateQuest(), i);
     }
 
+    private void OnDestroy()
+    {
+        input.OnEscapeEvent -= HandleEscape;
+    }
+
     public bool Interact(Component performer, bool actived, Vector3 point = default)
     {
         if(actived == false)

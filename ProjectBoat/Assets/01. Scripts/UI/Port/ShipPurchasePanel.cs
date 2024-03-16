@@ -28,7 +28,10 @@ public class ShipPurchasePanel : MonoBehaviour
             priceText.text = "[ - ]";
         }
         else
+        {
+            purchaseButton.interactable = true;
             priceText.text = string.Format(PriceFormat, price.ToString("N0"));
+        }
     }
 
     private void HandlePurchase()

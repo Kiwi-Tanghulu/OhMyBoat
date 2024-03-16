@@ -9,7 +9,8 @@ public class ShipSO : ScriptableObject
     public string Content = "unbubblelievable";
 
     [Space(15f)]
-    public Ship ShipPrefab = null;
+    // public Ship ShipPrefab = null;
+    public GameObject ShipPrefab = null;
     public ShipStatSO ShipStat = null;
 
     [Space(15f)]

@@ -20,7 +20,7 @@ public class Stat
         currentValue = baseValue;   
     }
 
-    private void CalculateValue()
+    public void CalculateValue()
     {
         currentValue = baseValue;
 
