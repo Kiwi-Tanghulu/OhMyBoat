@@ -87,7 +87,7 @@ public class Ship : MonoBehaviour
 
     private void Rotate()
     {
-        transform.Rotate(new Vector3(0f, key.CurrentRotation * Time.deltaTime, 0f));
+        transform.Rotate(new Vector3(0f, key.CurrentRotateValue * Time.deltaTime, 0f));
     }
 
     private void ControlShip(bool isControl)

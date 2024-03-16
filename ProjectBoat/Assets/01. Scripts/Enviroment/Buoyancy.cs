@@ -182,6 +182,7 @@ public class Buoyancy : MonoBehaviour
         }
 
         angle.z = singleAngle;
+        angle.y = transform.eulerAngles.y;
         #region exception handling
         //if (!(rightDir == Vector3.zero || hypotenuse == Vector3.zero))
         //{

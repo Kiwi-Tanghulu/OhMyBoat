@@ -13,8 +13,8 @@ public class ShipKey : MonoBehaviour, IInteractable, IFocusable
     [Space]
     [SerializeField] private float turnSpeed;
     [SerializeField] private float maxRotation;
-    private float currentRotation = 0f;
-    public float CurrentRotation => currentRotation;
+    private float currentRotateValue = 0f;
+    public float CurrentRotateValue => currentRotateValue;
     private float handlingDir;
 
     [Space]
@@ -50,17 +50,17 @@ public class ShipKey : MonoBehaviour, IInteractable, IFocusable
 
     private void Handling()
     {
-        currentRotation += handlingDir * turnSpeed * Time.deltaTime;
+        currentRotateValue += handlingDir * turnSpeed * Time.deltaTime;
 
-        if(currentRotation > maxRotation || currentRotation < -maxRotation)
+        if(currentRotateValue > maxRotation || currentRotateValue < -maxRotation)
         {
-            currentRotation = Mathf.Clamp(currentRotation, -maxRotation, maxRotation);
+            currentRotateValue = Mathf.Clamp(currentRotateValue, -maxRotation, maxRotation);
         }
         else
         {
             transform.Rotate(new Vector3(0f, 0f, keyRotateSpeed * handlingDir * Time.deltaTime));
 
-            Vector3 rotation = new Vector3(0f, currentRotation, 0f);
+            Vector3 rotation = new Vector3(0f, currentRotateValue, 0f);
             rudderTrm.localRotation = Quaternion.Euler(rotation);
             OnKeyRotate?.Invoke(rotation);
         }
