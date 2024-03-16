@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipName: Nice Ship
   Content: unbubblelievable
+  ShipPrefab: {fileID: 0}
   ShipStat: {fileID: 11400000, guid: 44d2d969d86ede146a24e5f672e722a8, type: 2}
+  BasePrice: 10000
+  level: 0
+  PriceCoefficient: 1.5
+  IsPurchased: 0

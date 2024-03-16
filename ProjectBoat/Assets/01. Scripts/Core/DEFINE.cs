@@ -2,6 +2,8 @@ using UnityEngine;
 
 public static class DEFINE
 {
+	public const int ShipMaxLevel = 3;
+
 	public static PlayerHand PlayerHand = null;
 
 	private static GameObject stageBoard = null;

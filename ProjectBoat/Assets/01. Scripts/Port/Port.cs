@@ -25,7 +25,8 @@ public class Port : MonoBehaviour
         focusCam = focusPoint.Find("FocusCam").GetComponent<CinemachineVirtualCamera>();
 
         input.OnEscapeEvent += HandleEscape;
-        // input.OnScrollEvent += HandleScroll;
+        portPanel.OnPurchaseEvent += HandlePurchase;
+        portPanel.OnUpgradeEvent += HandlePurchase;
     }
 
     private void FixedUpdate()
@@ -59,13 +60,15 @@ public class Port : MonoBehaviour
         Release();
     }
 
-    // private void HandleScroll(float delta)
-    // {
-    //     Vector3 localPosition = focusCam.transform.localPosition;
-    //     localPosition.z += delta * zoomSpeed * Time.deltaTime;
-    //     localPosition.z = Mathf.Clamp(localPosition.z, zoomClamp.x, zoomClamp.y);
+    private void HandlePurchase(ShipSO shipData)
+    {
+        if(shipData.IsPurchased == false)
+            shipData.IsPurchased = true;
 
-    //     focusCam.transform.localPosition = localPosition;
-    // }
+        if(shipData.Level > DEFINE.ShipMaxLevel)
+            return;
+
+        shipData.ModifyLevel(1);
+    }
 }
 
