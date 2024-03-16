@@ -148,7 +148,7 @@ public class ShipSail : MonoBehaviour
 
     private void SetTrunDirection(Vector2 input)
     {
-        turnDir = -input.x;
+        turnDir = input.x;
     }
 
     private void InputSO_OnArrowEvent(Vector2 input)
