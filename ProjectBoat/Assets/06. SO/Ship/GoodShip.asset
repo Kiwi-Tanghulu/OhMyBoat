@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipName: Good Ship
   Content: amazing goood
-  ShipPrefab: {fileID: 175364, guid: 0961be66582a8714db9e751ce4630aed, type: 3}
+  ShipPrefab: {fileID: 8553012988014275079, guid: 4ee0fa36bab8a8b46a6cbbfc7783a9f8,
+    type: 3}
   ShipStat: {fileID: 11400000, guid: 03df2b2dace77c545aabe7ce2416f2b6, type: 2}
   BasePrice: 150000
   level: 0
