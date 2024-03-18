@@ -24,5 +24,6 @@ public class MegalodonThreatState : MegalodonState
         base.Update();
 
         threatAngle = (threatAngle + Time.deltaTime * 5) % 360f;
+        //Vector3 point = 
     }
 }
