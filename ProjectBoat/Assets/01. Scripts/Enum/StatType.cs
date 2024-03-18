@@ -1,7 +1,8 @@
 public enum StatType
 {
-	MaxHP,
-    RotateSpeed,
-    MoveSpeed,
+	Durability,
+    RateOfTurn,
+    TopSpeed,
+    AccelSpeed,
     Weight
 }

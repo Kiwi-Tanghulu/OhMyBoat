@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 3170344563276075542}
   m_Layer: 0
   m_Name: PlayerJiseong
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
   eyeTranform: {fileID: 0}
   focusingLayer:
     serializedVersion: 2
-    m_Bits: 3008
+    m_Bits: 68544
   distance: 1
   FocusedPoint: {x: 0, y: 0, z: 0}
   gizmo: 1
@@ -283,7 +283,7 @@ MonoBehaviour:
   swimSpeed: 1
   climSpeed: 0
   climbSpeed: 2
-  jumpPower: 3.5
+  jumpPower: 4
   gravityScale: 9.81
   groundLayer:
     serializedVersion: 2

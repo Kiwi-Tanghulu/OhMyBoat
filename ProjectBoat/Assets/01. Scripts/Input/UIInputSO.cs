@@ -7,9 +7,11 @@ using static Controls;
 public class UIInputSO : InputSO, IUIActions
 {
     public Action OnEscapeEvent = null;
+    public Action<float> OnScrollEvent = null;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         UIActions play = InputManager.controls.UI;
         play.SetCallbacks(this);
         InputManager.RegistInputMap(this, play.Get());
@@ -17,7 +19,13 @@ public class UIInputSO : InputSO, IUIActions
 
     public void OnEscape(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if(context.performed)
             OnEscapeEvent?.Invoke();
+    }
+
+    public void OnScroll(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnScrollEvent?.Invoke(context.ReadValue<float>());
     }
 }

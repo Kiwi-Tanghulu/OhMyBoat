@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Stat/ShipStat")]
+[CreateAssetMenu(menuName = "SO/Ship/ShipStat")]
 public class ShipStatSO : ScriptableObject
 {
-	public Stat MaxHP = new Stat();
-    public Stat RotateSpeed = new Stat();
-    public Stat MoveSpeed = new Stat();
+	public Stat Durability = new Stat();
+    public Stat RateOfTurn = new Stat();
+    public Stat TopSpeed = new Stat();
+    public Stat AccelSpeed = new Stat();
     public Stat Weight = new Stat();
 
     protected Dictionary<StatType, Stat> stats = null;
@@ -27,7 +28,15 @@ public class ShipStatSO : ScriptableObject
         {
             FieldInfo statField = characterStatType.GetField(statType.ToString());
             if(statField != null)
+            {
                 stats.Add(statType, statField.GetValue(this) as Stat);
+                stats[statType].CalculateValue();
+            }
         }
+    }
+
+    private void OnValidate()
+    {
+        OnEnable();
     }
 }
