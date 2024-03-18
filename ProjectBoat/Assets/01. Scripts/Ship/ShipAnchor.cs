@@ -28,17 +28,33 @@ public class ShipAnchor : MonoBehaviour
         inputSO.OnFEvent -= ShipInputSO_OnFEvent;
     }
 
-    private void ToggleActive()
+    public void SetActive(bool value, bool immediately = false)
     {
-        if(activeCoroutine == null)
-            activeCoroutine = StartCoroutine(ToggleActiveDelay());
+        if (activeCoroutine != null)
+        {
+            StopCoroutine(activeCoroutine);
+            activeCoroutine = null;
+        }
+
+        if (immediately)
+        {
+            active = value;
+
+            OnActiveChange?.Invoke(active);
+
+            activeCoroutine = null;
+        }
+        else
+        {
+            activeCoroutine = StartCoroutine(ToggleActiveDelay(value));
+        }
     }
 
-    private IEnumerator ToggleActiveDelay()
+    private IEnumerator ToggleActiveDelay(bool value)
     {
         yield return new WaitForSeconds(activeDelay);
 
-        active = !active;
+        active = value;
         
         OnActiveChange?.Invoke(active);
 
@@ -47,6 +63,6 @@ public class ShipAnchor : MonoBehaviour
 
     private void ShipInputSO_OnFEvent()
     {
-        ToggleActive();
+        SetActive(!active);
     }
 }

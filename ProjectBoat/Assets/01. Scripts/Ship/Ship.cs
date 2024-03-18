@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
+    public static Ship Instance { get; private set; }
+
     [SerializeField] private ShipInputSO inputSO;
 
     [Space]
@@ -24,15 +26,25 @@ public class Ship : MonoBehaviour
 
     private bool canMove;
 
+    private Player player;
+
+    public event Action<Island> OnSettlemented;
     public event Action<bool> OnShipControlChanged;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
         InputManager.ChangeInputMap(InputMapType.Play);
+        player = Player.Instance;
 
-        inputSO.OnEscapeEvetnt += ShipInputSO_OnEscapeEvent;
         anchor.OnActiveChange += Anchor_OnActiveChange;
         key.OnInteracted += Key_OnInteracted;
+
+        ControlShip(true);
     }
 
     private void Update()
@@ -52,21 +64,16 @@ public class Ship : MonoBehaviour
 
     private void OnDestroy()
     {
-        inputSO.OnEscapeEvetnt -= ShipInputSO_OnEscapeEvent;
         anchor.OnActiveChange -= Anchor_OnActiveChange;
         key.OnInteracted -= Key_OnInteracted;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-            other.transform.SetParent(transform);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-            other.transform.SetParent(null);
+        if(other.TryGetComponent<SettlementPoint>(out SettlementPoint point))
+        {
+            Settlement(point.SettlementIsland);
+        }
     }
 
     private void Move()
@@ -102,8 +109,16 @@ public class Ship : MonoBehaviour
         }
 
         OnShipControlChanged?.Invoke(isControl);
+    }
 
-        Debug.Log($"Ship Control : {isControl}");
+    public void Settlement(Island island)
+    {
+        InputManager.ChangeInputMap(InputMapType.Play);
+        anchor.SetActive(true, true);
+        island.SetSettlementShip(this);
+        transform.position = island.SettlementPoint.position;
+        transform.rotation = island.SettlementPoint.rotation;
+        OnSettlemented?.Invoke(island);
     }
 
     private void Anchor_OnActiveChange(bool active)
@@ -114,10 +129,5 @@ public class Ship : MonoBehaviour
     private void Key_OnInteracted()
     {
         ControlShip(true);
-    }
-
-    private void ShipInputSO_OnEscapeEvent()
-    {
-        ControlShip(false);
     }
 }
