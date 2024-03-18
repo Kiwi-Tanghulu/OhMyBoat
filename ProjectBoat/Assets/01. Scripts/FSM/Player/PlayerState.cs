@@ -27,5 +27,6 @@ public class PlayerState : State<PlayerFSM, PlayerStateEnum>
     public override void Update()
     {
         base.Update();
+        animator.SetFloat("move_speed", playerMovement.CurrentSpeed / playerMovement.RunSpeed);
     }
 }

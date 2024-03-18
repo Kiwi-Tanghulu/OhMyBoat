@@ -5,12 +5,12 @@ using UnityEngine;
 
 public enum PlayerStateEnum
 {
-    Idle,
     Move,
     Jump,
     Fall,
     Swim,
     Clim,
+    JumpDown,
 }
 public class StateMachine<T, U> where T : class where U : Enum
 {

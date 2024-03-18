@@ -19,7 +19,7 @@ public class PlayerFallState : PlayerState
 
         if (playerMovement.IsGround())
         {
-            owner.stateMachine.ChangeState(PlayerStateEnum.Idle);
+            owner.stateMachine.ChangeState(PlayerStateEnum.Move);
         }
     }
 

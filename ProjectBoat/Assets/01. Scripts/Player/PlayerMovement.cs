@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 MoveDir { get; private set; }
     private Vector3 lastMoveDir;
 
+    public bool CanJump { get; private set; }
+
     #region LadderVariable
     public Vector3 LadderUpPos { get; private set; }
     public Vector3 LadderDownPos { get; private set; }
@@ -57,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         input.OnMoveEvent += SetMoveDirection;
+        CanJump = true;
     }
     private void OnDestroy()
     {
@@ -102,7 +105,6 @@ public class PlayerMovement : MonoBehaviour
         characterController.enabled = false;
         transform.position = teleportPos;
         characterController.enabled = true;
-        Debug.Log("Teleport");
     }
     #region Clim
     public void Climing()
@@ -121,11 +123,11 @@ public class PlayerMovement : MonoBehaviour
     #endregion
     public bool IsGround()
     {
-        return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.12f, groundLayer);
+        return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.18f, groundLayer);
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 0.1f  + Vector3.down * 0.1f);
+        Gizmos.DrawLine(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 0.1f  + Vector3.down * 0.18f);
     }
 }
