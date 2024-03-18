@@ -60,7 +60,7 @@ public class ShipKey : MonoBehaviour, IInteractable, IFocusable
         {
             transform.Rotate(new Vector3(0f, 0f, keyRotateSpeed * handlingDir * Time.deltaTime));
 
-            Vector3 rotation = new Vector3(0f, currentRotateValue, 0f);
+            Vector3 rotation = new Vector3(0f, -currentRotateValue, 0f);
             rudderTrm.localRotation = Quaternion.Euler(rotation);
             OnKeyRotate?.Invoke(rotation);
         }

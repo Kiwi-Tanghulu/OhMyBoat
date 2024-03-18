@@ -28,7 +28,7 @@ public class StateMachine<T, U> where T : class where U : Enum
     }
     public void ChangeState(U nextStateType)
     {
-        CurrentState.Exit();
+        CurrentState?.Exit();
         CurrentState = StateDictionary[nextStateType];
         CurrentState.Enter();
     }
