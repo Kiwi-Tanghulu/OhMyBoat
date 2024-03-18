@@ -174,7 +174,7 @@ MonoBehaviour:
   eyeTranform: {fileID: 0}
   focusingLayer:
     serializedVersion: 2
-    m_Bits: 265152
+    m_Bits: 3008
   distance: 1
   FocusedPoint: {x: 0, y: 0, z: 0}
   gizmo: 1
@@ -283,7 +283,7 @@ MonoBehaviour:
   swimSpeed: 1
   climSpeed: 0
   climbSpeed: 2
-  jumpPower: 4
+  jumpPower: 3.5
   gravityScale: 9.81
   groundLayer:
     serializedVersion: 2

@@ -11,26 +11,17 @@ public class PlayerJumpState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
         playerMovement.SetVerticalVelocity(playerMovement.JumpPower);
     }
     public override void Update()
     {
         base.Update();
 
-        playerMovement.Gravity();
         playerMovement.Move();
 
         if (triggerCalled)
         {
-            if (playerMovement.IsGround()) 
-            {
-                owner.stateMachine.ChangeState(PlayerStateEnum.Idle);
-            }
-            else
-            {
-                owner.stateMachine.ChangeState(PlayerStateEnum.Fall);
-            }
+            owner.stateMachine.ChangeState(PlayerStateEnum.Fall);
         }
     }
 
