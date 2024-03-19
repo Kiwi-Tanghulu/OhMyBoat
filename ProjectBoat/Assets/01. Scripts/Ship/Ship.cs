@@ -115,6 +115,7 @@ public class Ship : MonoBehaviour
     {
         InputManager.ChangeInputMap(InputMapType.Play);
         anchor.SetActive(true, true);
+        key.SetHandle(0f);
         island.SetSettlementShip(this);
 
         Fader.Instance.FadeOneShot(() =>
