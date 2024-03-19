@@ -115,10 +115,15 @@ public class Ship : MonoBehaviour
     {
         InputManager.ChangeInputMap(InputMapType.Play);
         anchor.SetActive(true, true);
+        key.SetHandle(0f);
         island.SetSettlementShip(this);
-        transform.position = island.SettlementPoint.position;
-        transform.rotation = island.SettlementPoint.rotation;
-        OnSettlemented?.Invoke(island);
+
+        Fader.Instance.FadeOneShot(() =>
+        {
+            transform.position = island.SettlementTrm.position;
+            transform.rotation = island.SettlementTrm.rotation;
+            OnSettlemented?.Invoke(island);
+        }, 1f);
     }
 
     private void Anchor_OnActiveChange(bool active)

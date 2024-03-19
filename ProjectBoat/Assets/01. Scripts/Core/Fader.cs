@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using System.Buffers;
 
 public class Fader : MonoBehaviour
 {
@@ -19,12 +20,24 @@ public class Fader : MonoBehaviour
     public void FadeOut(Action onFadeOutAction)
     {
         fadeImageTrm.localPosition = new Vector3(2500, 0, 0);
-        fadeImageTrm.DOLocalMove(new Vector3(0, 0, 0), fadeTime).OnComplete(() => onFadeOutAction?.Invoke());
+        fadeImageTrm.DOLocalMove(new Vector3(0, 0, 0), fadeTime).OnComplete(() => onFadeOutAction?.Invoke()).SetEase(Ease.Linear);
     }
 
     public void FadeIn()
     {
         fadeImageTrm.localPosition = new Vector3(0, 0, 0);
-        fadeImageTrm.DOLocalMove(new Vector3(-2500, 0, 0), fadeTime);
+        fadeImageTrm.DOLocalMove(new Vector3(-2500, 0, 0), fadeTime).SetEase(Ease.Linear);
+    }
+
+    public void FadeOneShot(Action onFadeOutAction, float fadeOutTime)
+    {
+        Sequence seq = DOTween.Sequence();
+        fadeImageTrm.localPosition = new Vector3(2500, 0, 0);
+
+        seq.Append(fadeImageTrm.DOLocalMove(new Vector3(0, 0, 0), fadeTime).OnComplete(() => onFadeOutAction?.Invoke()).SetEase(Ease.Linear));
+        seq.AppendInterval(fadeOutTime);
+        seq.Append(fadeImageTrm.DOLocalMove(new Vector3(-2500, 0, 0), fadeTime).SetEase(Ease.Linear));
+
+        seq.Play();
     }
 }

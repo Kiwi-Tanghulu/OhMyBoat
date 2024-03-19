@@ -8,6 +8,8 @@ public class BoardingPoint : MonoBehaviour
     {
         Player.Instance.OnBoarding += Player_OnBoarding;
         Ship.Instance.OnSettlemented += Ship_OnSettlemented;
+
+        gameObject.SetActive(false);
     }
 
     private void Ship_OnSettlemented(Island island)
