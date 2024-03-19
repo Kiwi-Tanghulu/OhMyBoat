@@ -360,6 +360,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseDelta"",
+                    ""type"": ""Value"",
+                    ""id"": ""5228b414-9336-4a5d-a5da-bd35916d9038"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -516,6 +525,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""M"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8906e5a6-f250-48a9-b592-d4520d5fb60b"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -610,6 +630,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Ship_ESC = m_Ship.FindAction("ESC", throwIfNotFound: true);
         m_Ship_Space = m_Ship.FindAction("Space", throwIfNotFound: true);
         m_Ship_M = m_Ship.FindAction("M", throwIfNotFound: true);
+        m_Ship_MouseDelta = m_Ship.FindAction("MouseDelta", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
@@ -845,6 +866,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Ship_ESC;
     private readonly InputAction m_Ship_Space;
     private readonly InputAction m_Ship_M;
+    private readonly InputAction m_Ship_MouseDelta;
     public struct ShipActions
     {
         private @Controls m_Wrapper;
@@ -855,6 +877,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @ESC => m_Wrapper.m_Ship_ESC;
         public InputAction @Space => m_Wrapper.m_Ship_Space;
         public InputAction @M => m_Wrapper.m_Ship_M;
+        public InputAction @MouseDelta => m_Wrapper.m_Ship_MouseDelta;
         public InputActionMap Get() { return m_Wrapper.m_Ship; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -882,6 +905,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @M.started += instance.OnM;
             @M.performed += instance.OnM;
             @M.canceled += instance.OnM;
+            @MouseDelta.started += instance.OnMouseDelta;
+            @MouseDelta.performed += instance.OnMouseDelta;
+            @MouseDelta.canceled += instance.OnMouseDelta;
         }
 
         private void UnregisterCallbacks(IShipActions instance)
@@ -904,6 +930,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @M.started -= instance.OnM;
             @M.performed -= instance.OnM;
             @M.canceled -= instance.OnM;
+            @MouseDelta.started -= instance.OnMouseDelta;
+            @MouseDelta.performed -= instance.OnMouseDelta;
+            @MouseDelta.canceled -= instance.OnMouseDelta;
         }
 
         public void RemoveCallbacks(IShipActions instance)
@@ -1009,6 +1038,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnESC(InputAction.CallbackContext context);
         void OnSpace(InputAction.CallbackContext context);
         void OnM(InputAction.CallbackContext context);
+        void OnMouseDelta(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

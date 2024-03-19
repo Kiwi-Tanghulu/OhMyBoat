@@ -10,6 +10,7 @@ public class ShipInputSO : InputSO, IShipActions
 {
     public event Action<Vector2> OnMoveEvent;
     public event Action<Vector2> OnArrowEvent;
+    public event Action<Vector2> OnMouseDeltaEvent;
     public event Action OnFEvent;
     public event Action OnEscapeEvetnt;
     public event Action OnSpaceEvetnt;
@@ -53,5 +54,10 @@ public class ShipInputSO : InputSO, IShipActions
     public void OnM(InputAction.CallbackContext context)
     {
         OnMEvent?.Invoke();
+    }
+
+    public void OnMouseDelta(InputAction.CallbackContext context)
+    {
+        OnMouseDeltaEvent?.Invoke(context.ReadValue<Vector2>());
     }
 }
