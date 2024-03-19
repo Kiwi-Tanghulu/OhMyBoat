@@ -14,6 +14,8 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _MAIN_LIGHT_SHADOWS
+  - _MAIN_LIGHT_SHADOWS_CASCADE
+  - _MAIN_LIGHT_SHADOWS_SCREEN
   - _SHADOWS_SOFT
   m_InvalidKeywords: []
   m_LightmapFlags: 1
@@ -104,6 +106,8 @@ Material:
     - _GlossyReflections: 1
     - _LightStep: 0.01
     - _MAIN_LIGHT_SHADOWS: 1
+    - _MAIN_LIGHT_SHADOWS_CASCADE: 1
+    - _MAIN_LIGHT_SHADOWS_SCREEN: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
