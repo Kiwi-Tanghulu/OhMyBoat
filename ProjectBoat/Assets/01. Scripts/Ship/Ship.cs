@@ -119,8 +119,8 @@ public class Ship : MonoBehaviour
 
         Fader.Instance.FadeOneShot(() =>
         {
-            transform.position = island.SettlementPoint.position;
-            transform.rotation = island.SettlementPoint.rotation;
+            transform.position = island.SettlementTrm.position;
+            transform.rotation = island.SettlementTrm.rotation;
             OnSettlemented?.Invoke(island);
         }, 1f);
     }

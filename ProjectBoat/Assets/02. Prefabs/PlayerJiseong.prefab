@@ -174,7 +174,7 @@ MonoBehaviour:
   eyeTranform: {fileID: 0}
   focusingLayer:
     serializedVersion: 2
-    m_Bits: 68544
+    m_Bits: 220096
   distance: 1
   FocusedPoint: {x: 0, y: 0, z: 0}
   gizmo: 1
