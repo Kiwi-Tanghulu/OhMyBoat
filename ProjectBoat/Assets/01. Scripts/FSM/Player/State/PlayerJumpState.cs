@@ -18,6 +18,7 @@ public class PlayerJumpState : PlayerState
         base.Update();
 
         playerMovement.Move();
+        playerMovement.Gravity();
 
         if (triggerCalled)
         {

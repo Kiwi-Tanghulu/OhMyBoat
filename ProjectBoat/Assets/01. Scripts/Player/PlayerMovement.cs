@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private BoxCollider groundCheckCol;
 
     private PlayerFSM playerFSM;
     private CharacterController characterController;
@@ -123,11 +124,8 @@ public class PlayerMovement : MonoBehaviour
     #endregion
     public bool IsGround()
     {
-        return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.18f, groundLayer);
+        return Physics.OverlapBox(groundCheckCol.transform.position + groundCheckCol.center, groundCheckCol.size / 2, Quaternion.identity,groundLayer).Length > 0;
+        //return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.18f, groundLayer);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 0.1f  + Vector3.down * 0.18f);
-    }
 }
