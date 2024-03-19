@@ -32,13 +32,13 @@ public class PlayerClimState : PlayerState
         if(ladderUpPos.y < owner.transform.position.y)
         {
             playerMovement.Teleport(upArrivePos);
-            stateMachine.ChangeState(PlayerStateEnum.Idle);
+            stateMachine.ChangeState(PlayerStateEnum.Move);
         }
         
         if(ladderDownPos.y > owner.transform.position.y)
         {
             playerMovement.Teleport(downArrivePos);
-            stateMachine.ChangeState(PlayerStateEnum.Idle);
+            stateMachine.ChangeState(PlayerStateEnum.Move);
         }
     }
 

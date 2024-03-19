@@ -34,7 +34,7 @@ public class PlayerFSM : MonoBehaviour
 
     private void Start()
     {
-        stateMachine.Initialize(PlayerStateEnum.Idle, this);
+        stateMachine.Initialize(PlayerStateEnum.Move, this);
     }
     void Update()
     {

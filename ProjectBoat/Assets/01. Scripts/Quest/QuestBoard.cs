@@ -26,7 +26,12 @@ public class QuestBoard : MonoBehaviour, IInteractable
         
         input.OnEscapeEvent += HandleEscape;
 
-        for(int i = 0; i < 4; ++i)
+        
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < 4; ++i)
             boardUI.InitailizeSlot(CreateQuest(), i);
     }
 

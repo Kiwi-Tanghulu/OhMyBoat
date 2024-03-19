@@ -8,11 +8,12 @@ using static Controls;
 [CreateAssetMenu(menuName = "SO/InputSO/ShipInputSO")]
 public class ShipInputSO : InputSO, IShipActions
 {
-    public Action<Vector2> OnMoveEvent;
-    public Action<Vector2> OnArrowEvent;
-    public Action OnFEvent;
-    public Action OnEscapeEvetnt;
-    public Action OnSpaceEvetnt;
+    public event Action<Vector2> OnMoveEvent;
+    public event Action<Vector2> OnArrowEvent;
+    public event Action OnFEvent;
+    public event Action OnEscapeEvetnt;
+    public event Action OnSpaceEvetnt;
+    public event Action OnMEvent;
      
     protected override void OnEnable()
     {
@@ -47,5 +48,10 @@ public class ShipInputSO : InputSO, IShipActions
     public void OnSpace(InputAction.CallbackContext context)
     {
         OnSpaceEvetnt?.Invoke();
+    }
+
+    public void OnM(InputAction.CallbackContext context)
+    {
+        OnMEvent?.Invoke();
     }
 }

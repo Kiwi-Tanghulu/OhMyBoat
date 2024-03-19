@@ -130,7 +130,7 @@ public class Buoyancy : MonoBehaviour
     private void SetTransform()
     {
         //position
-        float waterHeight = WaterWave.Instance.GetWaveHeight(transform.position).y + floatingOffset;
+        float waterHeight = WaterManager.Instance.GetWaveHeight(transform.position) + floatingOffset;
         float y = Mathf.Lerp(waterHeight, transform.position.y, Time.deltaTime * floatingPower);
         float dot;
         float singleAngle;
@@ -141,8 +141,8 @@ public class Buoyancy : MonoBehaviour
         transform.position = pos;
 
         //x rotation
-        Vector3 frontVector = new Vector3(frontFloatingPoint.position.x, WaterWave.Instance.GetWaveHeight(frontFloatingPoint.position).y, frontFloatingPoint.position.z);
-        Vector3 backVector = new Vector3(backFloatingPoint.position.x, WaterWave.Instance.GetWaveHeight(backFloatingPoint.position).y, backFloatingPoint.position.z);
+        Vector3 frontVector = new Vector3(frontFloatingPoint.position.x, WaterManager.Instance.GetWaveHeight(frontFloatingPoint.position), frontFloatingPoint.position.z);
+        Vector3 backVector = new Vector3(backFloatingPoint.position.x, WaterManager.Instance.GetWaveHeight(backFloatingPoint.position), backFloatingPoint.position.z);
         Vector3 forwardDir = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized;
         Vector3 hypotenuse = (frontVector - backVector).normalized;
         dot = Mathf.Clamp(Vector3.Dot(hypotenuse, forwardDir), -1f, 1f);
@@ -157,7 +157,6 @@ public class Buoyancy : MonoBehaviour
         }
 
         angle.x = singleAngle;
-
         #region exception handling
         //if (!(forwardDir == Vector3.zero || hypotenuse == Vector3.zero))
         //{
@@ -167,8 +166,8 @@ public class Buoyancy : MonoBehaviour
         #endregion
 
         //z rotation
-        Vector3 leftVector = new Vector3(leftFloatingPoint.position.x, WaterWave.Instance.GetWaveHeight(leftFloatingPoint.position).y, leftFloatingPoint.position.z);
-        Vector3 rightVector = new Vector3(rightFloatingPoint.position.x, WaterWave.Instance.GetWaveHeight(rightFloatingPoint.position).y, rightFloatingPoint.position.z);
+        Vector3 leftVector = new Vector3(leftFloatingPoint.position.x, WaterManager.Instance.GetWaveHeight(leftFloatingPoint.position), leftFloatingPoint.position.z);
+        Vector3 rightVector = new Vector3(rightFloatingPoint.position.x, WaterManager.Instance.GetWaveHeight(rightFloatingPoint.position), rightFloatingPoint.position.z);
         Vector3 rightDir = new Vector3(transform.right.x, 0f, transform.right.z).normalized;
         hypotenuse = (rightVector - leftVector).normalized;
         dot = Mathf.Clamp(Vector3.Dot(hypotenuse, rightDir), -1f, 1f);
@@ -183,6 +182,7 @@ public class Buoyancy : MonoBehaviour
         }
 
         angle.z = singleAngle;
+        angle.y = transform.eulerAngles.y;
         #region exception handling
         //if (!(rightDir == Vector3.zero || hypotenuse == Vector3.zero))
         //{

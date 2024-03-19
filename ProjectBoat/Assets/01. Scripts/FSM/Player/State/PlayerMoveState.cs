@@ -22,18 +22,14 @@ public class PlayerMoveState : PlayerGroundState
 
         playerMovement.Move();
 
+
         playerMovement.SpeedCalculate();
 
-        if(playerMovement.CurrentSpeed > playerMovement.WalkSpeed + 0.1f)
-        {
-            animator.SetFloat("move_speed", 
-                (playerMovement.CurrentSpeed - playerMovement.WalkSpeed) / (playerMovement.RunSpeed - playerMovement.WalkSpeed));
-        }
-
-        if(playerMovement.CurrentSpeed < 0.1f && playerMovement.MoveDir.sqrMagnitude < 0.1f)
-        {
-            stateMachine.ChangeState(PlayerStateEnum.Idle);
-        }
+        //if(playerMovement.CurrentSpeed > playerMovement.WalkSpeed + 0.1f)
+        //{
+        //    animator.SetFloat("move_speed", 
+        //        (playerMovement.CurrentSpeed - playerMovement.WalkSpeed) / (playerMovement.RunSpeed - playerMovement.WalkSpeed));
+        //}
     }
 
     private void SetRun(bool value)
