@@ -17,8 +17,6 @@ public class PlayerJumpState : PlayerState
     {
         base.Update();
 
-        playerMovement.Gravity();
-
         playerMovement.Move();
         playerMovement.Gravity();
 

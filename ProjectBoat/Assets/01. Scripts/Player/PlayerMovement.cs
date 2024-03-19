@@ -50,11 +50,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private BoxCollider groundCheckCol;
 
     private PlayerFSM playerFSM;
-    private CharacterController characterController;
+    //private CharacterController characterController;
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        //characterController = GetComponent<CharacterController>();
         playerFSM = GetComponent<PlayerFSM>();
     }
     private void Start()
@@ -93,7 +93,12 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move()
     {
-        characterController.Move((transform.rotation * lastMoveDir * currentSpeed + verticalVelocity * Vector3.up) * Time.deltaTime);
+        //characterController.Move((transform.rotation * lastMoveDir * currentSpeed + verticalVelocity * Vector3.up) * Time.deltaTime);
+        transform.position += (transform.rotation * lastMoveDir * currentSpeed + verticalVelocity * Vector3.up) * Time.deltaTime;
+    }
+    private void Update()
+    {
+        Debug.Log("»Æ¿Œ" + IsGround());
     }
     public void SetMoveDirection(Vector2 value)
     {
@@ -103,14 +108,14 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Teleport(Vector3 teleportPos)
     {
-        characterController.enabled = false;
+        //characterController.enabled = false;
         transform.position = teleportPos;
-        characterController.enabled = true;
+        //characterController.enabled = true;
     }
     #region Clim
     public void Climing()
     {
-        characterController.Move(climbSpeed * MoveDir.z * Vector3.up * Time.deltaTime);
+        //characterController.Move(climbSpeed * MoveDir.z * Vector3.up * Time.deltaTime);
     }
     public void SetClimingPos(Vector3 ladderUp, Vector3 ladderDown, Vector3 upArrive, Vector3 downArrive, Vector3 teleportPos)
     {

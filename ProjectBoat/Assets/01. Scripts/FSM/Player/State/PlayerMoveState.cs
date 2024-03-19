@@ -20,8 +20,6 @@ public class PlayerMoveState : PlayerGroundState
     {
         base.Update();
 
-        playerMovement.SetVerticalVelocity(-2f);
-        playerMovement.Gravity();
         playerMovement.Move();
         playerMovement.SpeedCalculate();
 
