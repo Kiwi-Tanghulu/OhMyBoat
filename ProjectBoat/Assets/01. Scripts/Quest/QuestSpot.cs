@@ -14,7 +14,7 @@ public class QuestSpot : MonoBehaviour, IInteractable
     private void Update()
     {
         if(Input.GetKey(KeyCode.LeftControl))
-            if(Input.GetKeyDown(KeyCode.Alpha0))
+            if(Input.GetKeyDown(KeyCode.N))
                 FinishQuest();
     }
     #endregion

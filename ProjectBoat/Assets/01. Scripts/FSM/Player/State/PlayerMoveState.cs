@@ -21,8 +21,6 @@ public class PlayerMoveState : PlayerGroundState
         base.Update();
 
         playerMovement.Move();
-
-
         playerMovement.SpeedCalculate();
 
         //if(playerMovement.CurrentSpeed > playerMovement.WalkSpeed + 0.1f)

@@ -7,12 +7,12 @@ public class Island : MonoBehaviour
 {
     [SerializeField] private Transform landingPoint;
     [SerializeField] private Transform boardingPoint;
-    [SerializeField] private Transform settlementPoint;
+    [SerializeField] private Transform settlementTrm;
     private Ship settlementShip;
 
     public Transform LandingPoint => landingPoint;
     public Transform BoardingPoint => boardingPoint;
-    public Transform SettlementPoint => settlementPoint;
+    public Transform SettlementTrm => settlementTrm;
     public Ship SettlementShip => settlementShip;
 
     private void Start()

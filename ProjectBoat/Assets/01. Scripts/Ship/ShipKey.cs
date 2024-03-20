@@ -43,6 +43,16 @@ public class ShipKey : MonoBehaviour, IInteractable, IFocusable
         inputSO.OnMoveEvent -= SetHandlingDir;
     }
 
+    public void SetHandle(float angle)
+    {
+        currentRotateValue = Mathf.Clamp(angle, -maxRotation, maxRotation);
+
+        Vector3 rotation = new Vector3(0f, -currentRotateValue, 0f);
+        transform.localRotation = Quaternion.Euler(rotation);
+        rudderTrm.localRotation = Quaternion.Euler(rotation);
+        OnKeyRotate?.Invoke(rotation);
+    }
+
     private void SetHandlingDir(Vector2 input)
     {
         handlingDir = new Vector2(input.x, 0f).normalized.x;
