@@ -47,6 +47,7 @@ public class Stuff : MonoBehaviour, IGrabbable
         OnGrabbedEvent?.Invoke(false);
 
         stuffRigidbody.useGravity = true;
+        stuffRigidbody.constraints = RigidbodyConstraints.None;
     }
 
     private void ReleaseRigidbody()
@@ -54,5 +55,6 @@ public class Stuff : MonoBehaviour, IGrabbable
         stuffRigidbody.useGravity = false;
         stuffRigidbody.angularVelocity = Vector3.zero;
         stuffRigidbody.velocity = Vector3.zero;
+        stuffRigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 }
