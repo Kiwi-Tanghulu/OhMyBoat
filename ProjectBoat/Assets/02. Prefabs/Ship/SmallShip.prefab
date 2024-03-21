@@ -180,7 +180,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b446b1a18b19b194785b00069c28f9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputSO: {fileID: 11400000, guid: b374d39e6e61bba439a65e1fae261b70, type: 2}
   cam: {fileID: 7107852112756222504}
+  armTrm: {fileID: 6082757764442085609}
+  rotateSpeed: 0.25
+  rotationClampValue: {x: -30, y: 30}
+  inverseX: 1
+  inverseY: 0
 --- !u!1 &1455898081938028056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,7 +2453,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6823864470196511187}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20895493, y: -0.00000020861626, z: 0.000000044703484, w: 0.9779253}
+  m_LocalRotation: {x: 0.20895492, y: -0.00000020861626, z: 0.000000052154064, w: 0.9779253}
   m_LocalPosition: {x: 0, y: 27, z: -26.500015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
