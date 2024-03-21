@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     public void Boarding()
     {
         InputManager.ChangeInputMap(InputMapType.Ship);
+        transform.SetParent(Ship.Instance.transform);
 
         Fader.Instance.FadeOneShot(() =>
         {
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
 
     private void Ship_OnSettlemented(Island island)
     {
+        transform.SetParent(null);
         movement.Teleport(island.LandingPoint.position);
         gameObject.SetActive(true);
     }
