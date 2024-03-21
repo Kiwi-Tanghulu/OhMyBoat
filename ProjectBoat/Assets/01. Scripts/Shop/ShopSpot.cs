@@ -23,7 +23,6 @@ public class ShopSpot : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        input.OnEscapeEvent += HandleEscape;
         RestockShop();
     }
 
@@ -31,11 +30,6 @@ public class ShopSpot : MonoBehaviour, IInteractable
     {
         shopPanel = DEFINE.MainCanvas.Find("ShopPanel").GetComponent<ShopPanel>();
         shopPanel.OnPurchaseButtonClickedEvent += HandlePurchase;
-    }
-
-    private void OnDestroy()
-    {
-        input.OnEscapeEvent -= HandleEscape;
     }
 
     public void RestockShop()
@@ -73,6 +67,7 @@ public class ShopSpot : MonoBehaviour, IInteractable
         shopPanel.Initialize(liveShopData);
         InputManager.ChangeInputMap(InputMapType.UI);
         OnShopOpenedEvent?.Invoke();
+        input.OnEscapeEvent += HandleEscape;
     }
 
     private void Release()
@@ -80,6 +75,7 @@ public class ShopSpot : MonoBehaviour, IInteractable
         shopPanel.Release();
         InputManager.ChangeInputMap(InputMapType.Play);
         OnShopClosedEvent?.Invoke();
+        input.OnEscapeEvent -= HandleEscape;
     }
 
     private void HandleEscape()
