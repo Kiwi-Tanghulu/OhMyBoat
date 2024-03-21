@@ -10,11 +10,22 @@ public class AudioPlayer : MonoBehaviour
         player = GetComponent<AudioSource>();
     }
 
+    private void Start()
+    {
+        if (player == null)
+            player = GameManager.Instance.GlobalAudioPlayer;
+    }
+
     public void PlayAudio(string key)
     {
         Stop();
         player.clip = audioLibrary[key];
         player.Play();
+    }
+
+    public void PlayOneShot(string key)
+    {
+        player.PlayOneShot(audioLibrary[key]);
     }
 
     public void Pause()
@@ -25,10 +36,5 @@ public class AudioPlayer : MonoBehaviour
     public void Stop()
     {
         player.Stop();
-    }
-
-    public void PlayOneShot(string key)
-    {
-        player.PlayOneShot(audioLibrary[key]);
     }
 }

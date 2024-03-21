@@ -18,6 +18,6 @@ MonoBehaviour:
   - Key: SHOP_CLOSE
     Audio: {fileID: 8300000, guid: 4310c3b86554440b2b943399c0071e19, type: 3}
   - Key: BUTTON_CLICK
-    Audio: {fileID: 8300000, guid: 108b417a124ed8745a55bae344501cba, type: 3}
+    Audio: {fileID: 8300000, guid: 214f0dd902e424940a6e59792027d60b, type: 3}
   - Key: SLOT_CLICK
-    Audio: {fileID: 8300000, guid: 17be840ed12626145a378fe7f6ab1821, type: 3}
+    Audio: {fileID: 8300000, guid: 214f0dd902e424940a6e59792027d60b, type: 3}

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShopSpot : MonoBehaviour, IInteractable
 {
@@ -10,9 +11,13 @@ public class ShopSpot : MonoBehaviour, IInteractable
     [SerializeField] ShopSO shopData = null;
     [SerializeField] Transform spawnPoint = null;
 
+    [Space(15f)]
+    public UnityEvent OnShopOpenedEvent = null;
+    public UnityEvent OnShopClosedEvent = null;
+
     private ShopSO liveShopData = null;
-    private bool isFocused = false;
     private ShopPanel shopPanel = null;
+    private bool isFocused = false;
 
     public event Action<bool> OnFocusedEvent = null;
 
@@ -67,12 +72,14 @@ public class ShopSpot : MonoBehaviour, IInteractable
     {
         shopPanel.Initialize(liveShopData);
         InputManager.ChangeInputMap(InputMapType.UI);
+        OnShopOpenedEvent?.Invoke();
     }
 
     private void Release()
     {
         shopPanel.Release();
         InputManager.ChangeInputMap(InputMapType.Play);
+        OnShopClosedEvent?.Invoke();
     }
 
     private void HandleEscape()
