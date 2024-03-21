@@ -17,8 +17,6 @@ public class PlayerJumpDownState : PlayerState
     {
         base.Update();
 
-        playerMovement.Move();
-
         if (triggerCalled)
         {
             stateMachine.ChangeState(PlayerStateEnum.Move);

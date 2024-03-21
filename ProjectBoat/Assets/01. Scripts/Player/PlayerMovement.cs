@@ -30,14 +30,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float jumpPower;
     public float JumpPower => jumpPower;
-
-    [SerializeField] private float gravityScale;
-    public float GravityScale => gravityScale;
-    private float verticalVelocity;
     public Vector3 MoveDir { get; private set; }
     private Vector3 lastMoveDir;
 
-    public bool CanJump { get; private set; }
+    private bool isJump;
+    public bool IsJump { get => isJump; set => isJump = value; }
 
     #region LadderVariable
     public Vector3 LadderUpPos { get; private set; }
@@ -45,31 +42,28 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 UpArrivePos { get; private set; }
     public Vector3 DownArrivePos { get; private set; }
     #endregion
+    
+    private Rigidbody rigid;
+    public Rigidbody Rigid => rigid;
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private BoxCollider groundCheckCol;
 
     private PlayerFSM playerFSM;
-    //private CharacterController characterController;
 
     private void Awake()
     {
-        //characterController = GetComponent<CharacterController>();
+        rigid = GetComponent<Rigidbody>();
         playerFSM = GetComponent<PlayerFSM>();
     }
     private void Start()
     {
         input.OnMoveEvent += SetMoveDirection;
-        CanJump = true;
+        isJump = false;
     }
     private void OnDestroy()
     {
         input.OnMoveEvent -= SetMoveDirection;
-    }
-
-    public void Gravity()
-    {
-        verticalVelocity -= gravityScale * Time.deltaTime;
     }
     public void SetCurrentMaxSpeed(float _currentMaxSpeed)
     {
@@ -87,18 +81,25 @@ public class PlayerMovement : MonoBehaviour
     {
         currentSpeed = 0f;
     }
-    public void SetVerticalVelocity(float value)
-    {
-        verticalVelocity = value;
-    }
     public void Move()
     {
-        //characterController.Move((transform.rotation * lastMoveDir * currentSpeed + verticalVelocity * Vector3.up) * Time.deltaTime);
-        transform.position += (transform.rotation * lastMoveDir * currentSpeed + verticalVelocity * Vector3.up) * Time.deltaTime;
+        Vector3 moveDir = transform.rotation * lastMoveDir;
+        if (IsOnSlope() && IsGround() && !isJump)
+        {
+            moveDir = AdjustDirectionToSlope(moveDir);
+            rigid.useGravity = false;
+            rigid.velocity = Vector3.zero;
+        }
+        else
+        {
+            rigid.useGravity = true;
+        }
+        rigid.MovePosition(transform.position + moveDir * currentSpeed * Time.fixedDeltaTime);
     }
-    private void Update()
+
+    private void FixedUpdate()
     {
-        Debug.Log("È®ÀÎ" + IsGround());
+        Move();
     }
     public void SetMoveDirection(Vector2 value)
     {
@@ -108,15 +109,10 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Teleport(Vector3 teleportPos)
     {
-        //characterController.enabled = false;
         transform.position = teleportPos;
-        //characterController.enabled = true;
     }
     #region Clim
-    public void Climing()
-    {
-        //characterController.Move(climbSpeed * MoveDir.z * Vector3.up * Time.deltaTime);
-    }
+
     public void SetClimingPos(Vector3 ladderUp, Vector3 ladderDown, Vector3 upArrive, Vector3 downArrive, Vector3 teleportPos)
     {
         LadderUpPos = ladderUp;
@@ -130,7 +126,30 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGround()
     {
         return Physics.OverlapBox(groundCheckCol.transform.position + groundCheckCol.center, groundCheckCol.size / 2, Quaternion.identity,groundLayer).Length > 0;
-        //return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.18f, groundLayer);
     }
 
+
+    private RaycastHit slopeHit;
+    [SerializeField] private float maxSlopeAngle;
+    [SerializeField] private float slopeRayDistance;
+    private bool IsOnSlope()
+    {
+        Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
+        if(Physics.Raycast(ray, out slopeHit, slopeRayDistance, groundLayer))
+        {
+            var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle != 0f && angle < maxSlopeAngle;
+        }
+        return false;
+    }
+
+    private Vector3 AdjustDirectionToSlope(Vector3 direction)
+    {
+        return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position + Vector3.up * 0.1f, transform.position + Vector3.down * slopeRayDistance);
+    }
 }

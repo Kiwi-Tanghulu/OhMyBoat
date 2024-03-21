@@ -31,7 +31,7 @@ public class PlayerGroundState : PlayerState
 
     protected void HandleJumpEvent()
     {
-        if (playerMovement.IsGround() && playerMovement.CanJump)
+        if (playerMovement.IsGround() && !playerMovement.IsJump)
         {
             stateMachine.ChangeState(PlayerStateEnum.Jump);
         }

@@ -27,7 +27,6 @@ public class PlayerClimState : PlayerState
     public override void Update()
     {
         base.Update();
-        playerMovement.Climing();
 
         if(ladderUpPos.y < owner.transform.position.y)
         {

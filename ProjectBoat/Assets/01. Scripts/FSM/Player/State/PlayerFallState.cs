@@ -13,10 +13,6 @@ public class PlayerFallState : PlayerState
     {
         base.Update();
 
-        playerMovement.Move();
-
-        playerMovement.Gravity();
-
         if (playerMovement.IsGround())
         {
             owner.stateMachine.ChangeState(PlayerStateEnum.Move);
@@ -26,6 +22,5 @@ public class PlayerFallState : PlayerState
     public override void Exit()
     {
         base.Exit();
-        playerMovement.SetVerticalVelocity(0);
     }
 }

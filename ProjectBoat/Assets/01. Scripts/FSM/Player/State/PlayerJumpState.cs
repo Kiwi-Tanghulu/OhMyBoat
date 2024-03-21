@@ -11,14 +11,12 @@ public class PlayerJumpState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        playerMovement.SetVerticalVelocity(playerMovement.JumpPower);
+        playerMovement.IsJump = true;
+        playerMovement.Rigid.AddForce(Vector3.up * playerMovement.JumpPower, ForceMode.Impulse);
     }
     public override void Update()
     {
         base.Update();
-
-        playerMovement.Move();
-        playerMovement.Gravity();
 
         if (triggerCalled)
         {
@@ -29,6 +27,6 @@ public class PlayerJumpState : PlayerState
     public override void Exit()
     {
         base.Exit();
-        playerMovement.SetVerticalVelocity(0);
+        playerMovement.IsJump = false;
     }
 }

@@ -19,8 +19,6 @@ public class PlayerMoveState : PlayerGroundState
     public override void Update()
     {
         base.Update();
-
-        playerMovement.Move();
         playerMovement.SpeedCalculate();
 
         //if(playerMovement.CurrentSpeed > playerMovement.WalkSpeed + 0.1f)
