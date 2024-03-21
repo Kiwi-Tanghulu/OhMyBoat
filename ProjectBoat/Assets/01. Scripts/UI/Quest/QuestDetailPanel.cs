@@ -14,7 +14,7 @@ public class QuestDetailPanel : MonoBehaviour
     private void Awake()
     {
         progressPanel = transform.Find("SlipPanel/ScrollView/Viewport").GetComponent<QuestProgressPanel>();
-        titleText = transform.Find("TopPanel/TitleText").GetComponent<TMP_Text>();
+        titleText = transform.Find("TopPanel/Background/TitleText").GetComponent<TMP_Text>();
         contentText = transform.Find("ContentPanel/ContentBox/ContentText").GetComponent<TMP_Text>();
         npcImage = transform.Find("ContentPanel/NPCImage").GetComponent<RawImage>();
     }

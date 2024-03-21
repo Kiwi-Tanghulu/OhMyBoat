@@ -12,7 +12,7 @@ public class PortMenuPanel : MonoBehaviour
 
     private void Awake()
     {
-        selectButton = transform.Find("TopPanel/SelectButton").GetComponent<Button>();
+        selectButton = transform.Find("SelectButton").GetComponent<Button>();
 
         portData.OnCurrentShipChangedEvent += HandleShipChanged;
     }
