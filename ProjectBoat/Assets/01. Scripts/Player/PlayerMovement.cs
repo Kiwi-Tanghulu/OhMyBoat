@@ -132,10 +132,12 @@ public class PlayerMovement : MonoBehaviour
     private RaycastHit slopeHit;
     [SerializeField] private float maxSlopeAngle;
     [SerializeField] private float slopeRayDistance;
+
+    #region Slope
     private bool IsOnSlope()
     {
         Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
-        if(Physics.Raycast(ray, out slopeHit, slopeRayDistance, groundLayer))
+        if (Physics.Raycast(ray, out slopeHit, slopeRayDistance, groundLayer))
         {
             var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle != 0f && angle < maxSlopeAngle;
@@ -148,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 
+    #endregion
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position + Vector3.up * 0.1f, transform.position + Vector3.down * slopeRayDistance);
