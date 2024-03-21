@@ -139,15 +139,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 30275461639509906, guid: f7402286ce7701b479c9188f0e4da4e5,
         type: 3}
-      propertyPath: m_Type
+      propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 30275461639509906, guid: f7402286ce7701b479c9188f0e4da4e5,
         type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 643ab1e74021d434ca614b50ac4ce844,
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30275461639509906, guid: f7402286ce7701b479c9188f0e4da4e5,
         type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 917611945289825258, guid: f7402286ce7701b479c9188f0e4da4e5,
         type: 3}
       propertyPath: m_text
@@ -915,6 +919,12 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4293980400
       objectReference: {fileID: 0}
+    - target: {fileID: 4839201782465917028, guid: d3d778c126099a74fb59680af307ff1a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9f50362e3fa90440b8caef63181d40de,
+        type: 3}
     - target: {fileID: 5253866615748470285, guid: d3d778c126099a74fb59680af307ff1a,
         type: 3}
       propertyPath: m_Name
