@@ -785,8 +785,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922926482}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.00784294, z: 0, w: 0.99996924}
-  m_LocalPosition: {x: 32.62, y: 0.379, z: 29.84}
+  m_LocalRotation: {x: 0, y: 0.8139594, z: 0, w: 0.5809218}
+  m_LocalPosition: {x: 32.67467, y: 0.379, z: 29.79475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2046,7 +2046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &8042770298447156
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4532,11 +4532,12 @@ MonoBehaviour:
   climSpeed: 0
   climbSpeed: 2
   jumpPower: 4
-  gravityScale: 9.81
   groundLayer:
     serializedVersion: 2
     m_Bits: 8192
   groundCheckCol: {fileID: 0}
+  maxSlopeAngle: 0
+  slopeRayDistance: 0
 --- !u!23 &324795574466946944
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -31446,7 +31447,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2994665585511739676
 GameObject:
@@ -82558,8 +82559,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184191471380608751}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.00784294, z: -0, w: 0.99996924}
-  m_LocalPosition: {x: 32.62, y: -0.467, z: 29.84}
+  m_LocalRotation: {x: -0, y: 0.81395936, z: -0, w: 0.58092177}
+  m_LocalPosition: {x: 32.67467, y: -0.467, z: 29.79475}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -82567,7 +82568,7 @@ Transform:
   - {fileID: 4738440872168522010}
   - {fileID: 3932031118645566089}
   m_Father: {fileID: 3946923295868155201}
-  m_LocalEulerAnglesHint: {x: 0, y: -0.899, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 108.969, z: 0}
 --- !u!4 &7145700246110702733
 Transform:
   m_ObjectHideFlags: 0
@@ -90905,11 +90906,12 @@ MonoBehaviour:
   climSpeed: 0
   climbSpeed: 1
   jumpPower: 4
-  gravityScale: 9.81
   groundLayer:
     serializedVersion: 2
     m_Bits: 8192
   groundCheckCol: {fileID: 0}
+  maxSlopeAngle: 0
+  slopeRayDistance: 0
 --- !u!1 &8027618237735453520
 GameObject:
   m_ObjectHideFlags: 0
@@ -92204,7 +92206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3845541905832213953}
   serializedVersion: 2
-  m_LocalRotation: {x: -2.5199895e-16, y: -0.18438455, z: -4.727529e-17, w: 0.9828542}
+  m_LocalRotation: {x: 2.5199895e-16, y: -0.18438455, z: 4.727529e-17, w: 0.9828542}
   m_LocalPosition: {x: -0, y: 0, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
