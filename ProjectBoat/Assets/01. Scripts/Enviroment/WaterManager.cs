@@ -21,7 +21,7 @@ public class WaterManager : MonoBehaviour
     private Vector4 waveA;
     private Vector4 waveB;
     private Vector4 waveC;
-    private Vector4 waveD;
+    //private Vector4 waveD;
 
     [Space]
     [SerializeField] private Vector3 waterSize;
@@ -36,7 +36,7 @@ public class WaterManager : MonoBehaviour
         waveA = oceanMat.GetVector("_WaveA");
         waveB = oceanMat.GetVector("_WaveB");
         waveC = oceanMat.GetVector("_WaveC");
-        waveD = oceanMat.GetVector("_WaveD");
+        //waveD = oceanMat.GetVector("_WaveD");
     }
 
     private void Start()
@@ -49,7 +49,7 @@ public class WaterManager : MonoBehaviour
         Vector3 w1 = Vector3.zero;
         Vector3 w2 = Vector3.zero;
         Vector3 w3 = Vector3.zero;
-        Vector3 w4 = Vector3.zero;
+        //Vector3 w4 = Vector3.zero;
 
         w1 = GerstnerWave(waveA, pos);
         w1 = GerstnerWave(waveA, pos - w1);
@@ -66,12 +66,12 @@ public class WaterManager : MonoBehaviour
         w3 = GerstnerWave(waveC, pos - w3);
         w3 = GerstnerWave(waveC, pos - w3);
 
-        w4 = GerstnerWave(waveD, pos);
-        w4 = GerstnerWave(waveD, pos - w4);
-        w4 = GerstnerWave(waveD, pos - w4);
-        w4 = GerstnerWave(waveD, pos - w4);
+        //w4 = GerstnerWave(waveD, pos);
+        //w4 = GerstnerWave(waveD, pos - w4);
+        //w4 = GerstnerWave(waveD, pos - w4);
+        //w4 = GerstnerWave(waveD, pos - w4);
 
-        return ((w1 + w2 + w3 + w4) / waveCount).y + transform.position.y;
+        return ((w1 + w2 + w3) / waveCount).y + transform.position.y;
     }
 
    private Vector3 GerstnerWave(Vector4 wave, Vector3 p)
