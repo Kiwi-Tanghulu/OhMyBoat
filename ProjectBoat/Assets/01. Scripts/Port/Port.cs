@@ -1,6 +1,6 @@
-using System;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Port : MonoBehaviour
 {
@@ -16,6 +16,11 @@ public class Port : MonoBehaviour
     [SerializeField] GameObject currentShip = null;
     [SerializeField] Transform shipSpawnPoint = null;
 
+    [Space(15f)]
+    public UnityEvent OnPortOpenEvent = null;
+    public UnityEvent OnPortCloseEvent = null;
+    public UnityEvent OnCurrentShipChangedEvent = null;
+
 	private const int FOCUSED_PRIORITY = 20;
     private const int UNFOCUSED_PRIORITY = 1;
 
@@ -30,8 +35,6 @@ public class Port : MonoBehaviour
         focusPoint = transform.Find("FocusPoint");
         focusCam = focusPoint.Find("FocusCam").GetComponent<CinemachineVirtualCamera>();
 
-        input.OnEscapeEvent += HandleEscape;
-        portData.OnCurrentShipChangedEvent += HandleShipChanged;
         portPanel.OnPurchaseEvent += HandlePurchase;
         portPanel.OnUpgradeEvent += HandlePurchase;
     }
@@ -46,8 +49,7 @@ public class Port : MonoBehaviour
 
     private void OnDestroy()
     {
-        input.OnEscapeEvent -= HandleEscape;
-        portData.OnCurrentShipChangedEvent -= HandleShipChanged;
+        
     }
 
     public void Initialize()
@@ -61,6 +63,11 @@ public class Port : MonoBehaviour
 
         portPanel.Initialize(portData.CurrentShipData);
         portPanel.Display(true);
+
+        input.OnEscapeEvent += HandleEscape;
+        portData.OnCurrentShipChangedEvent += HandleShipChanged;
+
+        OnPortOpenEvent?.Invoke();
     }
 
     public void Release()
@@ -72,6 +79,11 @@ public class Port : MonoBehaviour
 
         portPanel.Release();
         portPanel.Display(false);
+
+        input.OnEscapeEvent -= HandleEscape;
+        portData.OnCurrentShipChangedEvent -= HandleShipChanged;
+
+        OnPortCloseEvent?.Invoke();
     }
 
     private void HandleEscape()
@@ -97,6 +109,7 @@ public class Port : MonoBehaviour
 
         GameObject prefab = portData.CurrentShipData.ShipPrefab;
         currentShip = Instantiate(prefab, shipSpawnPoint.position, shipSpawnPoint.rotation);
+        OnCurrentShipChangedEvent?.Invoke();
     }
 }
 

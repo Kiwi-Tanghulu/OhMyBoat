@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce3b7b349f04b64cb07561f2af20c1d, type: 3}
+  m_Name: PortAudioLib
+  m_EditorClassIdentifier: 
+  audioTables:
+  - Key: BUTTON_CLICK
+    Audio: {fileID: 8300000, guid: ed1a8c022df00864aa2c85842587a901, type: 3}
+  - Key: SWITCH_CLICK
+    Audio: {fileID: 8300000, guid: 8dfb39c95ad07c444919d79b7bded0c1, type: 3}
+  - Key: CREATE_SHIP
+    Audio: {fileID: 8300000, guid: 0c9acbb2183be6345b23af06e3f94c55, type: 3}
+  - Key: PORT_OPEN
+    Audio: {fileID: 8300000, guid: 0c9acbb2183be6345b23af06e3f94c55, type: 3}
+  - Key: PORT_CLOSE
+    Audio: {fileID: 8300000, guid: 0c9acbb2183be6345b23af06e3f94c55, type: 3}
