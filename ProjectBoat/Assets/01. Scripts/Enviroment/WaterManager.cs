@@ -26,6 +26,7 @@ public class WaterManager : MonoBehaviour
     [Space]
     [SerializeField] private Vector3 waterSize;
     [SerializeField] private Vector2 waterCount;
+    [SerializeField] private bool generateOcenaOnAwake;
 
     private void Awake()
     {
@@ -41,7 +42,8 @@ public class WaterManager : MonoBehaviour
 
     private void Start()
     {
-        GenerateOcean();
+        if(generateOcenaOnAwake)
+            GenerateOcean();
     }
 
     public float GetWaveHeight(Vector3 pos)
