@@ -39,11 +39,11 @@ public class Player : MonoBehaviour
     public void Boarding()
     {
         InputManager.ChangeInputMap(InputMapType.Ship);
-        transform.SetParent(Ship.Instance.transform);
 
         Fader.Instance.FadeOneShot(() =>
         {
             gameObject.SetActive(false);
+            transform.SetParent(Ship.Instance.transform);
             OnBoarding?.Invoke();
         }, 1f);
     }
