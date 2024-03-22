@@ -3951,7 +3951,7 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "88dbc3614a854865824127f946b2e256",
-    "m_Name": "Speculart Property",
+    "m_Name": "Specular Property",
     "m_ChildObjectList": [
         {
             "m_Id": "e7537f20ec23467a9023db3b7bb2a126"

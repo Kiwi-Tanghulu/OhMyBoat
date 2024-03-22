@@ -7,6 +7,7 @@ using static Controls;
 public class UIInputSO : InputSO, IUIActions
 {
     public Action OnEscapeEvent = null;
+    public Action OnDialogActionEvent = null;
     public Action<float> OnScrollEvent = null;
 
     protected override void OnEnable()
@@ -27,5 +28,11 @@ public class UIInputSO : InputSO, IUIActions
     {
         if(context.performed)
             OnScrollEvent?.Invoke(context.ReadValue<float>());
+    }
+
+    public void OnDialogAction(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnDialogActionEvent?.Invoke();
     }
 }
