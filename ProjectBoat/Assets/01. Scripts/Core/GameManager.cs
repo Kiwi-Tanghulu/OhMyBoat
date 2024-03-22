@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GameState GameState { get; private set; } = GameState.None;
     public event Action<GameState> OnGameStateChangedEvent = null;
 
+    public AudioSource GlobalAudioPlayer { get; private set; }
+
     private void Awake()
     {
         if (Instance != null)
@@ -15,6 +17,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         
+        GlobalAudioPlayer = GetComponent<AudioSource>();
     }
 
     private void Start()

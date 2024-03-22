@@ -404,6 +404,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1818437557056518961}
+        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SLOT_CLICK
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4864779484496506588
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,6 +560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4091708578649925572}
   - component: {fileID: 6642388948859994195}
+  - component: {fileID: 1818437557056518961}
   m_Layer: 5
   m_Name: StockSlot
   m_TagString: Untagged
@@ -591,6 +604,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7807b8a06b3c0848b7507f4a0a17fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1818437557056518961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8394434952764165289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b329a62174a214f80d705d445be22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioLibrary: {fileID: 11400000, guid: 9e458fc55897bba44a620cc3eb7cf28a, type: 2}
 --- !u!1 &8569242085752944901
 GameObject:
   m_ObjectHideFlags: 0
