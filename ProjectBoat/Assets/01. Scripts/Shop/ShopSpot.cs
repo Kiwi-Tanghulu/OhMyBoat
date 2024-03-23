@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ShopSpot : MonoBehaviour, IInteractable
+public class ShopSpot : MonoBehaviour
 {
     [SerializeField] UIInputSO input = null;
     [SerializeField] PlayerWalletSO wallet = null;
@@ -37,17 +37,7 @@ public class ShopSpot : MonoBehaviour, IInteractable
         liveShopData = ScriptableObject.Instantiate(shopData);
     }
 
-    public bool Interact(Component performer, bool actived, Vector3 point = default)
-    {
-        if(actived == false)
-            return false;
-
-        ToggleFocus(true);
-
-        return true;
-    }
-
-    private void ToggleFocus(bool focus)
+    public void ToggleFocus(bool focus)
     {
         isFocused = focus;
 

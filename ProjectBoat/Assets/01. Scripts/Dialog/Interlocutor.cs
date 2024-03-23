@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Interlocutor : MonoBehaviour
+public class Interlocutor : MonoBehaviour, IInteractable
 {
     [SerializeField] UIInputSO input = null;
 
@@ -9,6 +11,10 @@ public class Interlocutor : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera focusedCam = null;
     [SerializeField] DialogContextSO rootContext = null;
     [SerializeField] string interlocutorName = "unknown";
+
+    [Space(15f)]
+    public UnityEvent OnDialogFinishedEvent = null;
+    [SerializeField] List<ContextEventTable> contextEvents = null;
 
     private const int FOCUSED_PRIORITY = 20;
     private const int UNFOCUSED_PRIORITY = 1;
@@ -24,23 +30,37 @@ public class Interlocutor : MonoBehaviour
         input.OnDialogActionEvent += HandleDialogAction;
     }
 
-    private void Start()
+    public bool Interact(Component performer, bool actived, Vector3 point = default)
     {
+        if(actived == false)
+            return false;
+
         StartDialog(rootContext);
+        return true;
     }
 
 	public void StartDialog(DialogContextSO rootContext)
     {
+        contextEvents.ForEach(i => i?.Subscribe());
+
         dialogPanel.Display(true);
+        focusedCam.Priority = FOCUSED_PRIORITY;
+
         SetContext(rootContext);
         InputManager.ChangeInputMap(InputMapType.UI);
     }
 
     public void FinishDialog()
     {
+        contextEvents.ForEach(i => i?.Release());
+
         dialogPanel.Display(false);
+        focusedCam.Priority = UNFOCUSED_PRIORITY;
+
         dialogPanel.Release();
         InputManager.ChangeInputMap(InputMapType.Play);
+
+        OnDialogFinishedEvent?.Invoke();
     }
 
     private void SetContext(DialogContextSO context)
@@ -48,11 +68,14 @@ public class Interlocutor : MonoBehaviour
         currentContext = context;
         printing = true;
         dialogPanel.SetContext(currentContext, interlocutorName, FinishDialogCallback);
+
+        currentContext.OnContextStartEvent?.Invoke();
     }
 
     private void FinishDialogCallback()
     {
         printing = false;
+        currentContext.OnContextFinishEvent?.Invoke();
     }
 
     private void HandleDialogAction()
