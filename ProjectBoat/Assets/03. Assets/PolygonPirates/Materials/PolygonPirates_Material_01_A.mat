@@ -133,7 +133,7 @@ Material:
     - _EmissionColorUI: {r: 0.9485294, g: 0.8084626, b: 0.5579585, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SpecularColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3020714612947193345
 MonoBehaviour:
