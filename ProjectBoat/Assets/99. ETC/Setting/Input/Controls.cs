@@ -560,6 +560,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DialogAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""355ab6ca-ae67-46cb-bd43-ba10b237b8f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -582,6 +591,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b3ffdea-a7de-4ed1-8caf-c90b1ead05e9"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DialogAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbcc37bb-2267-4400-b3ce-7ca18aeb2b53"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DialogAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -635,6 +666,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
         m_UI_Scroll = m_UI.FindAction("Scroll", throwIfNotFound: true);
+        m_UI_DialogAction = m_UI.FindAction("DialogAction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -956,12 +988,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Escape;
     private readonly InputAction m_UI_Scroll;
+    private readonly InputAction m_UI_DialogAction;
     public struct UIActions
     {
         private @Controls m_Wrapper;
         public UIActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Escape => m_Wrapper.m_UI_Escape;
         public InputAction @Scroll => m_Wrapper.m_UI_Scroll;
+        public InputAction @DialogAction => m_Wrapper.m_UI_DialogAction;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -977,6 +1011,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Scroll.started += instance.OnScroll;
             @Scroll.performed += instance.OnScroll;
             @Scroll.canceled += instance.OnScroll;
+            @DialogAction.started += instance.OnDialogAction;
+            @DialogAction.performed += instance.OnDialogAction;
+            @DialogAction.canceled += instance.OnDialogAction;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -987,6 +1024,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Scroll.started -= instance.OnScroll;
             @Scroll.performed -= instance.OnScroll;
             @Scroll.canceled -= instance.OnScroll;
+            @DialogAction.started -= instance.OnDialogAction;
+            @DialogAction.performed -= instance.OnDialogAction;
+            @DialogAction.canceled -= instance.OnDialogAction;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1044,5 +1084,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnEscape(InputAction.CallbackContext context);
         void OnScroll(InputAction.CallbackContext context);
+        void OnDialogAction(InputAction.CallbackContext context);
     }
 }
