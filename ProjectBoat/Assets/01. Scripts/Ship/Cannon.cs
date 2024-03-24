@@ -8,6 +8,9 @@ public class Cannon : MonoBehaviour
     [SerializeField] private ShipInputSO inputSO;
 
     [Space]
+    [SerializeField] private LayerMask targetLayer;
+
+    [Space]
     [SerializeField] private Transform firePoint;
     [SerializeField] private float firePower;
     [SerializeField] private float fireDelay;
@@ -35,8 +38,9 @@ public class Cannon : MonoBehaviour
     {
         if (!canFire) return;
 
+        cannonBall.gameObject.SetActive(false);
         cannonBall.transform.position = firePoint.position;
-        cannonBall.Fire(transform.forward * firePower);
+        cannonBall.Fire(transform.forward * firePower, targetLayer);
 
         OnFire?.Invoke(firePoint);
     }
