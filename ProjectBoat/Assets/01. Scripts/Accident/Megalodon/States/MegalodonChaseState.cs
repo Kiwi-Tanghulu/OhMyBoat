@@ -4,30 +4,27 @@ using UnityEngine;
 
 public class MegalodonChaseState : MegalodonState
 {
-    private Transform targetShipTrm;
-    private Transform ownerTrm;
+    
 
-    private float threatRadius;
+    private Vector3 moveDir;
+
+    private float threatDistance;
 
     public MegalodonChaseState(MegalodonFSM _owner, StateMachine<MegalodonFSM, MegalodonStateType> _stateMachine, string _animationBoolName) 
         : base(_owner, _stateMachine, _animationBoolName)
     {
-        threatRadius = owner.StateInfo.threatRadius;
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-
-        targetShipTrm = owner.targetShip.transform;
-        ownerTrm = owner.transform;
+        threatDistance = owner.StateInfo.threatDistance;
     }
 
     public override void Update()
     {
         base.Update();
 
-        owner.Movement.SetMoveDir((targetShipTrm.position - ownerTrm.position).normalized);
+        moveDir = targetShipTrm.position - ownerTrm.position;
+        moveDir.y = 0;
+        moveDir.Normalize();
+
+        owner.Movement.SetMoveDir(moveDir);
         HandleThreatState();
     }
 
@@ -35,7 +32,7 @@ public class MegalodonChaseState : MegalodonState
     {
         float distance = Vector3.Distance(ownerTrm.position, targetShipTrm.position);
 
-        if(distance <= threatRadius)
+        if(distance <= threatDistance)
         {
             owner.stateMachine.ChangeState(MegalodonStateType.Threat);
         }

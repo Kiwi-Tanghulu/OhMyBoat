@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/AccidentInfo/MegalodonInfo")]
 public class MegalodonStateInfoSO : ScriptableObject
 {
-    public LayerMask shipLayer;
-    public float threatRadius;
-    public float detectRadius;
+    public float threatDistance;
+    public float attackDelay;
+    public float attackDistance;
 }
