@@ -6,6 +6,7 @@ public class GhostShip : MonoBehaviour
 {
     private Animator anim;
     private readonly int appearHash = Animator.StringToHash("Appear");
+    private readonly int disappearHash = Animator.StringToHash("Disappear");
 
     private void Awake()
     {
@@ -14,12 +15,17 @@ public class GhostShip : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.A))
             Appear(true);
+        if (Input.GetKeyDown(KeyCode.D))
+            Appear(false);
     }
 
     public void Appear(bool value)
     {
-        anim.SetBool(appearHash, value);
+        if(value)
+            anim.SetTrigger(appearHash);
+        else
+            anim.SetTrigger(disappearHash);
     }
 }
