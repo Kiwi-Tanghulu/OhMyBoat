@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -14,6 +15,10 @@ public class GhostShip : MonoBehaviour
     private Cannon[] cannons;
     private int[] cannonIndices;
 
+    [Space]
+    [SerializeField] private float chaseDistance;
+    private Transform shipTrm;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -24,6 +29,11 @@ public class GhostShip : MonoBehaviour
             cannonIndices[i] = i;
     }
 
+    private void Start()
+    {
+        shipTrm = Ship.Instance.transform;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
@@ -32,6 +42,8 @@ public class GhostShip : MonoBehaviour
             Appear(false);
         if (Input.GetKeyDown(KeyCode.E))
             Fire(5);
+
+        Chase();
     }
 
     public void Appear(bool value)
@@ -60,5 +72,16 @@ public class GhostShip : MonoBehaviour
 
         for (int i = 0; i < fireCount; i++)
             cannons[cannonIndices[i]].Fire();
+    }
+
+    private void Chase()
+    {
+        Vector3 targetPos = shipTrm.position + shipTrm.right * chaseDistance;
+        float yPos = transform.position.y;
+        Vector3 rot = transform.eulerAngles;
+        float yRot = shipTrm.eulerAngles.y;
+
+        transform.position = new Vector3(targetPos.x, yPos, targetPos.z);
+        transform.rotation = Quaternion.Euler(rot.x, yRot, rot.z);
     }
 }
