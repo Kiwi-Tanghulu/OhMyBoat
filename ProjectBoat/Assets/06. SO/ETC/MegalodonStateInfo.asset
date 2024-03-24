@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2621fc16ac9f44b9aa92f02062bd38, type: 3}
   m_Name: MegalodonStateInfo
   m_EditorClassIdentifier: 
-  shipLayer:
-    serializedVersion: 2
-    m_Bits: 65536
   threatDistance: 50
-  detectRadius: 0
+  attackDelay: 5
+  attackDistance: 10

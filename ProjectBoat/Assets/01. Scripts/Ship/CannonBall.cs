@@ -16,6 +16,11 @@ public class CannonBall : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        transform.forward = rb.velocity.normalized;
+    }
+
     public void Fire(Vector3 fireVector)
     {
         rb.velocity = Vector3.zero;
