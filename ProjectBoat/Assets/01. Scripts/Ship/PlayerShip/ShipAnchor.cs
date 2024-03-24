@@ -18,15 +18,15 @@ public class ShipAnchor : MonoBehaviour
 
     private Coroutine activeCoroutine;
 
-    private void Start()
-    {
-        inputSO.OnFEvent += ShipInputSO_OnFEvent;
-    }
+    //private void Start()
+    //{
+    //    inputSO.OnFEvent += ShipInputSO_OnFEvent;
+    //}
 
-    private void OnDestroy()
-    {
-        inputSO.OnFEvent -= ShipInputSO_OnFEvent;
-    }
+    //private void OnDestroy()
+    //{
+    //    inputSO.OnFEvent -= ShipInputSO_OnFEvent;
+    //}
 
     public void SetActive(bool value, bool immediately = false)
     {

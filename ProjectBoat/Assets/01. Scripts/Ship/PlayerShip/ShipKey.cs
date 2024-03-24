@@ -28,20 +28,20 @@ public class ShipKey : MonoBehaviour, IInteractable, IFocusable
 
     public GameObject CurrentObject => gameObject;
 
-    private void Start()
-    {
-        inputSO.OnMoveEvent += SetHandlingDir;
-    }
+    //private void Start()
+    //{
+    //    inputSO.OnMoveEvent += SetHandlingDir;
+    //}
 
-    private void Update()
-    {
-        Handling();
-    }
+    //private void Update()
+    //{
+    //    Handling();
+    //}
 
-    private void OnDestroy()
-    {
-        inputSO.OnMoveEvent -= SetHandlingDir;
-    }
+    //private void OnDestroy()
+    //{
+    //    inputSO.OnMoveEvent -= SetHandlingDir;
+    //}
 
     public void SetHandle(float angle)
     {

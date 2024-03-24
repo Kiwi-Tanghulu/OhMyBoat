@@ -11,12 +11,12 @@ public class Ship : MonoBehaviour
 
     [SerializeField] private ShipInputSO inputSO;
 
-    [Space]
-    [SerializeField] private ShipKey key;
-    [SerializeField] private ShipAnchor anchor;
+    //[Space]
+    //[SerializeField] private ShipKey key;
+    //[SerializeField] private ShipAnchor anchor;
     [SerializeField] private ShipSail sail;
-    public ShipKey Key => key;
-    public ShipAnchor Anchor => anchor;
+    //public ShipKey Key => key;
+    //public ShipAnchor Anchor => anchor;
     public ShipSail Sail => sail;
 
     [Space]
@@ -41,32 +41,32 @@ public class Ship : MonoBehaviour
         InputManager.ChangeInputMap(InputMapType.Play);
         player = Player.Instance;
 
-        anchor.OnActiveChange += Anchor_OnActiveChange;
-        key.OnInteracted += Key_OnInteracted;
+        //anchor.OnActiveChange += Anchor_OnActiveChange;
+        //key.OnInteracted += Key_OnInteracted;
 
         ControlShip(true);
     }
 
     private void Update()
     {
-        Rotate();
+        //Rotate();
 
-        if (canMove)
-        {
-            Accel();
-            Move();
-        }
-        else
-        {
-            Stop();
-        }
+        //if (canMove)
+        //{
+        //    Accel();
+        //    Move();
+        //}
+        //else
+        //{
+        //    Stop();
+        //}
     }
 
-    private void OnDestroy()
-    {
-        anchor.OnActiveChange -= Anchor_OnActiveChange;
-        key.OnInteracted -= Key_OnInteracted;
-    }
+    //private void OnDestroy()
+    //{
+    //    anchor.OnActiveChange -= Anchor_OnActiveChange;
+    //    key.OnInteracted -= Key_OnInteracted;
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -76,26 +76,26 @@ public class Ship : MonoBehaviour
         }
     }
 
-    private void Move()
-    {
-        transform.position += (transform.forward * currentMoveSpeed + sail.CurrentWindForce) * Time.deltaTime;
-    }
+    //private void Move()
+    //{
+    //    transform.position += (transform.forward * currentMoveSpeed + sail.CurrentWindForce) * Time.deltaTime;
+    //}
 
-    private void Accel()
-    {
-        currentMoveSpeed += moveAcceleration * Time.deltaTime;
-        currentMoveSpeed = Mathf.Clamp(currentMoveSpeed, 0f, maxMoveSpeed);
-    }
+    //private void Accel()
+    //{
+    //    currentMoveSpeed += moveAcceleration * Time.deltaTime;
+    //    currentMoveSpeed = Mathf.Clamp(currentMoveSpeed, 0f, maxMoveSpeed);
+    //}
 
-    private void Stop()
-    {
-        currentMoveSpeed = 0f;
-    }
+    //private void Stop()
+    //{
+    //    currentMoveSpeed = 0f;
+    //}
 
-    private void Rotate()
-    {
-        transform.Rotate(new Vector3(0f, key.CurrentRotateValue * Time.deltaTime, 0f));
-    }
+    //private void Rotate()
+    //{
+    //    //transform.Rotate(new Vector3(0f, key.CurrentRotateValue * Time.deltaTime, 0f));
+    //}
 
     private void ControlShip(bool isControl)
     {
@@ -114,8 +114,8 @@ public class Ship : MonoBehaviour
     public void Settlement(Island island)
     {
         InputManager.ChangeInputMap(InputMapType.Play);
-        anchor.SetActive(true, true);
-        key.SetHandle(0f);
+        //anchor.SetActive(true, true);
+        //key.SetHandle(0f);
         island.SetSettlementShip(this);
 
         Fader.Instance.FadeOneShot(() =>

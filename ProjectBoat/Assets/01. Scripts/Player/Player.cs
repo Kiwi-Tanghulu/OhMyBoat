@@ -43,12 +43,14 @@ public class Player : MonoBehaviour
         Fader.Instance.FadeOneShot(() =>
         {
             gameObject.SetActive(false);
+            transform.SetParent(Ship.Instance.transform);
             OnBoarding?.Invoke();
         }, 1f);
     }
 
     private void Ship_OnSettlemented(Island island)
     {
+        transform.SetParent(null);
         movement.Teleport(island.LandingPoint.position);
         gameObject.SetActive(true);
     }
